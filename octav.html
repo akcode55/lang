@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>امتحان F#</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Oswald:wght@500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #0f0e17;
+            color: #f0e8e8;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #0f0e17;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #ff8906;
+            margin-bottom: 30px;
+        }
+        .level-title {
+            color: #ff8906;
+            margin-top: 40px;
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .question p {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #ff8906;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #ff8b06a9;
+        }
+        .result {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 30px;
+            color: #333;
+        }
+        .evaluation-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #0f0e17;
+            color: orange;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+        }
+        .evaluation-popup button {
+            background-color: #ff8906;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .evaluation-popup button:hover {
+            background-color: #ff8b06a9;
+        }
+        .hidden {
+            display: none;
+        }
+        select {
+            background-color: #333;
+            color: #fff;
+            border: 2px solid #ff8906;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            font-family: 'Cairo', sans-serif;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        select:hover {
+            background-color: #444;
+            border-color: #ff8b06a9;
+        }
+        option {
+            background-color: #222;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h1>اختبار Octav</h1>
+    <select id="levelSelect">
+        <option value="easy">المستوى السهل</option>
+        <option value="medium">المستوى المتوسط</option>
+        <option value="hard">المستوى الصعب</option>
+    </select>
+    <!-- أسئلة المستوى السهل -->
+    <div id="easy" class="level-content">
+        <h2 class="level-title">المستوى السهل</h2>
+        <div class="question">
+            <p>كيف يمكن تعريف مصفوفة في Octave؟</p>
+            <input type="radio" name="q1" value="A = [1, 2, 3]"> A = [1, 2, 3]<br>
+            <input type="radio" name="q1" value="A = {1, 2, 3}"> A = {1, 2, 3}<br>
+            <input type="radio" name="q1" value="A = (1, 2, 3)"> A = (1, 2, 3)<br>
+        </div>
+        <div class="question">
+            <p>ما هي الكلمة المفتاحية لإنشاء دالة في Octave؟</p>
+            <input type="radio" name="q2" value="function"> function<br>
+            <input type="radio" name="q2" value="def"> def<br>
+            <input type="radio" name="q2" value="procedure"> procedure<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكنك حساب المتوسط لمصفوفة في Octave؟</p>
+            <input type="radio" name="q3" value="mean()"> mean()<br>
+            <input type="radio" name="q3" value="avg()"> avg()<br>
+            <input type="radio" name="q3" value="average()"> average()<br>
+        </div>
+        <div class="question">
+            <p>كيف تقوم بإنشاء مصفوفة صفرية في Octave؟</p>
+            <input type="radio" name="q4" value="zeros()"> zeros()<br>
+            <input type="radio" name="q4" value="empty()"> empty()<br>
+            <input type="radio" name="q4" value="null()"> null()<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكنك الحصول على حجم مصفوفة في Octave؟</p>
+            <input type="radio" name="q5" value="size()"> size()<br>
+            <input type="radio" name="q5" value="length()"> length()<br>
+            <input type="radio" name="q5" value="dimensions()"> dimensions()<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكنك تغيير قيمة عنصر في مصفوفة؟</p>
+            <input type="radio" name="q6" value="A(i) = value"> A(i) = value<br>
+            <input type="radio" name="q6" value="A[i] = value"> A[i] = value<br>
+            <input type="radio" name="q6" value="A(i, j) = value"> A(i, j) = value<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكنك إجراء عملية ضرب بين مصفوفتين في Octave؟</p>
+            <input type="radio" name="q7" value="A * B"> A * B<br>
+            <input type="radio" name="q7" value="A . B"> A . B<br>
+            <input type="radio" name="q7" value="A & B"> A & B<br>
+        </div>
+        <div class="question">
+            <p>ما هي الطريقة الصحيحة لعرض مخرجات دالة في Octave؟</p>
+            <input type="radio" name="q8" value="disp()"> disp()<br>
+            <input type="radio" name="q8" value="print()"> print()<br>
+            <input type="radio" name="q8" value="output()"> output()<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكنك استخدام حلقة for في Octave؟</p>
+            <input type="radio" name="q9" value="for i = 1:10"> for i = 1:10<br>
+            <input type="radio" name="q9" value="foreach i = 1:10"> foreach i = 1:10<br>
+            <input type="radio" name="q9" value="loop i = 1:10"> loop i = 1:10<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكنك استخدام دالة الشرط if في Octave؟</p>
+            <input type="radio" name="q10" value="if condition"> if condition<br>
+            <input type="radio" name="q10" value="case condition"> case condition<br>
+            <input type="radio" name="q10" value="switch condition"> switch condition<br>
+        </div>
+        <div class="question">
+            <p>ما هي الطريقة الصحيحة لإضافة تعليق في Octave؟</p>
+            <input type="radio" name="q11" value="% comment"> % comment<br>
+            <input type="radio" name="q11" value="// comment"> // comment<br>
+            <input type="radio" name="q11" value="/* comment */"> /* comment */<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكنك تنفيذ ملف سكربت في Octave؟</p>
+            <input type="radio" name="q12" value="source('file.m')"> source('file.m')<br>
+            <input type="radio" name="q12" value="run('file.m')"> run('file.m')<br>
+            <input type="radio" name="q12" value="execute('file.m')"> execute('file.m')<br>
+        </div>
+
+        <!-- أسئلة المستوى المتوسط -->
+        <div id="medium" class="level-content hidden">
+            <h2 class="level-title">المستوى المتوسط</h2>
+            <div class="question">
+                <p>كيف تقوم بإنشاء مصفوفة من أعداد عشوائية في Octave؟</p>
+                <input type="radio" name="q13" value="rand()"> rand()<br>
+                <input type="radio" name="q13" value="random()"> random()<br>
+                <input type="radio" name="q13" value="randn()"> randn()<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة الصحيحة للحصول على العنصر الأقصى في مصفوفة؟</p>
+                <input type="radio" name="q14" value="max()"> max()<br>
+                <input type="radio" name="q14" value="max_element()"> max_element()<br>
+                <input type="radio" name="q14" value="maximum()"> maximum()<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك جمع مصفوفتين في Octave؟</p>
+                <input type="radio" name="q15" value="A + B"> A + B<br>
+                <input type="radio" name="q15" value="concat(A, B)"> concat(A, B)<br>
+                <input type="radio" name="q15" value="combine(A, B)"> combine(A, B)<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة الصحيحة للحصول على عدد عناصر مصفوفة في Octave؟</p>
+                <input type="radio" name="q16" value="length()"> length()<br>
+                <input type="radio" name="q16" value="size()"> size()<br>
+                <input type="radio" name="q16" value="count()"> count()<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك إجراء عملية طرح بين مصفوفتين؟</p>
+                <input type="radio" name="q17" value="A - B"> A - B<br>
+                <input type="radio" name="q17" value="subtract(A, B)"> subtract(A, B)<br>
+                <input type="radio" name="q17" value="A / B"> A / B<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكن استخدام حلقة while في Octave؟</p>
+                <input type="radio" name="q18" value="while condition"> while condition<br>
+                <input type="radio" name="q18" value="repeat condition"> repeat condition<br>
+                <input type="radio" name="q18" value="until condition"> until condition<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك تحميل بيانات من ملف في Octave؟</p>
+                <input type="radio" name="q19" value="load('file.txt')"> load('file.txt')<br>
+                <input type="radio" name="q19" value="import('file.txt')"> import('file.txt')<br>
+                <input type="radio" name="q19" value="read('file.txt')"> read('file.txt')<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة الصحيحة لإنشاء مصفوفة متعددة الأبعاد؟</p>
+                <input type="radio" name="q20" value="A = zeros(3, 4)"> A = zeros(3, 4)<br>
+                <input type="radio" name="q20" value="A = ones(3, 4)"> A = ones(3, 4)<br>
+                <input type="radio" name="q20" value="A = matrix(3, 4)"> A = matrix(3, 4)<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة الصحيحة لإنشاء دالة ذات مدخلات متعددة في Octave؟</p>
+                <input type="radio" name="q21" value="function [output1, output2] = myFunction(input1, input2)"> function [output1, output2] = myFunction(input1, input2)<br>
+                <input type="radio" name="q21" value="function output1, output2 = myFunction(input1, input2)"> function output1, output2 = myFunction(input1, input2)<br>
+                <input type="radio" name="q21" value="def myFunction(input1, input2)"> def myFunction(input1, input2)<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك استخدام دالة تجريبية في Octave؟</p>
+                <input type="radio" name="q22" value="test()"> test()<br>
+                <input type="radio" name="q22" value="try()"> try()<br>
+                <input type="radio" name="q22" value="execute()"> execute()<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة الصحيحة لعرض مخرجات عملية في Octave؟</p>
+                <input type="radio" name="q23" value="disp()"> disp()<br>
+                <input type="radio" name="q23" value="show()"> show()<br>
+                <input type="radio" name="q23" value="print()"> print()<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك إضافة تعليق في نهاية سطر في Octave؟</p>
+                <input type="radio" name="q24" value="% comment"> % comment<br>
+                <input type="radio" name="q24" value="# comment"> # comment<br>
+                <input type="radio" name="q24" value="// comment"> // comment<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك حساب المتوسط لمصفوفة من القيم في Octave؟</p>
+                <input type="radio" name="q25" value="mean()"> mean()<br>
+                <input type="radio" name="q25" value="average()"> average()<br>
+                <input type="radio" name="q25" value="avg()"> avg()<br>
+            </div>
+
+        <!-- أسئلة المستوى الصعب -->
+        <div id="hard" class="level-content hidden">
+            <h2 class="level-title">المستوى الصعب</h2>
+            <div class="question">
+                <p>كيف يمكنك التعامل مع الاستثناءات في Octave؟</p>
+                <input type="radio" name="q26" value="try...catch"> try...catch<br>
+                <input type="radio" name="q26" value="handle"> handle<br>
+                <input type="radio" name="q26" value="catch"> catch<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة الصحيحة لإنشاء دالة ذات أعداد متغيرة من المدخلات؟</p>
+                <input type="radio" name="q27" value="varargin"> varargin<br>
+                <input type="radio" name="q27" value="inputArgs"> inputArgs<br>
+                <input type="radio" name="q27" value="args"> args<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك تعريف دالة ذات قيم افتراضية في Octave؟</p>
+                <input type="radio" name="q28" value="function [output] = myFunction(input1, input2, varargin)"> function [output] = myFunction(input1, input2, varargin)<br>
+                <input type="radio" name="q28" value="function [output] = myFunction(input1, input2)"> function [output] = myFunction(input1, input2)<br>
+                <input type="radio" name="q28" value="function output = myFunction(input1, input2)"> function output = myFunction(input1, input2)<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة الصحيحة لإنشاء نموذج (Class) في Octave؟</p>
+                <input type="radio" name="q29" value="classdef MyClass"> classdef MyClass<br>
+                <input type="radio" name="q29" value="define class MyClass"> define class MyClass<br>
+                <input type="radio" name="q29" value="create class MyClass"> create class MyClass<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك التعامل مع البيانات الكبيرة في Octave؟</p>
+                <input type="radio" name="q30" value="matrix"> matrix<br>
+                <input type="radio" name="q30" value="cell"> cell<br>
+                <input type="radio" name="q30" value="table"> table<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك تحميل بيانات من مصدر خارجي في Octave؟</p>
+                <input type="radio" name="q31" value="load"> load<br>
+                <input type="radio" name="q31" value="import"> import<br>
+                <input type="radio" name="q31" value="read"> read<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة الصحيحة لتمثيل البيانات في Octave؟</p>
+                <input type="radio" name="q32" value="plot"> plot<br>
+                <input type="radio" name="q32" value="graph"> graph<br>
+                <input type="radio" name="q32" value="display"> display<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك تحليل البيانات الإحصائية في Octave؟</p>
+                <input type="radio" name="q33" value="stats"> stats<br>
+                <input type="radio" name="q33" value="mean"> mean<br>
+                <input type="radio" name="q33" value="analyze"> analyze<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك تحسين أداء البرنامج في Octave؟</p>
+                <input type="radio" name="q34" value="profile"> profile<br>
+                <input type="radio" name="q34" value="optimize"> optimize<br>
+                <input type="radio" name="q34" value="debug"> debug<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة الصحيحة لإنشاء مصفوفة مكونة من أعداد حقيقية؟</p>
+                <input type="radio" name="q35" value="real()"> real()<br>
+                <input type="radio" name="q35" value="complex()"> complex()<br>
+                <input type="radio" name="q35" value="number()"> number()<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك إجراء عمليات حسابية متقدمة في Octave؟</p>
+                <input type="radio" name="q36" value="advanced_calculation"> advanced_calculation<br>
+                <input type="radio" name="q36" value="calc"> calc<br>
+                <input type="radio" name="q36" value="compute"> compute<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة الصحيحة لتحليل نتائج النموذج في Octave؟</p>
+                <input type="radio" name="q37" value="analysis"> analysis<br>
+                <input type="radio" name="q37" value="evaluate"> evaluate<br>
+                <input type="radio" name="q37" value="assess"> assess<br>
+            </div>
+        </div>
+
+    <button id="submitButton">تقديم</button>
+
+    <div id="evaluationPopup" class="evaluation-popup">
+        <h2>النتائج</h2>
+        <p id="resultText"></p>
+        <button onclick="closePopup()">إغلاق</button>
+    </div>
+
+    <script>
+        document.getElementById('levelSelect').addEventListener('change', function () {
+            document.querySelectorAll('.level-content').forEach(function (content) {
+                content.classList.add('hidden');
+            });
+            document.getElementById(this.value).classList.remove('hidden');
+        });
+
+        document.getElementById('submitButton').addEventListener('click', function () {
+            let score = 0;
+            let totalQuestions = 30;
+            // الأسئلة السهلة
+            let easyAnswers = {
+                q1: 'A = [1, 2, 3]',
+                q2: 'function',
+                q3: 'mean()',
+                q4: 'zeros()',
+                q5: 'size()',
+                q6: 'A(i) = value',
+                q7: 'A * B',
+                q8: 'disp()',
+                q9: 'for i = 1:10',
+                q10: 'if condition',
+                q11: '% comment',
+                q12: 'source(\'file.m\')'
+            };
+            // الأسئلة المتوسطة
+            let mediumAnswers = {
+                q13: 'rand()',
+                q14: 'max()',
+                q15: 'A + B',
+                q16: 'length()',
+                q17: 'A - B',
+                q18: 'while condition',
+                q19: 'load(\'file.txt\')',
+                q20: 'A = zeros(3, 4)',
+                q21: 'function [output1, output2] = myFunction(input1, input2)',
+                q22: 'test()',
+                q23: 'disp()',
+                q24: '% comment',
+                q25: 'mean()'
+            };
+            // الأسئلة الصعبة
+            let hardAnswers = {
+                q26: 'try...catch',
+                q27: 'varargin',
+                q28: 'function [output] = myFunction(input1, input2, varargin)',
+                q29: 'classdef MyClass',
+                q30: 'matrix',
+                q31: 'load',
+                q32: 'plot',
+                q33: 'stats',
+                q34: 'profile',
+                q35: 'real()',
+                q36: 'advanced_calculation',
+                q37: 'analysis'
+            };
+
+            function calculateScore(level, answers) {
+                let score = 0;
+                let questions = document.querySelectorAll(`#${level} .question`);
+                questions.forEach(function (question) {
+                    let selected = question.querySelector('input[type="radio"]:checked');
+                    let answerKey = question.querySelector('p').textContent.split(' ')[0].toLowerCase();
+                    if (selected && selected.value === answers[answerKey]) {
+                        score++;
+                    }
+                });
+                return score;
+            }
+
+            score += calculateScore('easy', easyAnswers);
+            score += calculateScore('medium', mediumAnswers);
+            score += calculateScore('hard', hardAnswers);
+
+            document.getElementById('resultText').textContent = `لقد حصلت على ${score} من ${totalQuestions} في الاختبار.`;
+            document.getElementById('evaluationPopup').style.display = 'block';
+        });
+
+        function closePopup() {
+            document.getElementById('evaluationPopup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

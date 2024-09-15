@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>امتحان Angular</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Oswald:wght@500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #0f0e17;
+            color: #f0e8e8;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #0f0e17;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #ff8906;
+            margin-bottom: 30px;
+        }
+        .level-title {
+            color: #ff8906;
+            margin-top: 40px;
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .question p {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #ff8906;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #ff8b06a9;
+        }
+        .result {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 30px;
+            color: #333;
+        }
+        .evaluation-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #0f0e17;
+            color: orange;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+        }
+        .evaluation-popup button {
+            background-color: #ff8906;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .evaluation-popup button:hover {
+            background-color: #ff8b06a9;
+        }
+        .hidden {
+            display: none;
+        }
+        select {
+            background-color: #333;
+            color: #fff;
+            border: 2px solid #ff8906;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            font-family: 'Cairo', sans-serif;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        select:hover {
+            background-color: #444;
+            border-color: #ff8b06a9;
+        }
+        option {
+            background-color: #222;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>امتحان Angular</h1>
+        
+        <!-- القائمة المنسدلة لاختيار المستوى -->
+        <select id="levelSelect">
+            <option value="easy">المستوى السهل</option>
+            <option value="medium">المستوى المتوسط</option>
+            <option value="hard">المستوى الصعب</option>
+        </select>
+
+        <!-- أسئلة المستوى السهل -->
+        <div id="easy" class="level-content">
+            <h2 class="level-title">المستوى السهل</h2>
+            <div class="question">
+                <p>ما هو Angular؟</p>
+                <input type="radio" name="q1" value="إطار عمل لبناء تطبيقات الويب"> إطار عمل لبناء تطبيقات الويب<br>
+                <input type="radio" name="q1" value="مكتبة لواجهة المستخدم"> مكتبة لواجهة المستخدم<br>
+                <input type="radio" name="q1" value="أداة لتحسين الأداء"> أداة لتحسين الأداء<br>
+            </div>
+            <div class="question">
+                <p>ما هي الوحدة الأساسية في Angular؟</p>
+                <input type="radio" name="q2" value="المكونات"> المكونات<br>
+                <input type="radio" name="q2" value="الخدمات"> الخدمات<br>
+                <input type="radio" name="q2" value="التوجيه"> التوجيه<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك تعريف مكون في Angular؟</p>
+                <input type="radio" name="q3" value="@Component({selector: 'my-component'})"> @Component({selector: 'my-component'})<br>
+                <input type="radio" name="q3" value="@Directive({selector: 'my-component'})"> @Directive({selector: 'my-component'})<br>
+                <input type="radio" name="q3" value="@Injectable({selector: 'my-component'})"> @Injectable({selector: 'my-component'})<br>
+            </div>
+            <div class="question">
+                <p>ما هي الخدمة في Angular؟</p>
+                <input type="radio" name="q4" value="فئة توفر وظائف لمكونات متعددة"> فئة توفر وظائف لمكونات متعددة<br>
+                <input type="radio" name="q4" value="مكون يستخدم لعرض البيانات"> مكون يستخدم لعرض البيانات<br>
+                <input type="radio" name="q4" value="أداة للتوجيه بين الصفحات"> أداة للتوجيه بين الصفحات<br>
+            </div>
+            <div class="question">
+                <p>ما هو نظام التوجيه في Angular؟</p>
+                <input type="radio" name="q5" value="توجيه المستخدم إلى الصفحات المختلفة"> توجيه المستخدم إلى الصفحات المختلفة<br>
+                <input type="radio" name="q5" value="تغيير البيانات في المكونات"> تغيير البيانات في المكونات<br>
+                <input type="radio" name="q5" value="تحسين أداء التطبيق"> تحسين أداء التطبيق<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك استخدام البيانات الواردة إلى مكون في Angular؟</p>
+                <input type="radio" name="q6" value="@Input()"> @Input()<br>
+                <input type="radio" name="q6" value="@Output()"> @Output()<br>
+                <input type="radio" name="q6" value="@ViewChild()"> @ViewChild()<br>
+            </div>
+            <div class="question">
+                <p>ما هو Angular CLI؟</p>
+                <input type="radio" name="q7" value="أداة سطر الأوامر لإنشاء وإدارة تطبيقات Angular"> أداة سطر الأوامر لإنشاء وإدارة تطبيقات Angular<br>
+                <input type="radio" name="q7" value="مكتبة لتحسين أداء Angular"> مكتبة لتحسين أداء Angular<br>
+                <input type="radio" name="q7" value="أداة لتصحيح الأخطاء"> أداة لتصحيح الأخطاء<br>
+            </div>
+            <div class="question">
+                <p>ما هي Angular Module؟</p>
+                <input type="radio" name="q8" value="مجموعة من المكونات والخدمات المتعلقة"> مجموعة من المكونات والخدمات المتعلقة<br>
+                <input type="radio" name="q8" value="خدمة لتوجيه البيانات"> خدمة لتوجيه البيانات<br>
+                <input type="radio" name="q8" value="مكتبة للاتصال بالخوادم"> مكتبة للاتصال بالخوادم<br>
+            </div>
+            <div class="question">
+                <p>ما هو عنصر ngIf في Angular؟</p>
+                <input type="radio" name="q9" value="يستخدم لإظهار أو إخفاء العناصر بناءً على شرط"> يستخدم لإظهار أو إخفاء العناصر بناءً على شرط<br>
+                <input type="radio" name="q9" value="يستخدم لإدراج عناصر جديدة"> يستخدم لإدراج عناصر جديدة<br>
+                <input type="radio" name="q9" value="يستخدم لإدارة الأحداث"> يستخدم لإدارة الأحداث<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك إدارة التوجيه في Angular؟</p>
+                <input type="radio" name="q10" value="باستخدام RouterModule"> باستخدام RouterModule<br>
+                <input type="radio" name="q10" value="باستخدام NgModule"> باستخدام NgModule<br>
+                <input type="radio" name="q10" value="باستخدام HttpClientModule"> باستخدام HttpClientModule<br>
+            </div>
+        </div>
+
+        <!-- أسئلة المستوى المتوسط -->
+        <div id="medium" class="level-content hidden">
+            <h2 class="level-title">المستوى المتوسط</h2>
+            <div class="question">
+                <p>ما هو مفهوم Dependency Injection في Angular؟</p>
+                <input type="radio" name="q11" value="آلية لتوفير التبعيات للمكونات والخدمات"> آلية لتوفير التبعيات للمكونات والخدمات<br>
+                <input type="radio" name="q11" value="آلية لإدارة حالة التطبيق"> آلية لإدارة حالة التطبيق<br>
+                <input type="radio" name="q11" value="نمط لتوزيع البيانات"> نمط لتوزيع البيانات<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Data Binding في Angular؟</p>
+                <input type="radio" name="q12" value="ربط البيانات بين المكونات والنماذج"> ربط البيانات بين المكونات والنماذج<br>
+                <input type="radio" name="q12" value="تغيير الستايل بناءً على الأحداث"> تغيير الستايل بناءً على الأحداث<br>
+                <input type="radio" name="q12" value="إنشاء مكونات جديدة"> إنشاء مكونات جديدة<br>
+            </div>
+            <div class="question">
+                <p>ما هي الاستخدامات الشائعة لـ Angular Services؟</p>
+                <input type="radio" name="q13" value="مشاركة البيانات بين المكونات"> مشاركة البيانات بين المكونات<br>
+                <input type="radio" name="q13" value="إنشاء نماذج جديدة"> إنشاء نماذج جديدة<br>
+                <input type="radio" name="q13" value="تصميم واجهات المستخدم"> تصميم واجهات المستخدم<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular Pipes؟</p>
+                <input type="radio" name="q14" value="تحويل البيانات إلى شكل يمكن عرضه في القالب"> تحويل البيانات إلى شكل يمكن عرضه في القالب<br>
+                <input type="radio" name="q14" value="إدارة التوجيه داخل التطبيق"> إدارة التوجيه داخل التطبيق<br>
+                <input type="radio" name="q14" value="توفير خدمات متعددة"> توفير خدمات متعددة<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطرق المختلفة لتعريف وتطبيق الحماية في Angular؟</p>
+                <input type="radio" name="q15" value="باستخدام Guards"> باستخدام Guards<br>
+                <input type="radio" name="q15" value="باستخدام Directives"> باستخدام Directives<br>
+                <input type="radio" name="q15" value="باستخدام Services"> باستخدام Services<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular Reactive Forms؟</p>
+                <input type="radio" name="q16" value="أسلوب لبناء نماذج ديناميكية وتفاعلية"> أسلوب لبناء نماذج ديناميكية وتفاعلية<br>
+                <input type="radio" name="q16" value="أسلوب لتحسين الأداء"> أسلوب لتحسين الأداء<br>
+                <input type="radio" name="q16" value="أسلوب لإدارة التوجيه"> أسلوب لإدارة التوجيه<br>
+            </div>
+            <div class="question">
+                <p>ما هو Angular Universal؟</p>
+                <input type="radio" name="q17" value="إطار عمل لتطبيقات الويب الجانبية"> إطار عمل لتطبيقات الويب الجانبية<br>
+                <input type="radio" name="q17" value="أداة لتحسين أداء الواجهة الأمامية"> أداة لتحسين أداء الواجهة الأمامية<br>
+                <input type="radio" name="q17" value="إطار عمل للتطبيقات ذات التوجيه الجانبي"> إطار عمل للتطبيقات ذات التوجيه الجانبي<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular Directives؟</p>
+                <input type="radio" name="q18" value="تعليمات مضافة إلى عناصر HTML لتعديل سلوكها"> تعليمات مضافة إلى عناصر HTML لتعديل سلوكها<br>
+                <input type="radio" name="q18" value="خدمات لتحسين الأداء"> خدمات لتحسين الأداء<br>
+                <input type="radio" name="q18" value="مكونات متقدمة لتصميم واجهات المستخدم"> مكونات متقدمة لتصميم واجهات المستخدم<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك إدراج مكتبة خارجية في مشروع Angular؟</p>
+                <input type="radio" name="q19" value="عن طريق تعديل ملف angular.json"> عن طريق تعديل ملف angular.json<br>
+                <input type="radio" name="q19" value="عن طريق إضافة المكتبة في المكونات"> عن طريق إضافة المكتبة في المكونات<br>
+                <input type="radio" name="q19" value="عن طريق إضافة المكتبة في الخدمات"> عن طريق إضافة المكتبة في الخدمات<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular Modules؟</p>
+                <input type="radio" name="q20" value="وحدات منطقية للتنظيم وإدارة المكونات"> وحدات منطقية للتنظيم وإدارة المكونات<br>
+                <input type="radio" name="q20" value="خدمات لتحسين أداء التطبيق"> خدمات لتحسين أداء التطبيق<br>
+                <input type="radio" name="q20" value="مكتبات لتصحيح الأخطاء"> مكتبات لتصحيح الأخطاء<br>
+            </div>
+        </div>
+
+        <!-- أسئلة المستوى الصعب -->
+        <div id="hard" class="level-content hidden">
+            <h2 class="level-title">المستوى الصعب</h2>
+            <div class="question">
+                <p>ما هو مفهوم Change Detection في Angular؟</p>
+                <input type="radio" name="q21" value="آلية لمراقبة التغييرات في البيانات وتحديث العرض تلقائيًا"> آلية لمراقبة التغييرات في البيانات وتحديث العرض تلقائيًا<br>
+                <input type="radio" name="q21" value="نمط لإدارة حالة التطبيق"> نمط لإدارة حالة التطبيق<br>
+                <input type="radio" name="q21" value="تقنية لتحسين أداء التطبيق"> تقنية لتحسين أداء التطبيق<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular Ahead-of-Time (AOT) Compilation؟</p>
+                <input type="radio" name="q22" value="تقنية لترجمة الكود إلى JavaScript قبل وقت التشغيل"> تقنية لترجمة الكود إلى JavaScript قبل وقت التشغيل<br>
+                <input type="radio" name="q22" value="طريقة لتأجيل تجميع الكود حتى وقت التشغيل"> طريقة لتأجيل تجميع الكود حتى وقت التشغيل<br>
+                <input type="radio" name="q22" value="نمط لتصحيح الأخطاء في الوقت الفعلي"> نمط لتصحيح الأخطاء في الوقت الفعلي<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular Lazy Loading؟</p>
+                <input type="radio" name="q23" value="تحميل الوحدات فقط عند الحاجة إليها لتحسين الأداء"> تحميل الوحدات فقط عند الحاجة إليها لتحسين الأداء<br>
+                <input type="radio" name="q23" value="تحميل كل المحتوى في البداية"> تحميل كل المحتوى في البداية<br>
+                <input type="radio" name="q23" value="تقنية لتأخير تحميل الصور"> تقنية لتأخير تحميل الصور<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular Reactive Programming؟</p>
+                <input type="radio" name="q24" value="أسلوب برمجي يتعامل مع البيانات بشكل تفاعلي عبر التدفقات"> أسلوب برمجي يتعامل مع البيانات بشكل تفاعلي عبر التدفقات<br>
+                <input type="radio" name="q24" value="طريقة لتخزين البيانات بشكل مؤقت"> طريقة لتخزين البيانات بشكل مؤقت<br>
+                <input type="radio" name="q24" value="نمط لتحسين الأداء في الخوادم"> نمط لتحسين الأداء في الخوادم<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular Zones؟</p>
+                <input type="radio" name="q25" value="آلية لمراقبة التغييرات في إطار Angular"> آلية لمراقبة التغييرات في إطار Angular<br>
+                <input type="radio" name="q25" value="أسلوب لتجميع الكود بشكل أسرع"> أسلوب لتجميع الكود بشكل أسرع<br>
+                <input type="radio" name="q25" value="طريقة لتحسين استجابة التطبيق"> طريقة لتحسين استجابة التطبيق<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular Change Detection Strategies؟</p>
+                <input type="radio" name="q26" value="استراتيجيات للتحكم في كيفية اكتشاف التغييرات في البيانات"> استراتيجيات للتحكم في كيفية اكتشاف التغييرات في البيانات<br>
+                <input type="radio" name="q26" value="تقنيات لتحسين أداء الرسوميات"> تقنيات لتحسين أداء الرسوميات<br>
+                <input type="radio" name="q26" value="أساليب لتعديل المحتوى ديناميكيًا"> أساليب لتعديل المحتوى ديناميكيًا<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular Dependency Injection Hierarchy؟</p>
+                <input type="radio" name="q27" value="هيكلية لتوفير التبعيات عبر مستويات مختلفة من التطبيق"> هيكلية لتوفير التبعيات عبر مستويات مختلفة من التطبيق<br>
+                <input type="radio" name="q27" value="نمط لإدارة البيانات في قواعد البيانات"> نمط لإدارة البيانات في قواعد البيانات<br>
+                <input type="radio" name="q27" value="تقنية لتحسين الأداء في واجهات المستخدم"> تقنية لتحسين الأداء في واجهات المستخدم<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular Application State Management؟</p>
+                <input type="radio" name="q28" value="إدارة حالة التطبيق بطرق متقدمة"> إدارة حالة التطبيق بطرق متقدمة<br>
+                <input type="radio" name="q28" value="إدارة إعدادات التكوين"> إدارة إعدادات التكوين<br>
+                <input type="radio" name="q28" value="تقنية لتحسين الأداء في الشبكة"> تقنية لتحسين الأداء في الشبكة<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular Router Guards؟</p>
+                <input type="radio" name="q29" value="آلية لحماية التوجيه وتقييد الوصول إلى مسارات معينة"> آلية لحماية التوجيه وتقييد الوصول إلى مسارات معينة<br>
+                <input type="radio" name="q29" value="تقنية لتحسين الأداء في التوجيه"> تقنية لتحسين الأداء في التوجيه<br>
+                <input type="radio" name="q29" value="استراتيجية لإدارة التوجيه الديناميكي"> استراتيجية لإدارة التوجيه الديناميكي<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular Change Detection Zones؟</p>
+                <input type="radio" name="q30" value="تقنيات لمراقبة التغييرات في إطار Angular لتقليل عدد التحديثات"> تقنيات لمراقبة التغييرات في إطار Angular لتقليل عدد التحديثات<br>
+                <input type="radio" name="q30" value="أساليب لتحسين أداء الذاكرة"> أساليب لتحسين أداء الذاكرة<br>
+                <input type="radio" name="q30" value="نمط لتحسين أداء الشبكة"> نمط لتحسين أداء الشبكة<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular View Encapsulation؟</p>
+                <input type="radio" name="q31" value="تقنيات لتغليف وتقييد الوصول إلى أنماط CSS داخل المكونات"> تقنيات لتغليف وتقييد الوصول إلى أنماط CSS داخل المكونات<br>
+                <input type="radio" name="q31" value="استراتيجيات لتحسين أداء الرسوميات"> استراتيجيات لتحسين أداء الرسوميات<br>
+                <input type="radio" name="q31" value="طرق لتحسين أداء التوجيه"> طرق لتحسين أداء التوجيه<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular Service Worker؟</p>
+                <input type="radio" name="q32" value="أداة لتحسين أداء التطبيق باستخدام التخزين المؤقت وتحديثات الخلفية"> أداة لتحسين أداء التطبيق باستخدام التخزين المؤقت وتحديثات الخلفية<br>
+                <input type="radio" name="q32" value="تقنية لتأخير تحميل البيانات"> تقنية لتأخير تحميل البيانات<br>
+                <input type="radio" name="q32" value="أسلوب لإدارة الأحداث"> أسلوب لإدارة الأحداث<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular Performance Optimization؟</p>
+                <input type="radio" name="q33" value="استراتيجيات وتقنيات لتحسين أداء التطبيق في واجهة المستخدم"> استراتيجيات وتقنيات لتحسين أداء التطبيق في واجهة المستخدم<br>
+                <input type="radio" name="q33" value="طرق لتحسين أداء الخوادم"> طرق لتحسين أداء الخوادم<br>
+                <input type="radio" name="q33" value="تقنيات لتحسين أداء الشبكة"> تقنيات لتحسين أداء الشبكة<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular Server-Side Rendering (SSR)؟</p>
+                <input type="radio" name="q34" value="تقنية لتوليد HTML على الخادم قبل إرساله إلى العميل"> تقنية لتوليد HTML على الخادم قبل إرساله إلى العميل<br>
+                <input type="radio" name="q34" value="تقنية لتحسين أداء التطبيق في الواجهة الأمامية"> تقنية لتحسين أداء التطبيق في الواجهة الأمامية<br>
+                <input type="radio" name="q34" value="طريقة لتحسين تجربة المستخدم عبر الواجهة الرسومية"> طريقة لتحسين تجربة المستخدم عبر الواجهة الرسومية<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular Custom Validators؟</p>
+                <input type="radio" name="q35" value="طرق لتحديد قواعد التحقق المخصصة للنماذج"> طرق لتحديد قواعد التحقق المخصصة للنماذج<br>
+                <input type="radio" name="q35" value="استراتيجيات لتحسين أداء النماذج"> استراتيجيات لتحسين أداء النماذج<br>
+                <input type="radio" name="q35" value="طرق لتحسين أداء البيانات"> طرق لتحسين أداء البيانات<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular Intersection Observer؟</p>
+                <input type="radio" name="q36" value="أداة لمراقبة التفاعل بين العناصر وعرضها في الصفحة"> أداة لمراقبة التفاعل بين العناصر وعرضها في الصفحة<br>
+                <input type="radio" name="q36" value="تقنية لتحسين أداء الشبكة"> تقنية لتحسين أداء الشبكة<br>
+                <input type="radio" name="q36" value="طريقة لتحسين أداء الرسوميات"> طريقة لتحسين أداء الرسوميات<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular Web Workers؟</p>
+                <input type="radio" name="q37" value="تقنية لتشغيل المهام في خيوط خلفية لتحسين الأداء"> تقنية لتشغيل المهام في خيوط خلفية لتحسين الأداء<br>
+                <input type="radio" name="q37" value="استراتيجيات لتحسين أداء التوجيه"> استراتيجيات لتحسين أداء التوجيه<br>
+                <input type="radio" name="q37" value="طرق لتحسين أداء الخادم"> طرق لتحسين أداء الخادم<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular State Management Libraries؟</p>
+                <input type="radio" name="q38" value="مكتبات لإدارة حالة التطبيق بطريقة منظمة ومتقدمة"> مكتبات لإدارة حالة التطبيق بطريقة منظمة ومتقدمة<br>
+                <input type="radio" name="q38" value="مكتبات لتحسين الأداء في الواجهة الأمامية"> مكتبات لتحسين الأداء في الواجهة الأمامية<br>
+                <input type="radio" name="q38" value="مكتبات لتصحيح الأخطاء في الواجهة الأمامية"> مكتبات لتصحيح الأخطاء في الواجهة الأمامية<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular Dynamic Component Loading؟</p>
+                <input type="radio" name="q39" value="تقنية لتحميل المكونات ديناميكيًا أثناء وقت التشغيل"> تقنية لتحميل المكونات ديناميكيًا أثناء وقت التشغيل<br>
+                <input type="radio" name="q39" value="طريقة لتحسين أداء تحميل الصفحات"> طريقة لتحسين أداء تحميل الصفحات<br>
+                <input type="radio" name="q39" value="تقنية لتحسين أداء الرسوميات"> تقنية لتحسين أداء الرسوميات<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular Change Detection Strategy OnPush؟</p>
+                <input type="radio" name="q40" value="استراتيجية لتحسين أداء اكتشاف التغييرات من خلال الحد من عدد التحديثات"> استراتيجية لتحسين أداء اكتشاف التغييرات من خلال الحد من عدد التحديثات<br>
+                <input type="radio" name="q40" value="طريقة لتحسين أداء الذاكرة"> طريقة لتحسين أداء الذاكرة<br>
+                <input type="radio" name="q40" value="تقنية لتحسين أداء الشبكة"> تقنية لتحسين أداء الشبكة<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular Content Projection؟</p>
+                <input type="radio" name="q41" value="تقنية لإدراج المحتوى في مكونات داخلية بشكل ديناميكي"> تقنية لإدراج المحتوى في مكونات داخلية بشكل ديناميكي<br>
+                <input type="radio" name="q41" value="استراتيجيات لتحسين أداء النماذج"> استراتيجيات لتحسين أداء النماذج<br>
+                <input type="radio" name="q41" value="طرق لتحسين أداء الرسوميات"> طرق لتحسين أداء الرسوميات<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular Event Delegation؟</p>
+                <input type="radio" name="q42" value="أسلوب لمعالجة الأحداث على مستوى أعلى في شجرة DOM لتقليل عدد المعالجات"> أسلوب لمعالجة الأحداث على مستوى أعلى في شجرة DOM لتقليل عدد المعالجات<br>
+                <input type="radio" name="q42" value="تقنيات لتحسين أداء التوجيه"> تقنيات لتحسين أداء التوجيه<br>
+                <input type="radio" name="q42" value="طرق لتحسين أداء الذاكرة"> طرق لتحسين أداء الذاكرة<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular Form Control?</p>
+                <input type="radio" name="q43" value="كائن يمثل عنصر تحكم في نموذج ويحتوي على بيانات وطرق للتحقق"> كائن يمثل عنصر تحكم في نموذج ويحتوي على بيانات وطرق للتحقق<br>
+                <input type="radio" name="q43" value="كائن لتخزين الإعدادات"> كائن لتخزين الإعدادات<br>
+                <input type="radio" name="q43" value="كائن لإدارة التوجيه"> كائن لإدارة التوجيه<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular NgRx?</p>
+                <input type="radio" name="q44" value="مكتبة لإدارة الحالة باستخدام نمط Redux"> مكتبة لإدارة الحالة باستخدام نمط Redux<br>
+                <input type="radio" name="q44" value="مكتبة لتحسين أداء الذاكرة"> مكتبة لتحسين أداء الذاكرة<br>
+                <input type="radio" name="q44" value="مكتبة لإدارة التوجيه"> مكتبة لإدارة التوجيه<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular Testing Library?</p>
+                <input type="radio" name="q45" value="مكتبة لأدوات اختبار المكونات والتطبيقات في Angular"> مكتبة لأدوات اختبار المكونات والتطبيقات في Angular<br>
+                <input type="radio" name="q45" value="مكتبة لتحسين الأداء"> مكتبة لتحسين الأداء<br>
+                <input type="radio" name="q45" value="مكتبة لإدارة التوجيه"> مكتبة لإدارة التوجيه<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular CLI?</p>
+                <input type="radio" name="q46" value="أداة سطر الأوامر لإنشاء وإدارة مشاريع Angular"> أداة سطر الأوامر لإنشاء وإدارة مشاريع Angular<br>
+                <input type="radio" name="q46" value="أداة لتحسين أداء التطبيق"> أداة لتحسين أداء التطبيق<br>
+                <input type="radio" name="q46" value="أداة لإدارة البيانات"> أداة لإدارة البيانات<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular HttpClient?</p>
+                <input type="radio" name="q47" value="خدمة للتعامل مع الطلبات والردود HTTP"> خدمة للتعامل مع الطلبات والردود HTTP<br>
+                <input type="radio" name="q47" value="خدمة لتحسين أداء الرسوميات"> خدمة لتحسين أداء الرسوميات<br>
+                <input type="radio" name="q47" value="خدمة لإدارة التوجيه"> خدمة لإدارة التوجيه<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular Router Module?</p>
+                <input type="radio" name="q48" value="وحدة لإدارة التوجيه في التطبيق"> وحدة لإدارة التوجيه في التطبيق<br>
+                <input type="radio" name="q48" value="وحدة لتحسين أداء الرسوميات"> وحدة لتحسين أداء الرسوميات<br>
+                <input type="radio" name="q48" value="وحدة لإدارة حالة التطبيق"> وحدة لإدارة حالة التطبيق<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular NgRx Effects?</p>
+                <input type="radio" name="q49" value="مكتبة لإدارة الآثار الجانبية في تطبيقات NgRx"> مكتبة لإدارة الآثار الجانبية في تطبيقات NgRx<br>
+                <input type="radio" name="q49" value="مكتبة لتحسين أداء الذاكرة"> مكتبة لتحسين أداء الذاكرة<br>
+                <input type="radio" name="q49" value="مكتبة لإدارة التوجيه"> مكتبة لإدارة التوجيه<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular Event Emitters؟</p>
+                <input type="radio" name="q50" value="آلية لإرسال الأحداث من مكونات الطفل إلى المكونات الأصلية"> آلية لإرسال الأحداث من مكونات الطفل إلى المكونات الأصلية<br>
+                <input type="radio" name="q50" value="آلية لتحسين أداء التوجيه"> آلية لتحسين أداء التوجيه<br>
+                <input type="radio" name="q50" value="آلية لإدارة التوجيه الديناميكي"> آلية لإدارة التوجيه الديناميكي<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم Angular HttpInterceptor?</p>
+                <input type="radio" name="q51" value="أداة لتعديل الطلبات والردود HTTP قبل إرسالها أو بعد تلقيها"> أداة لتعديل الطلبات والردود HTTP قبل إرسالها أو بعد تلقيها<br>
+                <input type="radio" name="q51" value="أداة لتحسين أداء الرسوميات"> أداة لتحسين أداء الرسوميات<br>
+                <input type="radio" name="q51" value="أداة لإدارة حالة التطبيق"> أداة لإدارة حالة التطبيق<br>
+            </div>
+        </div>
+    </div>
+
+
+        <button onclick="submitQuiz()">طمنى بسرعه</button>
+    </div>
+
+    <!-- نافذة النتيجة -->
+    <div id="resultPopup" class="evaluation-popup">
+        <p id="resultText"></p>
+        <button onclick="closePopup()">إغلاق</button>
+    </div>
+
+    <script>
+        const levelSelect = document.getElementById('levelSelect');
+        const levelContents = document.querySelectorAll('.level-content');
+        const resultPopup = document.getElementById('resultPopup');
+        const resultText = document.getElementById('resultText');
+
+        levelSelect.addEventListener('change', (e) => {
+            const selectedLevel = e.target.value;
+
+            levelContents.forEach(content => {
+                if (content.id === selectedLevel) {
+                    content.classList.remove('hidden');
+                } else {
+                    content.classList.add('hidden');
+                }
+            });
+        });
+
+        function submitQuiz() {
+            const selectedLevel = levelSelect.value;
+            const questions = document.querySelectorAll(`#${selectedLevel} .question`);
+            let score = 0;
+
+            questions.forEach(question => {
+                const selectedOption = question.querySelector('input[type="radio"]:checked');
+                if (selectedOption && selectedOption.value === getCorrectAnswer(question)) {
+                    score++;
+                }
+            });
+
+            resultText.textContent = `لقد أجبت بشكل صحيح على ${score} من ${questions.length} سؤال.`;
+            resultPopup.style.display = 'block';
+        }
+
+        function getCorrectAnswer(question) {
+              const correctAnswers = {
+                easy: {
+                    q1: "مكتبة لواجهة المستخدم في React",
+                    q2: "يوفر واجهات المستخدم التفاعلية",
+                    q3: "JSX",
+                    q4: "مكونات الوظائف",
+                    q5: "استعمال state",
+                    q6: "وحدة التحكم",
+                    q7: "المتغيرات",
+                    q8: "React Router",
+                    q9: "فوقي",
+                    q10: "باستخدام NgModule"
+                },
+                medium: {
+                    q11: "آلية لتوفير التبعيات للمكونات والخدمات",
+                    q12: "ربط البيانات بين المكونات والنماذج",
+                    q13: "مشاركة البيانات بين المكونات",
+                    q14: "تحويل البيانات إلى شكل يمكن عرضه في القالب",
+                    q15: "باستخدام Guards",
+                    q16: "أسلوب لبناء نماذج ديناميكية وتفاعلية",
+                    q17: "إطار عمل للتطبيقات ذات التوجيه الجانبي",
+                    q18: "تعليمات مضافة إلى عناصر HTML لتعديل سلوكها",
+                    q19: "عن طريق تعديل ملف angular.json",
+                    q20: "وحدات منطقية للتنظيم وإدارة المكونات"
+                },
+                hard: {
+                    q21: "آلية لمراقبة التغييرات في البيانات وتحديث العرض تلقائيًا",
+                    q22: "تقنية لترجمة الكود إلى JavaScript قبل وقت التشغيل",
+                    q23: "تحميل الوحدات فقط عند الحاجة إليها لتحسين الأداء",
+                    q24: "أسلوب برمجي يتعامل مع البيانات بشكل تفاعلي عبر التدفقات",
+                    q25: "آلية لمراقبة التغييرات في إطار Angular",
+                    q26: "استراتيجيات للتحكم في كيفية اكتشاف التغييرات في البيانات",
+                    q27: "هيكلية لتوفير التبعيات عبر مستويات مختلفة من التطبيق",
+                    q28: "إدارة حالة التطبيق بطرق متقدمة",
+                    q29: "آلية لحماية التوجيه وتقييد الوصول إلى مسارات معينة",
+                    q30: "تقنيات لمراقبة التغييرات في إطار Angular لتقليل عدد التحديثات",
+                    q31: "تقنيات لتغليف وتقييد الوصول إلى أنماط CSS داخل المكونات",
+                    q32: "أداة لتحسين أداء التطبيق باستخدام التخزين المؤقت وتحديثات الخلفية",
+                    q33: "استراتيجيات وتقنيات لتحسين أداء التطبيق في واجهة المستخدم",
+                    q34: "تقنية لتوليد HTML على الخادم قبل إرساله إلى العميل",
+                    q35: "طرق لتحديد قواعد التحقق المخصصة للنماذج",
+                    q36: "أداة لمراقبة التفاعل بين العناصر وعرضها في الصفحة",
+                    q37: "تقنية لتشغيل المهام في خيوط خلفية لتحسين الأداء",
+                    q38: "مكتبات لإدارة حالة التطبيق بطريقة منظمة ومتقدمة",
+                    q39: "تقنية لتحميل المكونات ديناميكيًا أثناء وقت التشغيل",
+                    q40: "استراتيجية لتحسين أداء اكتشاف التغييرات من خلال الحد من عدد التحديثات",
+                    q41: "تقنية لإدراج المحتوى في مكونات داخلية بشكل ديناميكي",
+                    q42: "أسلوب لمعالجة الأحداث على مستوى أعلى في شجرة DOM لتقليل عدد المعالجات",
+                    q43: "كائن يمثل عنصر تحكم في نموذج ويحتوي على بيانات وطرق للتحقق",
+                    q44: "مكتبة لإدارة الحالة باستخدام نمط Redux",
+                    q45: "مكتبة لأدوات اختبار المكونات والتطبيقات في Angular",
+                    q46: "أداة سطر الأوامر لإنشاء وإدارة مشاريع Angular",
+                    q47: "خدمة للتعامل مع الطلبات والردود HTTP",
+                    q48: "وحدة لإدارة التوجيه في التطبيق",
+                    q49: "مكتبة لإدارة الآثار الجانبية في تطبيقات NgRx",
+                    q50: "آلية لإرسال الأحداث من مكونات الطفل إلى المكونات الأصلية",
+                    q51: "أداة لتعديل الطلبات والردود HTTP قبل إرسالها أو بعد تلقيها"
+                }
+              };
+
+            const questionId = question.querySelector('input[type="radio"]').name;
+            return correctAnswers[selectedLevel][questionId];
+        }
+
+        function closePopup() {
+            resultPopup.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

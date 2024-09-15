@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحة الرئيسية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Oswald:wght@500&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #0f0e17, #1a1a2e, #162447);
+            background-size: 600% 600%;
+            animation: BackgroundAnimation 15s ease infinite;
+            margin: 0;
+            padding: 0;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes BackgroundAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .header {
+    background-color: #ff8906;
+    padding: 2px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10; /* أعلى من العناصر الأخرى */
+}
+
+        .header .logo {
+            width: 100px;
+            height: auto;
+        }
+
+        .header p {
+            margin: 0;
+            font-size: 24px;
+            color: #0f0e17;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+
+        .menu-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-icon:hover {
+            transform: rotate(90deg);
+        }
+
+        .menu {
+            display: none;
+            position: absolute;
+            top: 80px;
+            right: 20px;
+            background-color: #1a1a2e;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            width: 250px;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.5s ease;
+            max-height: 0;
+            opacity: 0;
+        }
+
+        .menu.open {
+            display: block;
+            max-height: 1000px;
+            opacity: 1;
+        }
+
+        .menu-category {
+            border-bottom: 1px solid #333;
+        }
+
+        .menu-category:last-child {
+            border-bottom: none;
+        }
+
+        .menu-category-header {
+            background-color:linear-gradient(135deg, #0f0e17, #1a1a2e, #162447);
+            color: white;
+            padding: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .menu-category-header:hover {
+            background-color: #ff6f3d;
+            transform: translateX(10px);
+        }
+
+        .menu-category-content {
+            display: none;
+            background-color:linear-gradient(135deg, #0f0e17, #1a1a2e, #162447);
+            padding-left: 15px;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.5s ease;
+            max-height: 0;
+            opacity: 0;
+            transform: translateY(-20px);
+            border-radius: 8px;
+        }
+
+        .menu-category-content.open {
+            display: block;
+            max-height: 500px;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .menu-category-content a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #ff8906;
+            font-weight: 700;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .menu-category-content a:hover {
+            background-color: #ff6f3d;
+            color: #0f0e17;
+            transform: scale(1.05);
+        }
+
+        .static-text {
+            font-size: 36px;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            animation: textAnimation 1s ease-out;
+        }
+
+        @keyframes textAnimation {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 0 5%;
+            margin-top: 20px;
+            animation: gridAnimation 1.5s ease-out;
+           
+        }
+
+        @keyframes gridAnimation {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .logo-grid img {
+            width: 80px;
+            height: auto;
+            transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
+            border-radius: 8px;
+        }
+
+        .logo-grid img:hover {
+            transform: rotate(10deg) scale(1.2);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            filter: brightness(1.2);
+        }
+
+        .start-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 30px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f0e17;
+            background-color: #ff8906;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .start-button:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transform: scale(1.1);
+        }
+        .blurred-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 14, 23, 0.7);
+    backdrop-filter: blur(10px);
+    z-index: -1; /* خلف العناصر الأخرى */
+}
+
+        /* Modal Styles */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.4); 
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; 
+            padding: 20px; 
+            border: 1px solid #888;
+            width: 80%; 
+            border-radius: 8px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+        }
+
+        .modal-content ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .modal-content ul li {
+            margin: 10px 0;
+        }
+
+        .modal-content ul li a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .modal-content ul li a:hover {
+            text-decoration: underline;
+        }
+        .logo-item {
+    position: relative;
+    text-align: center;
+}
+
+.language-name {
+    font-family: 'Cairo', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #ff8906;
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.logo-item:hover .language-name {
+    opacity: 1;
+}
+
+    </style>
+</head>
+
+<body>
+    
+    <div class="header">
+        <img src="1.png" alt="الشعار" class="logo">
+        <p>PROGRAMMING TESTING</p>
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+        <div class="menu" id="menu">
+            <div class="menu-category">
+                <div class="menu-category-header" onclick="toggleCategory('frontend-exams')">Frontend Exams</div>
+                <div class="menu-category-content" id="frontend-exams">
+                    <a href="html.html">امتحان HTML</a>
+                    <a href="css.html">امتحان CSS</a>
+                    <a href="js.html">امتحان JavaScript</a>
+                    <a href="react.html">امتحان React</a>
+                    <a href="node.html">امتحان Node</a>
+                    <a href="type.html">امتحان TypeScript</a>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                <div class="menu-category-header" onclick="toggleCategory('android-ios-exams')">Android & iOS Exams</div>
+                <div class="menu-category-content" id="android-ios-exams">
+                    <a href="dart.html">امتحان Dart</a>
+                    <a href="flutter.html">امتحان Flutter</a>
+                    <a href="c.html">امتحان C#</a>
+                    <a href="Objective-C.html">امتحان Objective-C</a>
+                    <a href="kotlin.html">امتحان Kotlin</a>
+                    <a href="swift.html">امتحان Swift</a>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                <div class="menu-category-header" onclick="toggleCategory('ai-exams')">AI Exams</div>
+                <div class="menu-category-content" id="ai-exams">
+                    <a href="python.html">امتحان Python</a>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                <div class="menu-category-header" onclick="toggleCategory('large-systems-cloud-apps-exams')">Large systems & cloud applications Exams</div>
+                <div class="menu-category-content" id="large-systems-cloud-apps-exams">
+                    <a href="go.html">امتحان Go</a>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                <div class="menu-category-header" onclick="toggleCategory('backend-exams')">Backend Exams</div>
+                <div class="menu-category-content" id="backend-exams">
+                    <a href="R.html">امتحان R</a>
+                    <a href="java.html">امتحان Java</a>
+                    <a href="c.html">امتحان C#</a>
+                    <a href="mysql.html">امتحان MySQL</a>
+                    <a href="ASP.NET.html">امتحان ASP.NET</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="static-text">
+      Test and reassure yourself in the programming
+    </div>
+
+    <div class="logo-grid">
+        <div class="logo-item">
+            <a href="html.html"><img src="html.png" alt="HTML Logo"></a>
+            <div class="language-name">HTML</div>
+        </div>
+        <div class="logo-item">
+            <a href="css.html"><img src="css.png" alt="CSS Logo"></a>
+            <div class="language-name">CSS</div>
+        </div>
+        <div class="logo-item">
+            <a href="js.html"><img src="js.png" alt="JavaScript Logo"></a>
+            <div class="language-name">JavaScript</div>
+        </div>
+        <div class="logo-item">
+            <a href="type.html"><img src="typescript.png" alt="TypeScript Logo"></a>
+            <div class="language-name">TypeScript</div>
+        </div>
+        <div class="logo-item">
+            <a href="react.html"><img src="react.png" alt="React Logo"></a>
+            <div class="language-name">React</div>
+        </div>
+        <div class="logo-item">
+            <a href="node.html"><img src="node.png" alt="Node.js Logo"></a>
+            <div class="language-name">Node.js</div>
+        </div>
+        <div class="logo-item">
+            <a href="coffeescript.html"><img src="coffeescript.png" alt="coffeescript Logo"></a>
+            <div class="language-name">CoffeeScript</div>
+        </div>
+        <div class="logo-item">
+            <a href="EJS.html"><img src="EJS.png" alt="EJS Logo"></a>
+            <div class="language-name">EJS</div>
+        </div>
+        <div class="logo-item">
+            <a href="angular.html"><img src="angular.png" alt="Angular Logo"></a>
+            <div class="language-name">Angular</div>
+        </div>
+        <div class="logo-item">
+            <a href="vue.html"><img src="vue.png" alt="Vue.js Logo"></a>
+            <div class="language-name">Vue.js</div>
+        </div>
+        <div class="logo-item">
+            <a href="python.html"><img src="python.png" alt="Python Logo"></a>
+            <div class="language-name">Python</div>
+        </div>
+        <div class="logo-item">
+            <a href="java.html"><img src="java.png" alt="Java Logo"></a>
+            <div class="language-name">Java</div>
+        </div>
+        <div class="logo-item">
+            <a href="php.html"><img src="php.png" alt="PHP Logo"></a>
+            <div class="language-name">PHP</div>
+        </div>
+        <div class="logo-item">
+            <a href="ruby.html"><img src="ruby.png" alt="Ruby Logo"></a>
+            <div class="language-name">Ruby</div>
+        </div>
+        <div class="logo-item">
+            <a href="c++.html"><img src="c++.png" alt="c++ Logo"></a>
+            <div class="language-name">C++</div>
+        </div>
+        <div class="logo-item">
+            <a href="c.html"><img src="c2.png" alt="C# Logo"></a>
+            <div class="language-name">C#</div>
+        </div>
+
+        <!-- عناصر إضافية -->
+        <div class="logo-item">
+            <a href="mysql.html"><img src="mysql.png" alt="SQL Logo"></a>
+            <div class="language-name">SQL</div>
+        </div>
+        <div class="logo-item">
+            <a href="dart.html"><img src="dart.png" alt="dart Logo"></a>
+            <div class="language-name">Dart</div>
+        </div>
+        <div class="logo-item">
+            <a href="flutter.html"><img src="flutter.png" alt="fjutter Logo"></a>
+            <div class="language-name">Flutter</div>
+
+        </div>
+        <div class="logo-item">
+            <a href="swift.html"><img src="swift.png" alt="Swift Logo"></a>
+            <div class="language-name">Swift</div>
+    </div>
+    <div class="logo-item">
+        <a href="Objective-C.html"><img src="Objective-C.png" alt="Objective-C Logo"></a>
+        <div class="language-name">Objective-C</div>
+    </div>
+    <div class="logo-item">
+        <a href="ASP.NET.html"><img src="asp.png" alt="ASP Logo"></a>
+        <div class="language-name">ASP</div>
+    </div>
+    <div class="logo-item">
+        <a href="kotlin.html"><img src="kotlin.png" alt="kotlin Logo"></a>
+        <div class="language-name">Kotlin</div>
+    </div>
+    <div class="logo-item">
+        <a href="go.html"><img src="go.png" alt="go Logo"></a>
+        <div class="language-name">Go</div>
+    </div>
+    <div class="logo-item">
+        <a href="R.html"><img src="r.png" alt="R Logo"></a>
+        <div class="language-name">R</div>
+    </div>
+    <div class="logo-item">
+        <a href="fsharp.html"><img src="f.png" alt="f# Logo"></a>
+        <div class="language-name">F#</div>
+    </div>
+    <div class="logo-item">
+        <a href="OCaml.html"><img src="OCaml.png" alt="OCaml Logo"></a>
+        <div class="language-name">OCaml</div>
+    </div>
+    <div class="logo-item">
+        <a href="octav.html"><img src="octav.png" alt="Gnu Octave Logo"></a>
+        <div class="language-name"> Gnu Octave</div>
+    </div>
+    <div class="logo-item">
+        <a href="rust.html"><img src="rust.png" alt="Rust"></a>
+        <div class="language-name">  Rust</div>
+    </div>
+
+    <!-- Modal -->
+    <div id="examModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeExamModal()">&times;</span>
+            <h2>اختر امتحان</h2>
+
+            <div class="menu-category">
+                <div class="menu-category-header" onclick="toggleCategory('frontend-exams')">Frontend Exams</div>
+                <div class="menu-category-content" id="frontend-exams">
+                    <a href="html.html">امتحان HTML</a>
+                    <a href="css.html">امتحان CSS</a>
+                    <a href="js.html">امتحان JavaScript</a>
+                    <a href="react.html">امتحان React</a>
+                    <a href="node.html">امتحان Node</a>
+                    <a href="type.html">امتحان TypeScript</a>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                <div class="menu-category-header" onclick="toggleCategory('android-ios-exams')">Android & iOS Exams</div>
+                <div class="menu-category-content" id="android-ios-exams">
+                    <a href="dart.html">امتحان Dart</a>
+                    <a href="flutter.html">امتحان Flutter</a>
+                    <a href="c.html">امتحان C#</a>
+                    <a href="Objective-C.html">امتحان Objective-C</a>
+                    <a href="kotlin.html">امتحان Kotlin</a>
+                    <a href="swift.html">امتحان Swift</a>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                <div class="menu-category-header" onclick="toggleCategory('ai-exams')">AI Exams</div>
+                <div class="menu-category-content" id="ai-exams">
+                    <a href="python.html">امتحان Python</a>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                <div class="menu-category-header" onclick="toggleCategory('large-systems-cloud-apps-exams')">Large systems & cloud applications Exams</div>
+                <div class="menu-category-content" id="large-systems-cloud-apps-exams">
+                    <a href="go.html">امتحان Go</a>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                <div class="menu-category-header" onclick="toggleCategory('backend-exams')">Backend Exams</div>
+                <div class="menu-category-content" id="backend-exams">
+                    <a href="R.html">امتحان R</a>
+                    <a href="java.html">امتحان Java</a>
+                    <a href="c.html">امتحان C#</a>
+                    <a href="mysql.html">امتحان MySQL</a>
+                    <a href="ASP.NET.html">امتحان ASP.NET</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById('menu');
+            menu.classList.toggle('open');
+        }
+
+        function openExamModal() {
+            document.getElementById('examModal').style.display = 'block';
+        }
+
+        function closeExamModal() {
+            document.getElementById('examModal').style.display = 'none';
+        }
+
+        function toggleCategory(categoryId) {
+            var category = document.getElementById(categoryId);
+            category.classList.toggle('open');
+        }
+
+        // Close the modal if the user clicks outside of it
+        window.onclick = function(event) {
+            if (event.target === document.getElementById('examModal')) {
+                closeExamModal();
+            }
+        }
+    </script>
+</body>
+</html>

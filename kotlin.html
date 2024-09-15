@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>امتحان Flutter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Oswald:wght@500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #0f0e17;
+            color: #f0e8e8;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #0f0e17;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #ff8906;
+            margin-bottom: 30px;
+        }
+        .level-title {
+            color: #ff8906;
+            margin-top: 40px;
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .question p {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #ff8906;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #ff8b06a9;
+        }
+        .result {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 30px;
+            color: #333;
+        }
+        .evaluation-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #0f0e17;
+            color: orange;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+        }
+        .evaluation-popup button {
+            background-color: #ff8906;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .evaluation-popup button:hover {
+            background-color: #ff8b06a9;
+        }
+        .hidden {
+            display: none;
+        }
+        select {
+            background-color: #333;
+            color: #fff;
+            border: 2px solid #ff8906;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            font-family: 'Cairo', sans-serif;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        select:hover {
+            background-color: #444;
+            border-color: #ff8b06a9;
+        }
+        option {
+            background-color: #222;
+            color: #fff;
+        }
+    </style>
+    </head>
+<body>
+    <div class="container">
+        <h1>امتحان Kotlin</h1>
+        
+        <!-- القائمة المنسدلة لاختيار المستوى -->
+        <select id="levelSelect">
+            <option value="easy">المستوى السهل</option>
+            <option value="medium">المستوى المتوسط</option>
+            <option value="hard">المستوى الصعب</option>
+        </select>
+
+        <!-- أسئلة المستوى السهل -->
+        <div id="easy" class="level-content">
+            <h2 class="level-title">المستوى السهل</h2>
+            <!-- الأسئلة المضافة -->
+            <div class="question">
+                <p>ما هو نوع البيانات الذي يستخدم لتخزين نص في Kotlin؟</p>
+                <input type="radio" name="q1" value="String"> String<br>
+                <input type="radio" name="q1" value="Text"> Text<br>
+                <input type="radio" name="q1" value="Character"> Character<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة لتعريف دالة في Kotlin؟</p>
+                <input type="radio" name="q2" value="fun"> fun<br>
+                <input type="radio" name="q2" value="define"> define<br>
+                <input type="radio" name="q2" value="method"> method<br>
+            </div>
+            <div class="question">
+                <p>ما هو نوع البيانات الذي يستخدم لتخزين عدد صحيح في Kotlin؟</p>
+                <input type="radio" name="q3" value="Int"> Int<br>
+                <input type="radio" name="q3" value="Integer"> Integer<br>
+                <input type="radio" name="q3" value="Number"> Number<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة لتعريف متغير ثابت في Kotlin؟</p>
+                <input type="radio" name="q4" value="val"> val<br>
+                <input type="radio" name="q4" value="const"> const<br>
+                <input type="radio" name="q4" value="final"> final<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لإنشاء كائنات في Kotlin؟</p>
+                <input type="radio" name="q5" value="Class"> Class<br>
+                <input type="radio" name="q5" value="Object"> Object<br>
+                <input type="radio" name="q5" value="Data Class"> Data Class<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة لإنشاء كتلة شرطية في Kotlin؟</p>
+                <input type="radio" name="q6" value="if"> if<br>
+                <input type="radio" name="q6" value="when"> when<br>
+                <input type="radio" name="q6" value="case"> case<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لتخزين قيمتين أو أكثر في Kotlin؟</p>
+                <input type="radio" name="q7" value="Pair"> Pair<br>
+                <input type="radio" name="q7" value="Array"> Array<br>
+                <input type="radio" name="q7" value="List"> List<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة لإنشاء حلقة تكرار في Kotlin؟</p>
+                <input type="radio" name="q8" value="for"> for<br>
+                <input type="radio" name="q8" value="while"> while<br>
+                <input type="radio" name="q8" value="do"> do<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لإنشاء مصفوفات في Kotlin؟</p>
+                <input type="radio" name="q9" value="Array"> Array<br>
+                <input type="radio" name="q9" value="List"> List<br>
+                <input type="radio" name="q9" value="Set"> Set<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة للتعامل مع الاستثناءات في Kotlin؟</p>
+                <input type="radio" name="q10" value="try"> try<br>
+                <input type="radio" name="q10" value="catch"> catch<br>
+                <input type="radio" name="q10" value="throw"> throw<br>
+            </div>
+            <!-- إضافة 10 أسئلة أخرى للمستوى السهل -->
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لإنشاء دوال غير متزامنة في Kotlin؟</p>
+                <input type="radio" name="q11" value="suspend"> suspend<br>
+                <input type="radio" name="q11" value="async"> async<br>
+                <input type="radio" name="q11" value="coroutine"> coroutine<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة لتعريف الكائنات القابلة للتوريث في Kotlin؟</p>
+                <input type="radio" name="q12" value="open"> open<br>
+                <input type="radio" name="q12" value="abstract"> abstract<br>
+                <input type="radio" name="q12" value="extend"> extend<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لإنشاء خصائص مؤقتة في Kotlin؟</p>
+                <input type="radio" name="q13" value="lateinit"> lateinit<br>
+                <input type="radio" name="q13" value="lazy"> lazy<br>
+                <input type="radio" name="q13" value="temp"> temp<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة للتعامل مع التعديلات على الخصائص في Kotlin؟</p>
+                <input type="radio" name="q14" value="var"> var<br>
+                <input type="radio" name="q14" value="mutable"> mutable<br>
+                <input type="radio" name="q14" value="val"> val<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لتعريف واجهات في Kotlin؟</p>
+                <input type="radio" name="q15" value="interface"> interface<br>
+                <input type="radio" name="q15" value="trait"> trait<br>
+                <input type="radio" name="q15" value="abstract"> abstract<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة لإنشاء صفوف بيانات في Kotlin؟</p>
+                <input type="radio" name="q16" value="data"> data<br>
+                <input type="radio" name="q16" value="class"> class<br>
+                <input type="radio" name="q16" value="record"> record<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لتخزين عناصر غير متكررة في Kotlin؟</p>
+                <input type="radio" name="q17" value="Set"> Set<br>
+                <input type="radio" name="q17" value="List"> List<br>
+                <input type="radio" name="q17" value="Array"> Array<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة لتعريف واجهات غير متزامنة في Kotlin؟</p>
+                <input type="radio" name="q18" value="suspend"> suspend<br>
+                <input type="radio" name="q18" value="async"> async<br>
+                <input type="radio" name="q18" value="await"> await<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لإنشاء كائنات غير محددة في Kotlin؟</p>
+                <input type="radio" name="q19" value="Any"> Any<br>
+                <input type="radio" name="q19" value="Object"> Object<br>
+                <input type="radio" name="q19" value="Type"> Type<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة للتعامل مع التعديل على الخصائص القابلة للقراءة فقط في Kotlin؟</p>
+                <input type="radio" name="q20" value="get"> get<br>
+                <input type="radio" name="q20" value="read"> read<br>
+                <input type="radio" name="q20" value="val"> val<br>
+            </div>
+        </div>
+
+        <!-- أسئلة المستوى المتوسط -->
+        <div id="medium" class="level-content hidden">
+            <h2 class="level-title">المستوى المتوسط</h2>
+            <!-- الأسئلة المضافة -->
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لإنشاء دوال غير متزامنة في Kotlin؟</p>
+                <input type="radio" name="q21" value="suspend"> suspend<br>
+                <input type="radio" name="q21" value="async"> async<br>
+                <input type="radio" name="q21" value="coroutine"> coroutine<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة لتعريف الكائنات القابلة للتوريث في Kotlin؟</p>
+                <input type="radio" name="q22" value="open"> open<br>
+                <input type="radio" name="q22" value="abstract"> abstract<br>
+                <input type="radio" name="q22" value="extend"> extend<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لإنشاء خصائص مؤقتة في Kotlin؟</p>
+                <input type="radio" name="q23" value="lateinit"> lateinit<br>
+                <input type="radio" name="q23" value="lazy"> lazy<br>
+                <input type="radio" name="q23" value="temp"> temp<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة للتعامل مع التعديلات على الخصائص في Kotlin؟</p>
+                <input type="radio" name="q24" value="var"> var<br>
+                <input type="radio" name="q24" value="mutable"> mutable<br>
+                <input type="radio" name="q24" value="val"> val<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لتعريف واجهات في Kotlin؟</p>
+                <input type="radio" name="q25" value="interface"> interface<br>
+                <input type="radio" name="q25" value="trait"> trait<br>
+                <input type="radio" name="q25" value="abstract"> abstract<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة لإنشاء صفوف بيانات في Kotlin؟</p>
+                <input type="radio" name="q26" value="data"> data<br>
+                <input type="radio" name="q26" value="class"> class<br>
+                <input type="radio" name="q26" value="record"> record<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لتخزين عناصر غير متكررة في Kotlin؟</p>
+                <input type="radio" name="q27" value="Set"> Set<br>
+                <input type="radio" name="q27" value="List"> List<br>
+                <input type="radio" name="q27" value="Array"> Array<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة لتعريف واجهات غير متزامنة في Kotlin؟</p>
+                <input type="radio" name="q28" value="suspend"> suspend<br>
+                <input type="radio" name="q28" value="async"> async<br>
+                <input type="radio" name="q28" value="await"> await<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لإنشاء كائنات غير محددة في Kotlin؟</p>
+                <input type="radio" name="q29" value="Any"> Any<br>
+                <input type="radio" name="q29" value="Object"> Object<br>
+                <input type="radio" name="q29" value="Type"> Type<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة للتعامل مع التعديل على الخصائص القابلة للقراءة فقط في Kotlin؟</p>
+                <input type="radio" name="q30" value="get"> get<br>
+                <input type="radio" name="q30" value="read"> read<br>
+                <input type="radio" name="q30" value="val"> val<br>
+            </div>
+            <!-- إضافة 10 أسئلة أخرى للمستوى المتوسط -->
+        </div>
+
+        <!-- أسئلة المستوى الصعب -->
+        <div id="hard" class="level-content hidden">
+            <h2 class="level-title">المستوى الصعب</h2>
+            <!-- الأسئلة المضافة -->
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لتعريف أنواع القيم الخاصة بالتحويل في Kotlin؟</p>
+                <input type="radio" name="q31" value="Enum"> Enum<br>
+                <input type="radio" name="q31" value="Union"> Union<br>
+                <input type="radio" name="q31" value="Object"> Object<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة للتعامل مع التعبيرات اللامتزامنة في Kotlin؟</p>
+                <input type="radio" name="q32" value="suspend"> suspend<br>
+                <input type="radio" name="q32" value="async"> async<br>
+                <input type="radio" name="q32" value="defer"> defer<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لإنشاء دوال أعلى في Kotlin؟</p>
+                <input type="radio" name="q33" value="HigherOrderFunction"> HigherOrderFunction<br>
+                <input type="radio" name="q33" value="Lambda"> Lambda<br>
+                <input type="radio" name="q33" value="Function"> Function<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة لتعريف الواجهة القابلة للتنفيذ في Kotlin؟</p>
+                <input type="radio" name="q34" value="functional"> functional<br>
+                <input type="radio" name="q34" value="inline"> inline<br>
+                <input type="radio" name="q34" value="abstract"> abstract<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لتعريف التفاعل بين الدوال في Kotlin؟</p>
+                <input type="radio" name="q35" value="ScopeFunction"> ScopeFunction<br>
+                <input type="radio" name="q35" value="ExtensionFunction"> ExtensionFunction<br>
+                <input type="radio" name="q35" value="InlineFunction"> InlineFunction<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة لإنشاء كائنات غير متزامنة في Kotlin؟</p>
+                <input type="radio" name="q36" value="async"> async<br>
+                <input type="radio" name="q36" value="await"> await<br>
+                <input type="radio" name="q36" value="defer"> defer<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لتعريف القيم ذات التعيين المسبق في Kotlin؟</p>
+                <input type="radio" name="q37" value="Const"> Const<br>
+                <input type="radio" name="q37" value="Static"> Static<br>
+                <input type="radio" name="q37" value="Final"> Final<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة لإنشاء واجهات قابلة للتنفيذ في Kotlin؟</p>
+                <input type="radio" name="q38" value="interface"> interface<br>
+                <input type="radio" name="q38" value="abstract"> abstract<br>
+                <input type="radio" name="q38" value="inline"> inline<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لإنشاء متغيرات ثابتة في Kotlin؟</p>
+                <input type="radio" name="q39" value="const"> const<br>
+                <input type="radio" name="q39" value="final"> final<br>
+                <input type="radio" name="q39" value="static"> static<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة لتعريف القيم الثابتة في Kotlin؟</p>
+                <input type="radio" name="q40" value="val"> val<br>
+                <input type="radio" name="q40" value="const"> const<br>
+                <input type="radio" name="q40" value="static"> static<br>
+              </div>
+        </div>
+
+        <!-- زر تقديم -->
+        <button onclick="submitQuiz()">طمنى بسرعه</button>
+
+        <!-- نافذة عرض النتيجة -->
+        <div id="evaluationPopup" class="evaluation-popup">
+            <p id="resultMessage"></p>
+            <button onclick="closePopup()">إغلاق</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('levelSelect').addEventListener('change', function() {
+            var level = this.value;
+            document.querySelectorAll('.level-content').forEach(function(div) {
+                div.classList.add('hidden');
+            });
+            document.getElementById(level).classList.remove('hidden');
+        });
+
+         function submitQuiz() {
+            var score = 0;
+            var totalQuestions = 40;
+            var correctAnswers = {
+   easy: {
+                q1: "suspend",
+                q2: "open",
+                q3: "lateinit",
+                q4: "var",
+                q5: "interface",
+                q6: "data",
+                q7: "Set",
+                q8: "suspend",
+                q9: "Any",
+                q10: "val"
+            },
+            medium: {
+                q11: "suspend",
+                q12: "open",
+                q13: "lateinit",
+                q14: "var",
+                q15: "interface",
+                q16: "data",
+                q17: "Set",
+                q18: "suspend",
+                q19: "Any",
+                q20: "val"
+            },
+            hard: {
+                q31: "HigherOrderFunction",
+                q32: "functional",
+                q33: "ScopeFunction",
+                q34: "async",
+                q35: "Const",
+                q36: "interface",
+                q37: "const",
+                q38: "val",
+                q39:"const",
+                q40:"val",// إضافة الإجابات الصحيحة لبقية الأسئلة
+            }
+        };
+
+
+            for (var key in correctAnswers) {
+                var selectedOption = document.querySelector(`input[name="${key}"]:checked`);
+                if (selectedOption && selectedOption.value === correctAnswers[key]) {
+                    score++;
+                }
+            }
+
+            var resultMessage = `لقد حصلت على ${score} من ${totalQuestions} إجابة صحيحة.`;
+            document.getElementById('resultMessage').innerText = resultMessage;
+            document.getElementById('evaluationPopup').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('evaluationPopup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

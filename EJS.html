@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>امتحان EJS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Oswald:wght@500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #0f0e17;
+            color: #f0e8e8;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #0f0e17;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #ff8906;
+            margin-bottom: 30px;
+        }
+        .level-title {
+            color: #ff8906;
+            margin-top: 40px;
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .question p {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #ff8906;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #ff8b06a9;
+        }
+        .result {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 30px;
+            color: #333;
+        }
+        .evaluation-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #0f0e17;
+            color: orange;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+        }
+        .evaluation-popup button {
+            background-color: #ff8906;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .evaluation-popup button:hover {
+            background-color: #ff8b06a9;
+        }
+        .hidden {
+            display: none;
+        }
+        select {
+            background-color: #333;
+            color: #fff;
+            border: 2px solid #ff8906;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            font-family: 'Cairo', sans-serif;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        select:hover {
+            background-color: #444;
+            border-color: #ff8b06a9;
+        }
+        option {
+            background-color: #222;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>امتحان EJS</h1>
+        
+        <!-- القائمة المنسدلة لاختيار المستوى -->
+        <select id="levelSelect">
+            <option value="easy">المستوى السهل</option>
+            <option value="medium">المستوى المتوسط</option>
+            <option value="hard">المستوى الصعب</option>
+        </select>
+
+        <!-- أسئلة المستوى السهل -->
+        <div id="easy" class="level-content">
+            <h2 class="level-title">المستوى السهل</h2>
+            <div class="question">
+                <p>ما هو EJS؟</p>
+                <input type="radio" name="q1" value="محرك قوالب"> محرك قوالب<br>
+                <input type="radio" name="q1" value="لغة برمجة"> لغة برمجة<br>
+                <input type="radio" name="q1" value="إطار عمل"> إطار عمل<br>
+            </div>
+            <div class="question">
+                <p>كيف يتم تضمين قوالب EJS في صفحة HTML؟</p>
+                <input type="radio" name="q2" value="&lt;% include file.ejs %&gt;"> &lt;% include file.ejs %&gt;<br>
+                <input type="radio" name="q2" value="&lt;@ include file.ejs @&gt;"> &lt;@ include file.ejs @&gt;<br>
+                <input type="radio" name="q2" value="&lt;%= include file.ejs %&gt;"> &lt;%= include file.ejs %&gt;<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية التي تستخدم لطباعة متغير في EJS؟</p>
+                <input type="radio" name="q3" value="<%= %>"> <%= %><br>
+                <input type="radio" name="q3" value="<% %>"> <% %><br>
+                <input type="radio" name="q3" value="<%@ %>"> <%@ %><br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك استخدام جملة شرطية في EJS؟</p>
+                <input type="radio" name="q4" value="<% if (condition) { %>"> <% if (condition) { %><br>
+                <input type="radio" name="q4" value="<% if (condition) { %>"> <% if (condition) { %><br>
+                <input type="radio" name="q4" value="<% condition ? %>"> <% condition ? %><br>
+            </div>
+            <div class="question">
+                <p>كيف يتم تكرار عناصر مصفوفة في EJS؟</p>
+                <input type="radio" name="q5" value="<% array.forEach(item => { %>"> <% array.forEach(item => { %><br>
+                <input type="radio" name="q5" value="<% for (let item of array) { %>"> <% for (let item of array) { %><br>
+                <input type="radio" name="q5" value="<% array.map(item => { %>"> <% array.map(item => { %><br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة الصحيحة لتضمين متغير داخل نص في EJS؟</p>
+                <input type="radio" name="q6" value="<%= variable %>"> <%= variable %><br>
+                <input type="radio" name="q6" value="<% variable %>"> <% variable %><br>
+                <input type="radio" name="q6" value="<%= text <%= variable %> %>"> <%= text <%= variable %> %><br>
+            </div>
+            <div class="question">
+                <p>ما هو الفرق بين include و partial في EJS؟</p>
+                <input type="radio" name="q7" value="لا يوجد فرق"> لا يوجد فرق<br>
+                <input type="radio" name="q7" value="partial تستخدم لإعادة استخدام الكود فقط"> partial تستخدم لإعادة استخدام الكود فقط<br>
+                <input type="radio" name="q7" value="include يمكن استخدامها لتحميل ملفات نصية"> include يمكن استخدامها لتحميل ملفات نصية<br>
+            </div>
+            <div class="question">
+                <p>كيف يتم تمرير بيانات من خادم إلى قالب EJS؟</p>
+                <input type="radio" name="q8" value="من خلال استدعاء الدالة render()"> من خلال استدعاء الدالة render()<br>
+                <input type="radio" name="q8" value="من خلال متغيرات بيئية"> من خلال متغيرات بيئية<br>
+                <input type="radio" name="q8" value="من خلال جملة include"> من خلال جملة include<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة المستخدمة لإدخال التعليقات في EJS؟</p>
+                <input type="radio" name="q9" value="<%-- comment --%>"> <%-- comment --%><br>
+                <input type="radio" name="q9" value="<!-- comment -->"> <!-- comment --> <br>
+                                <input type="radio" name="q9" value="<% // comment %>"> <% // comment %><br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك عرض قيمة متغير باستخدام EJS؟</p>
+                <input type="radio" name="q10" value="<%= variable %>"> <%= variable %><br>
+                <input type="radio" name="q10" value="<% variable %>"> <% variable %><br>
+                <input type="radio" name="q10" value="<%= value %>"> <%= value %><br>
+            </div>
+        </div>
+
+        <!-- أسئلة المستوى المتوسط -->
+        <div id="medium" class="level-content hidden">
+            <h2 class="level-title">المستوى المتوسط</h2>
+            <div class="question">
+                <p>كيف تستخدم EJS مع Express.js؟</p>
+                <input type="radio" name="q11" value="تحديد EJS كمحرك القوالب في Express.js"> تحديد EJS كمحرك القوالب في Express.js<br>
+                <input type="radio" name="q11" value="تضمين EJS كحزمة منفصلة"> تضمين EJS كحزمة منفصلة<br>
+                <input type="radio" name="q11" value="إعادة تسميته كـ HTML"> إعادة تسميته كـ HTML<br>
+            </div>
+            <div class="question">
+                <p>ما هي صيغة التعبيرات الشرطية في EJS؟</p>
+                <input type="radio" name="q12" value="<% if (condition) { %>"> <% if (condition) { %><br>
+                <input type="radio" name="q12" value="<% if (condition) %>"> <% if (condition) %><br>
+                <input type="radio" name="q12" value="<% condition ? %>"> <% condition ? %><br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك استخدام المتغيرات المحلية في EJS؟</p>
+                <input type="radio" name="q13" value="بتعريفها في ملف القالب نفسه"> بتعريفها في ملف القالب نفسه<br>
+                <input type="radio" name="q13" value="بتمريرها من خلال وظيفة render()"> بتمريرها من خلال وظيفة render()<br>
+                <input type="radio" name="q13" value="من خلال توابع EJS الخاصة"> من خلال توابع EJS الخاصة<br>
+            </div>
+            <div class="question">
+                <p>ما هو الأسلوب الصحيح لاستخدام المكونات في EJS؟</p>
+                <input type="radio" name="q14" value="عن طريق تضمين ملفات EJS داخل بعضها البعض"> عن طريق تضمين ملفات EJS داخل بعضها البعض<br>
+                <input type="radio" name="q14" value="بإنشاء مكونات باستخدام الجافا سكريبت فقط"> بإنشاء مكونات باستخدام الجافا سكريبت فقط<br>
+                <input type="radio" name="q14" value="عن طريق استخدام دوال EJS المتقدمة"> عن طريق استخدام دوال EJS المتقدمة<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة الصحيحة لاستخدام EJS مع البيانات الديناميكية؟</p>
+                <input type="radio" name="q15" value="بتمرير البيانات ككائن من جانب الخادم"> بتمرير البيانات ككائن من جانب الخادم<br>
+                <input type="radio" name="q15" value="من خلال إنشاء متغيرات جافا سكريبت في القالب"> من خلال إنشاء متغيرات جافا سكريبت في القالب<br>
+                <input type="radio" name="q15" value="بتمرير البيانات كمعلمات في استدعاءات AJAX"> بتمرير البيانات كمعلمات في استدعاءات AJAX<br>
+            </div>
+            <div class="question">
+                <p>كيف تتعامل مع الأخطاء في EJS؟</p>
+                <input type="radio" name="q16" value="بتحديد دالة error في القالب"> بتحديد دالة error في القالب<br>
+                <input type="radio" name="q16" value="باستخدام أدوات تصحيح الأخطاء في متصفحك"> باستخدام أدوات تصحيح الأخطاء في متصفحك<br>
+                <input type="radio" name="q16" value="بالتعامل مع الأخطاء من جانب الخادم وتقديم رسالة للمستخدم"> بالتعامل مع الأخطاء من جانب الخادم وتقديم رسالة للمستخدم<br>
+            </div>
+            <div class="question">
+                <p>ما هي صيغة التكرار في EJS؟</p>
+                <input type="radio" name="q17" value="<% array.forEach(item => { %>"> <% array.forEach(item => { %><br>
+                <input type="radio" name="q17" value="<% for (let item of array) { %>"> <% for (let item of array) { %><br>
+                <input type="radio" name="q17" value="<% array.map(item => { %>"> <% array.map(item => { %><br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك استخدام المصفوفات في EJS؟</p>
+                <input type="radio" name="q18" value="بتكرار العناصر باستخدام الحلقات"> بتكرار العناصر باستخدام الحلقات<br>
+                <input type="radio" name="q18" value="بإدخال عناصر المصفوفة بشكل مباشر في القالب"> بإدخال عناصر المصفوفة بشكل مباشر في القالب<br>
+                <input type="radio" name="q18" value="بإضافة عناصر إلى المصفوفة في القالب"> بإضافة عناصر إلى المصفوفة في القالب<br>
+            </div>
+            <div class="question">
+                <p>ما هو الأسلوب الأفضل لتنظيم القوالب في EJS؟</p>
+                <input type="radio" name="q19" value="بإنشاء ملفات قوالب منفصلة لكل جزء من التطبيق"> بإنشاء ملفات قوالب منفصلة لكل جزء من التطبيق<br>
+                <input type="radio" name="q19" value="بتخزين كل القوالب في ملف واحد"> بتخزين كل القوالب في ملف واحد<br>
+                <input type="radio" name="q19" value="بإعادة استخدام القوالب باستخدام خاصية include"> بإعادة استخدام القوالب باستخدام خاصية include<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك إضافة التعليقات في EJS؟</p>
+                <input type="radio" name="q20" value="<%-- تعليق --%>"> <%-- تعليق --%><br>
+                <input type="radio" name="q20" value="<!-- تعليق -->"> <!-- تعليق --> <br>
+                <input type="radio" name="q20" value="<% # تعليق %>"> <% # تعليق %><br>
+            </div>
+        </div>
+
+        <!-- أسئلة المستوى الصعب -->
+        <div id="hard" class="level-content hidden">
+            <h2 class="level-title">المستوى الصعب</h2>
+            <div class="question">
+                <p>ما هي أهم الفروقات بين EJS و Handlebars؟</p>
+                <input type="radio" name="q21" value="EJS يوفر المزيد من إمكانيات التحكم في التدفق"> EJS يوفر المزيد من إمكانيات التحكم في التدفق<br>
+                <input type="radio" name="q21" value="Handlebars يدعم التكرار فقط"> Handlebars يدعم التكرار فقط<br>
+                <input type="radio" name="q21" value="EJS يدعم جميع أنواع البيانات"> EJS يدعم جميع أنواع البيانات<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك التعامل مع التكرار المتداخل في EJS؟</p>
+                <input type="radio" name="q22" value="باستخدام حلقات for المتداخلة"> باستخدام حلقات for المتداخلة<br>
+                <input type="radio" name="q22" value="بالتكرار عبر المصفوفات المدمجة"> بالتكرار عبر المصفوفات المدمجة<br>
+                <input type="radio" name="q22" value="باستخدام تعبيرات شرطية متداخلة"> باستخدام تعبيرات شرطية متداخلة<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة المثلى لتصحيح الأخطاء في قوالب EJS؟</p>
+                <input type="radio" name="q23" value="بفحص كود القوالب بعناية باستخدام أدوات التصحيح"> بفحص كود القوالب بعناية باستخدام أدوات التصحيح<br>
+                <input type="radio" name="q23" value="باستخدام السجلات من الخادم لتتبع الأخطاء"> باستخدام السجلات من الخادم لتتبع الأخطاء<br>
+                <input type="radio" name="q23" value="بالتبديل إلى وضع الاختبار في EJS"> بالتبديل إلى وضع الاختبار في EJS<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك تحسين أداء القوالب في EJS؟</p>
+                <input type="radio" name="q24" value="بتقليل عدد التكرارات في القوالب"> بتقليل عدد التكرارات في القوالب<br>
+                <input type="radio" name="q24" value="بتخزين القوالب في ذاكرة التخزين المؤقت"> بتخزين القوالب في ذاكرة التخزين المؤقت<br>
+                <input type="radio" name="q24" value="بإعادة استخدام القوالب بشكل محدود"> بإعادة استخدام القوالب بشكل محدود<br>
+            </div>
+            <div class="question">
+                <p>كيف يتم دمج بيانات JSON في قوالب EJS؟</p>
+                <input type="radio" name="q25" value="بتمرير البيانات ككائن عند استدعاء render()"> بتمرير البيانات ككائن عند استدعاء render()<br>
+                <input type="radio" name="q25" value="بتضمين البيانات مباشرة في القالب"> بتضمين البيانات مباشرة في القالب<br>
+                <input type="radio" name="q25" value="بإضافة بيانات JSON إلى القالب باستخدام دوال EJS"> بإضافة بيانات JSON إلى القالب باستخدام دوال EJS<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك معالجة القيم الفارغة في EJS؟</p>
+                <input type="radio" name="q26" value="بإظهار رسالة افتراضية عند عدم وجود قيمة"> بإظهار رسالة افتراضية عند عدم وجود قيمة<br>
+                <input type="radio" name="q26" value="بتجاهل القيم الفارغة بالكامل"> بتجاهل القيم الفارغة بالكامل<br>
+                <input type="radio" name="q26" value="بتحديد القيم الافتراضية في القالب"> بتحديد القيم الافتراضية في القالب<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك تنظيم القوالب المعقدة في EJS؟</p>
+                <input type="radio" name="q27" value="بتقسيم القوالب إلى ملفات متعددة وإعادة استخدامها"> بتقسيم القوالب إلى ملفات متعددة وإعادة استخدامها<br>
+                <input type="radio" name="q27" value="بإدخال كل القوالب في ملف واحد"> بإدخال كل القوالب في ملف واحد<br>
+                <input type="radio" name="q27" value="بالتعامل مع القوالب بشكل منفصل عن البيانات"> بالتعامل مع القوالب بشكل منفصل عن البيانات<br>
+            </div>
+            <div class="question">
+                <p>ما هو دور دالة `render` في EJS؟</p>
+                <input type="radio" name="q28" value="لإرسال القوالب إلى العميل"> لإرسال القوالب إلى العميل<br>
+                <input type="radio" name="q28" value="لطباعة القيم مباشرة في القالب"> لطباعة القيم مباشرة في القالب<br>
+                <input type="radio" name="q28" value="لاستخدام البيانات من ملف القالب"> لاستخدام البيانات من ملف القالب<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك التعامل مع الأحداث في قوالب EJS؟</p>
+                <input type="radio" name="q29" value="بإضافة معالجات الأحداث إلى العناصر HTML"> بإضافة معالجات الأحداث إلى العناصر HTML<br>
+                <input type="radio" name="q29" value="بإدراج كود جافا سكريبت داخل القالب"> بإدراج كود جافا سكريبت داخل القالب<br>
+                <input type="radio" name="q29" value="بتعريف أحداث في خادم Express.js"> بتعريف أحداث في خادم Express.js<br>
+            </div>
+            <div class="question">
+                <p>كيف تتعامل مع النصوص الطويلة في EJS؟</p>
+                <input type="radio" name="q30" value="بتقطيع النصوص الطويلة إلى أجزاء"> بتقطيع النصوص الطويلة إلى أجزاء<br>
+                <input type="radio" name="q30" value="بإضافة نصوص ضمن عنصر `<pre>`"> بإضافة نصوص ضمن عنصر `<pre>`<br>
+                <input type="radio" name="q30" value="بإعادة تنسيق النصوص داخل القالب"> بإعادة تنسيق النصوص داخل القالب<br>
+           </div>
+        </div>
+        <button onclick="submitQuiz()">طمنى بسرعه</button>
+    </div>
+
+    <div id="popup" class="evaluation-popup">
+        <p id="popupResult"></p>
+        <button onclick="closePopup()">إغلاق</button>
+    </div>
+
+    <script>
+        document.getElementById('levelSelect').addEventListener('change', function() {
+            document.querySelectorAll('.level-content').forEach(div => div.classList.add('hidden'));
+            document.getElementById(this.value).classList.remove('hidden');
+        });
+
+        const correctAnswers = {
+            easy: {
+        q1: "<%= variable %>",
+        q2: "<% if (condition) { %>",
+        q3: "<%= value %>",
+        q4: "<% include partial.ejs %>",
+        q5: "<% include partial.ejs %>",
+        q6: "<% for (let item of array) { %>",
+        q7: "<%= variable %>",
+        q8: "<%= variable %>",
+        q9: "<% if (condition) { %>",
+        q10: "<%= variable %>",
+    },
+    medium: {
+        q11: "تحديد EJS كمحرك القوالب في Express.js",
+        q12: "<% if (condition) { %>",
+        q13: "بتمريرها من خلال وظيفة render()",
+        q14: "عن طريق تضمين ملفات EJS داخل بعضها البعض",
+        q15: "بتمرير البيانات ككائن من جانب الخادم",
+        q16: "بالتعامل مع الأخطاء من جانب الخادم وتقديم رسالة للمستخدم",
+        q17: "<% for (let item of array) { %>",
+        q18: "بتكرار العناصر باستخدام الحلقات",
+        q19: "بإعادة استخدام القوالب باستخدام خاصية include",
+        q20: "<%-- تعليق --%>",
+    },
+    hard: {
+        q21: "EJS يوفر المزيد من إمكانيات التحكم في التدفق",
+        q22: "<% array.forEach(item => { %>",
+        q23: "بفحص كود القوالب بعناية باستخدام أدوات التصحيح",
+        q24: "بتخزين القوالب في ذاكرة التخزين المؤقت",
+        q25: "بتمرير البيانات ككائن عند استدعاء render()",
+        q26: "بإظهار رسالة افتراضية عند عدم وجود قيمة",
+        q27: "بتقسيم القوالب إلى ملفات متعددة وإعادة استخدامها",
+        q28: "لإرسال القوالب إلى العميل",
+        q29: "بإضافة معالجات الأحداث إلى العناصر HTML",
+        q30: "بتقطيع النصوص الطويلة إلى أجزاء",
+            }
+        };
+
+        function getCorrectAnswer(questionId) {
+            const level = document.getElementById('levelSelect').value;
+            return correctAnswers[level][questionId];
+        }
+
+        function submitQuiz() {
+            const level = document.getElementById('levelSelect').value;
+            const questions = document.querySelectorAll(`#${level} .question`);
+            let score = 0;
+            questions.forEach((question) => {
+                const questionId = question.querySelector('p').textContent.trim().split(' ')[0].toLowerCase();
+                const selectedAnswer = question.querySelector('input[type="radio"]:checked');
+                if (selectedAnswer && selectedAnswer.value === getCorrectAnswer(questionId)) {
+                    score++;
+                }
+            });
+            const resultText = `نتيجتك هي: ${score} من ${questions.length}`;
+            document.getElementById('popupResult').innerText = resultText;
+            document.getElementById('popup').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

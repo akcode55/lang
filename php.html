@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>امتحان PHP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Oswald:wght@500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #0f0e17;
+            color: #f0e8e8;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #0f0e17;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #ff8906;
+            margin-bottom: 30px;
+        }
+        .level-title {
+            color: #ff8906;
+            margin-top: 40px;
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .question p {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #ff8906;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #ff8b06a9;
+        }
+        .result {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 30px;
+            color: #333;
+        }
+        .evaluation-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #0f0e17;
+            color: orange;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+        }
+        .evaluation-popup button {
+            background-color: #ff8906;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .evaluation-popup button:hover {
+            background-color: #ff8b06a9;
+        }
+        .hidden {
+            display: none;
+        }
+        select {
+            background-color: #333;
+            color: #fff;
+            border: 2px solid #ff8906;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            font-family: 'Cairo', sans-serif;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        select:hover {
+            background-color: #444;
+            border-color: #ff8b06a9;
+        }
+        option {
+            background-color: #222;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>امتحان PHP</h1>
+        
+        <!-- القائمة المنسدلة لاختيار المستوى -->
+        <select id="levelSelect">
+            <option value="easy">المستوى السهل</option>
+            <option value="medium">المستوى المتوسط</option>
+            <option value="hard">المستوى الصعب</option>
+        </select>
+
+        <!-- أسئلة المستوى السهل -->
+        <div id="easy" class="level-content">
+            <h2 class="level-title">المستوى السهل</h2>
+            <div class="question">
+                <p>ما هي الطريقة الصحيحة لتعريف متغير في PHP؟</p>
+                <input type="radio" name="q1" value="$variable"> $variable<br>
+                <input type="radio" name="q1" value="variable"> variable<br>
+                <input type="radio" name="q1" value="var variable"> var variable<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك تعليق سطر واحد في PHP؟</p>
+                <input type="radio" name="q2" value="// تعليق"> // تعليق<br>
+                <input type="radio" name="q2" value="/* تعليق */"> /* تعليق */<br>
+                <input type="radio" name="q2" value="<!-- تعليق -->"> <!-- تعليق --><br>
+            </div>
+            <div class="question">
+                <p>ما هو نوع البيانات المستخدم لتخزين الأعداد الصحيحة في PHP؟</p>
+                <input type="radio" name="q3" value="int"> int<br>
+                <input type="radio" name="q3" value="integer"> integer<br>
+                <input type="radio" name="q3" value="number"> number<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المحجوزة المستخدمة لتعريف دالة في PHP؟</p>
+                <input type="radio" name="q4" value="function"> function<br>
+                <input type="radio" name="q4" value="method"> method<br>
+                <input type="radio" name="q4" value="def"> def<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك طباعة النصوص في PHP؟</p>
+                <input type="radio" name="q5" value="echo"> echo<br>
+                <input type="radio" name="q5" value="print"> print<br>
+                <input type="radio" name="q5" value="write"> write<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك استخدام المتغيرات في PHP؟</p>
+                <input type="radio" name="q6" value="$variable"> $variable<br>
+                <input type="radio" name="q6" value="variable"> variable<br>
+                <input type="radio" name="q6" value="var variable"> var variable<br>
+            </div>
+            <div class="question">
+                <p>ما هو استخدام الدالة isset() في PHP؟</p>
+                <input type="radio" name="q7" value="للتحقق من وجود متغير"> للتحقق من وجود متغير<br>
+                <input type="radio" name="q7" value="لإزالة متغير"> لإزالة متغير<br>
+                <input type="radio" name="q7" value="لطباعة متغير"> لطباعة متغير<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك تعريف مصفوفة في PHP؟</p>
+                <input type="radio" name="q8" value="$array = array();"> $array = array();<br>
+                <input type="radio" name="q8" value="$array = [];"> $array = [];<br>
+                <input type="radio" name="q8" value="$array = new Array();"> $array = new Array();<br>
+            </div>
+            <div class="question">
+                <p>ما هو مخرجات الكود التالي؟ <br> echo 5 + '10';</p>
+                <input type="radio" name="q9" value="15"> 15<br>
+                <input type="radio" name="q9" value="510"> 510<br>
+                <input type="radio" name="q9" value="undefined"> undefined<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك التحقق من نوع المتغير في PHP؟</p>
+                <input type="radio" name="q10" value="gettype()"> gettype()<br>
+                <input type="radio" name="q10" value="type()"> type()<br>
+                <input type="radio" name="q10" value="is_type()"> is_type()<br>
+            </div>
+        </div>
+
+        <!-- أسئلة المستوى المتوسط -->
+        <div id="medium" class="level-content hidden">
+            <h2 class="level-title">المستوى المتوسط</h2>
+            <div class="question">
+                <p>ما هو الفرق بين include و require في PHP؟</p>
+                <input type="radio" name="q11" value="require يوقف تنفيذ السكربت عند حدوث خطأ بينما include لا يفعل ذلك."> require يوقف تنفيذ السكربت عند حدوث خطأ بينما include لا يفعل ذلك.<br>
+                                <input type="radio" name="q11" value="لا يوجد فرق بين include و require"> لا يوجد فرق بين include و require<br>
+                <input type="radio" name="q11" value="include يوقف تنفيذ السكربت عند حدوث خطأ بينما require لا يفعل ذلك"> include يوقف تنفيذ السكربت عند حدوث خطأ بينما require لا يفعل ذلك<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك إنشاء جلسة (Session) في PHP؟</p>
+                <input type="radio" name="q12" value="session_start()"> session_start()<br>
+                <input type="radio" name="q12" value="start_session()"> start_session()<br>
+                <input type="radio" name="q12" value="begin_session()"> begin_session()<br>
+            </div>
+            <div class="question">
+                <p>ما هو استخدام الدالة mysqli_connect() في PHP؟</p>
+                <input type="radio" name="q13" value="للاتصال بقاعدة البيانات"> للاتصال بقاعدة البيانات<br>
+                <input type="radio" name="q13" value="لإغلاق اتصال بقاعدة البيانات"> لإغلاق اتصال بقاعدة البيانات<br>
+                <input type="radio" name="q13" value="لإنشاء جدول في قاعدة البيانات"> لإنشاء جدول في قاعدة البيانات<br>
+            </div>
+            <div class="question">
+                <p>ما هو استخدام الدالة $_POST في PHP؟</p>
+                <input type="radio" name="q14" value="للحصول على البيانات المرسلة عبر طريقة POST"> للحصول على البيانات المرسلة عبر طريقة POST<br>
+                <input type="radio" name="q14" value="للحصول على البيانات المرسلة عبر طريقة GET"> للحصول على البيانات المرسلة عبر طريقة GET<br>
+                <input type="radio" name="q14" value="لإرسال البيانات عبر طريقة POST"> لإرسال البيانات عبر طريقة POST<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة الصحيحة لتعريف دالة في PHP؟</p>
+                <input type="radio" name="q15" value="function functionName() {}"> function functionName() {}<br>
+                <input type="radio" name="q15" value="def functionName() {}"> def functionName() {}<br>
+                <input type="radio" name="q15" value="func functionName() {}"> func functionName() {}<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك معالجة الاستثناءات في PHP؟</p>
+                <input type="radio" name="q16" value="باستخدام try-catch"> باستخدام try-catch<br>
+                <input type="radio" name="q16" value="باستخدام try-finally"> باستخدام try-finally<br>
+                <input type="radio" name="q16" value="باستخدام catch-finally"> باستخدام catch-finally<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك فحص ما إذا كان المتغير يحتوي على قيمة معينة في PHP؟</p>
+                <input type="radio" name="q17" value="isset()"> isset()<br>
+                <input type="radio" name="q17" value="empty()"> empty()<br>
+                <input type="radio" name="q17" value="contains()"> contains()<br>
+            </div>
+            <div class="question">
+                <p>ما هو استخدام الدالة htmlspecialchars() في PHP؟</p>
+                <input type="radio" name="q18" value="لتحويل الأحرف الخاصة إلى رموز HTML"> لتحويل الأحرف الخاصة إلى رموز HTML<br>
+                <input type="radio" name="q18" value="لطباعة النصوص"> لطباعة النصوص<br>
+                <input type="radio" name="q18" value="لتشفير النصوص"> لتشفير النصوص<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك التحقق مما إذا كان مصفوفة غير فارغة في PHP؟</p>
+                <input type="radio" name="q19" value="!empty()"> !empty()<br>
+                <input type="radio" name="q19" value="!isset()"> !isset()<br>
+                <input type="radio" name="q19" value="array_length() > 0"> array_length() > 0<br>
+            </div>
+            <div class="question">
+                <p>ما هو استخدام الدالة explode() في PHP؟</p>
+                <input type="radio" name="q20" value="لتقسيم سلسلة نصية إلى مصفوفة"> لتقسيم سلسلة نصية إلى مصفوفة<br>
+                <input type="radio" name="q20" value="لدمج مصفوفة إلى سلسلة نصية"> لدمج مصفوفة إلى سلسلة نصية<br>
+                <input type="radio" name="q20" value="لإزالة عناصر من مصفوفة"> لإزالة عناصر من مصفوفة<br>
+            </div>
+        </div>
+
+        <!-- أسئلة المستوى الصعب -->
+        <div id="hard" class="level-content hidden">
+            <h2 class="level-title">المستوى الصعب</h2>
+            <div class="question">
+                <p>ما هو الفرق بين الفئات (Classes) والكائنات (Objects) في PHP؟</p>
+                <input type="radio" name="q21" value="الفئة هي قالب للكائنات، بينما الكائن هو مثيل للفئة"> الفئة هي قالب للكائنات، بينما الكائن هو مثيل للفئة<br>
+                <input type="radio" name="q21" value="الفئة هي كائن، بينما الكائن هو فئة"> الفئة هي كائن، بينما الكائن هو فئة<br>
+                <input type="radio" name="q21" value="الفئة والكائن هما نفس الشيء"> الفئة والكائن هما نفس الشيء<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك تعريف واجهة (Interface) في PHP؟</p>
+                <input type="radio" name="q22" value="interface InterfaceName {}"> interface InterfaceName {}<br>
+                <input type="radio" name="q22" value="interface InterfaceName () {}"> interface InterfaceName () {}<br>
+                <input type="radio" name="q22" value="class InterfaceName {}"> class InterfaceName {}<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك استخدام الميراث (Inheritance) في PHP؟</p>
+                <input type="radio" name="q23" value="class ChildClass extends ParentClass {}"> class ChildClass extends ParentClass {}<br>
+                <input type="radio" name="q23" value="class ChildClass inherits ParentClass {}"> class ChildClass inherits ParentClass {}<br>
+                <input type="radio" name="q23" value="class ChildClass implements ParentClass {}"> class ChildClass implements ParentClass {}<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك تنفيذ طرق واجهة (Interface) في PHP؟</p>
+                <input type="radio" name="q24" value="باستخدام الكلمة المحجوزة implements"> باستخدام الكلمة المحجوزة implements<br>
+                <input type="radio" name="q24" value="باستخدام الكلمة المحجوزة extends"> باستخدام الكلمة المحجوزة extends<br>
+                <input type="radio" name="q24" value="باستخدام الكلمة المحجوزة interface"> باستخدام الكلمة المحجوزة interface<br>
+            </div>
+            <div class="question">
+                <p>ما هو استخدام الدالة PDO في PHP؟</p>
+                <input type="radio" name="q25" value="للتحكم في قواعد البيانات بشكل آمن وموحد"> للتحكم في قواعد البيانات بشكل آمن وموحد<br>
+                <input type="radio" name="q25" value="للتعامل مع الملفات"> للتعامل مع الملفات<br>
+                <input type="radio" name="q25" value="لإدارة الجلسات"> لإدارة الجلسات<br>
+            </div>
+            <div class="question">
+                <p>ما هو الفرق بين الـ MySQLi و PDO في PHP؟</p>
+                <input type="radio" name="q26" value="MySQLi يدعم قواعد بيانات MySQL فقط، بينما PDO يدعم قواعد بيانات متعددة"> MySQLi يدعم قواعد بيانات MySQL فقط، بينما PDO يدعم قواعد بيانات متعددة<br>
+                <input type="radio" name="q26" value="PDO يدعم قواعد بيانات MySQL فقط، بينما MySQLi يدعم قواعد بيانات متعددة"> PDO يدعم قواعد بيانات MySQL فقط، بينما MySQLi يدعم قواعد بيانات متعددة<br>
+                <input type="radio" name="q26" value="لا يوجد فرق بين MySQLi و PDO"> لا يوجد فرق بين MySQLi و PDO<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك استخدام التخزين المؤقت (Caching) في PHP؟</p>
+                <input type="radio" name="q27" value="باستخدام الذاكرة المؤقتة مثل APCu أو Memcached"> باستخدام الذاكرة المؤقتة مثل APCu أو Memcached<br>
+                <input type="radio" name="q27" value="باستخدام الجلسات فقط"> باستخدام الجلسات فقط<br>
+                <input type="radio" name="q27" value="باستخدام ملفات ثابتة"> باستخدام ملفات ثابتة<br>
+            </div>
+            <div class="question">
+                <p>ما هو الفرق بين الـ GET والـ POST في PHP؟</p>
+                <input type="radio" name="q28" value="GET ينقل البيانات عبر URL، بينما POST ينقل البيانات عبر جسم الطلب"> GET ينقل البيانات عبر URL، بينما POST ينقل البيانات عبر جسم الطلب<br>
+                <input type="radio" name="q28" value="POST ينقل البيانات عبر URL، بينما GET ينقل البيانات عبر جسم الطلب"> POST ينقل البيانات عبر URL، بينما GET ينقل البيانات عبر جسم الطلب<br>
+                <input type="radio" name="q28" value="لا يوجد فرق بين GET و POST"> لا يوجد فرق بين GET و POST<br>
+            </div>
+            <div class="question">
+                <p>ما هو استخدام الدالة file_get_contents() في PHP؟</p>
+                <input type="radio" name="q29" value="لقراءة محتوى ملف إلى سلسلة نصية"> لقراءة محتوى ملف إلى سلسلة نصية<br>
+                <input type="radio" name="q29" value="لإنشاء ملف جديد"> لإنشاء ملف جديد<br>
+                <input type="radio" name="q29" value="لحذف ملف"> لحذف ملف<br>
+            </div>
+            <div class="question">
+                <p>ما هو استخدام الدالة preg_match() في PHP؟</p>
+                <input type="radio" name="q30" value="للتحقق من تطابق نمط مع سلسلة نصية"> للتحقق من تطابق نمط مع سلسلة نصية<br>
+                <input type="radio" name="q30" value="لإزالة نمط من سلسلة نصية"> لإزالة نمط من سلسلة نصية<br>
+                <input type="radio" name="q30" value="لإضافة نمط إلى سلسلة نصية"> لإضافة نمط إلى سلسلة نصية<br>
+            </div>
+        </div>
+
+       <button onclick="submitQuiz()">طمنى بسرعه</button>
+    </div>
+
+    <!-- نافذة النتيجة -->
+    <div id="resultPopup" class="evaluation-popup">
+        <p id="resultText"></p>
+        <button onclick="closePopup()">إغلاق</button>
+    </div>
+
+    <script>
+        const levelSelect = document.getElementById('levelSelect');
+        const levelContents = document.querySelectorAll('.level-content');
+        const resultPopup = document.getElementById('resultPopup');
+        const resultText = document.getElementById('resultText');
+
+        levelSelect.addEventListener('change', (e) => {
+            const selectedLevel = e.target.value;
+
+            levelContents.forEach(content => {
+                if (content.id === selectedLevel) {
+                    content.classList.remove('hidden');
+                } else {
+                    content.classList.add('hidden');
+                }
+            });
+        });
+
+        function submitQuiz() {
+            const selectedLevel = levelSelect.value;
+            const questions = document.querySelectorAll(`#${selectedLevel} .question`);
+            let score = 0;
+
+            questions.forEach(question => {
+                const selectedOption = question.querySelector('input[type="radio"]:checked');
+                if (selectedOption && selectedOption.value === getCorrectAnswer(question)) {
+                    score++;
+                }
+            });
+
+            resultText.textContent = `لقد أجبت بشكل صحيح على ${score} من ${questions.length} سؤال.`;
+            resultPopup.style.display = 'block';
+        }
+
+        function getCorrectAnswer(question) {
+        const easyQuestions = {
+            "q1": "$variable",
+            "q2": "// تعليق",
+            "q3": "int",
+            "q4": "function",
+            "q5": "echo",
+            "q6": "$variable",
+            "q7": "للتحقق من وجود متغير",
+            "q8": "$array = array();",
+            "q9": "15",
+            "q10": "gettype()"
+        };
+
+        const mediumQuestions = {
+            "q11": "require يوقف تنفيذ السكربت عند حدوث خطأ بينما include لا يفعل ذلك.",
+            "q12": "session_start()",
+            "q13": "لللاتصال بقاعدة البيانات",
+            "q14": "للحصول على البيانات المرسلة عبر طريقة POST",
+            "q15": "function functionName() {}",
+            "q16": "باستخدام try-catch",
+            "q17": "isset()",
+            "q18": "لتحويل الأحرف الخاصة إلى رموز HTML",
+            "q19": "!empty()",
+            "q20": "لتقسيم سلسلة نصية إلى مصفوفة"
+        };
+
+        const hardQuestions = {
+            "q21": "الفئة هي قالب للكائنات، بينما الكائن هو مثيل للفئة",
+            "q22": "interface InterfaceName {}",
+            "q23": "class ChildClass extends ParentClass {}",
+            "q24": "باستخدام الكلمة المحجوزة implements",
+            "q25": "للتحكم في قواعد البيانات بشكل آمن وموحد",
+            "q26": "MySQLi يدعم قواعد بيانات MySQL فقط، بينما PDO يدعم قواعد بيانات متعددة",
+            "q27": "باستخدام الذاكرة المؤقتة مثل APCu أو Memcached",
+            "q28": "GET ينقل البيانات عبر URL، بينما POST ينقل البيانات عبر جسم الطلب",
+            "q29": "لقراءة محتوى ملف إلى سلسلة نصية",
+            "q30": "للتحقق من تطابق نمط مع سلسلة نصية"
+        };
+
+            const questionId = question.querySelector('input[type="radio"]').name;
+            return correctAnswers[selectedLevel][questionId];
+        }
+
+        function closePopup() {
+            resultPopup.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
+
+                

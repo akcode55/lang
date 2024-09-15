@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>امتحان Vue.js</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Oswald:wght@500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #0f0e17;
+            color: #f0e8e8;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #0f0e17;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #ff8906;
+            margin-bottom: 30px;
+        }
+        .level-title {
+            color: #ff8906;
+            margin-top: 40px;
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .question p {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #ff8906;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #ff8b06a9;
+        }
+        .result {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 30px;
+            color: #333;
+        }
+        .evaluation-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #0f0e17;
+            color: orange;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+        }
+        .evaluation-popup button {
+            background-color: #ff8906;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .evaluation-popup button:hover {
+            background-color: #ff8b06a9;
+        }
+        .hidden {
+            display: none;
+        }
+        select {
+            background-color: #333;
+            color: #fff;
+            border: 2px solid #ff8906;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            font-family: 'Cairo', sans-serif;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        select:hover {
+            background-color: #444;
+            border-color: #ff8b06a9;
+        }
+        option {
+            background-color: #222;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>امتحان Vue.js</h1>
+        
+        <!-- القائمة المنسدلة لاختيار المستوى -->
+        <select id="levelSelect">
+            <option value="easy">المستوى السهل</option>
+            <option value="medium">المستوى المتوسط</option>
+            <option value="hard">المستوى الصعب</option>
+        </select>
+
+        <!-- أسئلة المستوى السهل -->
+        <div id="easy" class="level-content">
+            <h2 class="level-title">المستوى السهل</h2>
+            <div class="question">
+                <p>ما هي المكتبة المستخدمة لبناء واجهات المستخدم في Vue.js؟</p>
+                <input type="radio" name="q1" value="Vue"> Vue<br>
+                <input type="radio" name="q1" value="React"> React<br>
+                <input type="radio" name="q1" value="Angular"> Angular<br>
+            </div>
+            <div class="question">
+                <p>كيف تقوم بإنشاء مكون جديد في Vue.js؟</p>
+                <input type="radio" name="q2" value="Vue.component('my-component', { /* options */ })"> Vue.component('my-component', { /* options */ })<br>
+                <input type="radio" name="q2" value="new Vue({ components: { MyComponent } })"> new Vue({ components: { MyComponent } })<br>
+                <input type="radio" name="q2" value="React.createComponent('MyComponent')"> React.createComponent('MyComponent')<br>
+            </div>
+            <div class="question">
+                <p>كيف تقوم بربط البيانات بين نموذج الإدخال والمكون في Vue.js؟</p>
+                <input type="radio" name="q3" value="v-model"> v-model<br>
+                <input type="radio" name="q3" value="bind"> bind<br>
+                <input type="radio" name="q3" value="data-bind"> data-bind<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة التي تستخدمها لتحديث حالة المكون في Vue.js؟</p>
+                <input type="radio" name="q4" value="this.$set"> this.$set<br>
+                <input type="radio" name="q4" value="this.updateState"> this.updateState<br>
+                <input type="radio" name="q4" value="this.setState"> this.setState<br>
+            </div>
+            <div class="question">
+                <p>كيف تقوم بتمرير الخصائص إلى مكون في Vue.js؟</p>
+                <input type="radio" name="q5" value="props"> props<br>
+                <input type="radio" name="q5" value="data"> data<br>
+                <input type="radio" name="q5" value="methods"> methods<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك استخدام الأحداث في Vue.js؟</p>
+                <input type="radio" name="q6" value="@click"> @click<br>
+                <input type="radio" name="q6" value="onClick"> onClick<br>
+                <input type="radio" name="q6" value="event"> event<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك تحديد تفاعل مع الأحداث في Vue.js؟</p>
+                <input type="radio" name="q7" value="methods"> methods<br>
+                <input type="radio" name="q7" value="computed"> computed<br>
+                <input type="radio" name="q7" value="watchers"> watchers<br>
+            </div>
+            <div class="question">
+                <p>ما هي البنية الأساسية لمكون في Vue.js؟</p>
+                <input type="radio" name="q8" value="template, script, style"> template, script, style<br>
+                <input type="radio" name="q8" value="view, model, controller"> view, model, controller<br>
+                <input type="radio" name="q8" value="component, logic, display"> component, logic, display<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك تكرار العناصر في قائمة باستخدام Vue.js؟</p>
+                <input type="radio" name="q9" value="v-for"> v-for<br>
+                <input type="radio" name="q9" value="forEach"> forEach<br>
+                <input type="radio" name="q9" value="map"> map<br>
+            </div>
+            <div class="question">
+                <p>ما هو الهدف من استخدام `v-bind` في Vue.js؟</p>
+                <input type="radio" name="q10" value="ربط الخصائص مع البيانات"> ربط الخصائص مع البيانات<br>
+                <input type="radio" name="q10" value="تكرار العناصر"> تكرار العناصر<br>
+                <input type="radio" name="q10" value="تغيير الحالة"> تغيير الحالة<br>
+            </div>
+        </div>
+
+        <!-- أسئلة المستوى المتوسط -->
+        <div id="medium" class="level-content hidden">
+            <h2 class="level-title">المستوى المتوسط</h2>
+            <div class="question">
+                <p>كيف يمكنك استخدام الموجهات (directives) في Vue.js؟</p>
+                <input type="radio" name="q11" value="من خلال خصائص HTML"> من خلال خصائص HTML<br>
+                               <input type="radio" name="q11" value="من خلال `v-` prefix"> من خلال `v-` prefix<br>
+                <input type="radio" name="q11" value="باستخدام أساليب JavaScript"> باستخدام أساليب JavaScript<br>
+            </div>
+            <div class="question">
+                <p>ما هي خاصية `computed` في Vue.js؟</p>
+                <input type="radio" name="q12" value="تحسب القيم بناءً على البيانات"></input> تحسب القيم بناءً على البيانات<br>
+                <input type="radio" name="q12" value="تراقب التغييرات في البيانات"></input> تراقب التغييرات في البيانات<br>
+                <input type="radio" name="q12" value="تحتوي على وظائف لمقارنة البيانات"></input> تحتوي على وظائف لمقارنة البيانات<br>
+            </div>
+            <div class="question">
+                <p>ما هو الفرق بين `computed` و `watch` في Vue.js؟</p>
+                <input type="radio" name="q13" value="`computed` تُستخدم لحساب القيم و`watch` تُستخدم لمراقبة التغييرات"></input> `computed` تُستخدم لحساب القيم و`watch` تُستخدم لمراقبة التغييرات<br>
+                <input type="radio" name="q13" value="كلاهما يقوم بنفس الوظيفة"></input> كلاهما يقوم بنفس الوظيفة<br>
+                <input type="radio" name="q13" value="`computed` تُستخدم لتكرار العناصر و`watch` تُستخدم للتعامل مع أحداث النقر"></input> `computed` تُستخدم لتكرار العناصر و`watch` تُستخدم للتعامل مع أحداث النقر<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكن استخدام الفلاتر (filters) في Vue.js؟</p>
+                <input type="radio" name="q14" value="باستخدام الخاصية `filters` في Vue instance"></input> باستخدام الخاصية `filters` في Vue instance<br>
+                <input type="radio" name="q14" value="داخل القوالب (templates) فقط"></input> داخل القوالب (templates) فقط<br>
+                <input type="radio" name="q14" value="بإضافة وظائف JavaScript مباشرة"></input> بإضافة وظائف JavaScript مباشرة<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك تعريف الحلقات في Vue.js؟</p>
+                <input type="radio" name="q15" value="باستخدام `v-for`"></input> باستخدام `v-for`<br>
+                <input type="radio" name="q15" value="باستخدام `v-repeat`"></input> باستخدام `v-repeat`<br>
+                <input type="radio" name="q15" value="باستخدام `for` loops في JavaScript"></input> باستخدام `for` loops في JavaScript<br>
+            </div>
+            <div class="question">
+                <p>ما هي طرق التفاعل مع واجهة المستخدم في Vue.js؟</p>
+                <input type="radio" name="q16" value="باستخدام `v-on`"></input> باستخدام `v-on`<br>
+                <input type="radio" name="q16" value="باستخدام `eventListener` مباشرة"></input> باستخدام `eventListener` مباشرة<br>
+                <input type="radio" name="q16" value="باستخدام `data` فقط"></input> باستخدام `data` فقط<br>
+            </div>
+            <div class="question">
+                <p>ما هي الفائدة من استخدام `Vuex` في Vue.js؟</p>
+                <input type="radio" name="q17" value="إدارة الحالة في التطبيقات الكبيرة"></input> إدارة الحالة في التطبيقات الكبيرة<br>
+                <input type="radio" name="q17" value="تحسين أداء الرسوميات"></input> تحسين أداء الرسوميات<br>
+                <input type="radio" name="q17" value="إدارة التوجيه بين الصفحات"></input> إدارة التوجيه بين الصفحات<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك استخدام المكونات الفرعية في Vue.js؟</p>
+                <input type="radio" name="q18" value="عن طريق تسجيلها في خاصية `components`"></input> عن طريق تسجيلها في خاصية `components`<br>
+                <input type="radio" name="q18" value="بإضافتها مباشرة إلى HTML"></input> بإضافتها مباشرة إلى HTML<br>
+                <input type="radio" name="q18" value="عن طريق استخدام `v-bind`"></input> عن طريق استخدام `v-bind`<br>
+            </div>
+            <div class="question">
+                <p>ما هي خاصية `watch` في Vue.js؟</p>
+                <input type="radio" name="q19" value="تراقب التغييرات في البيانات وتنفذ الدوال عند حدوث تغييرات"></input> تراقب التغييرات في البيانات وتنفذ الدوال عند حدوث تغييرات<br>
+                <input type="radio" name="q19" value="تقوم بحساب القيم بناءً على البيانات"></input> تقوم بحساب القيم بناءً على البيانات<br>
+                <input type="radio" name="q19" value="تستخدم فقط للتكرار"></input> تستخدم فقط للتكرار<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك استخدام `Vue Router` في Vue.js؟</p>
+                <input type="radio" name="q20" value="لتوجيه المستخدمين إلى صفحات مختلفة"></input> لتوجيه المستخدمين إلى صفحات مختلفة<br>
+                <input type="radio" name="q20" value="لتحديث البيانات بشكل دوري"></input> لتحديث البيانات بشكل دوري<br>
+                <input type="radio" name="q20" value="لإدارة حالة المكونات"></input> لإدارة حالة المكونات<br>
+            </div>
+        </div>
+
+        <!-- أسئلة المستوى الصعب -->
+        <div id="hard" class="level-content hidden">
+            <h2 class="level-title">المستوى الصعب</h2>
+            <div class="question">
+                <p>كيف يمكنك استخدام خاصية `dynamic components` في Vue.js؟</p>
+                <input type="radio" name="q21" value="باستخدام `component` tag مع خاصية `:is`"></input> باستخدام `component` tag مع خاصية `:is`<br>
+                <input type="radio" name="q21" value="بتحديد المكون بشكل ثابت في القالب"></input> بتحديد المكون بشكل ثابت في القالب<br>
+                <input type="radio" name="q21" value="عن طريق استخدام `v-for` للتكرار"></input> عن طريق استخدام `v-for` للتكرار<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة الصحيحة لاستخدام `async` و `await` مع Vue.js؟</p>
+                <input type="radio" name="q22" value="في دوال `methods` عند الحاجة إلى عمليات غير متزامنة"></input> في دوال `methods` عند الحاجة إلى عمليات غير متزامنة<br>
+                <input type="radio" name="q22" value="في قوالب Vue مباشرة"></input> في قوالب Vue مباشرة<br>
+                <input type="radio" name="q22" value="داخل `computed` فقط"></input> داخل `computed` فقط<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك تحسين أداء تطبيقات Vue.js الكبيرة؟</p>
+                <input type="radio" name="q23" value="باستخدام `async components` و `code splitting`"></input> باستخدام `async components` و `code splitting`<br>
+                <input type="radio" name="q23" value="بتقليل عدد المكونات المستخدمة"></input> بتقليل عدد المكونات المستخدمة<br>
+                <input type="radio" name="q23" value="باستخدام مكتبات خارجية لتحسين الأداء"></input> باستخدام مكتبات خارجية لتحسين الأداء<br>
+            </div>
+            <div class="question">
+                <p>ما هي وظيفة `mixin` في Vue.js؟</p>
+                <input type="radio" name="q24" value="إعادة استخدام الوظائف المشتركة بين المكونات"></input> إعادة استخدام الوظائف المشتركة بين المكونات<br>
+                <input type="radio" name="q24" value="إضافة خصائص جديدة للمكونات"></input> إضافة خصائص جديدة للمكونات<br>
+                <input type="radio" name="q24" value="تحديث حالة المكونات تلقائيًا"></input> تحديث حالة المكونات تلقائيًا<br>
+            </div>
+            <div class="question">
+                <p>ما هو تأثير استخدام `keep-alive` في Vue.js؟</p>
+                <input type="radio" name="q25" value="يحافظ على حالة المكونات بين التنقلات"></input> يحافظ على حالة المكونات بين التنقلات<br>
+                <input type="radio" name="q25" value="يؤدي إلى تحسين أداء الرسوميات"></input> يؤدي إلى تحسين أداء الرسوميات<br>
+                <input type="radio" name="q25" value="يمنع تحديث البيانات في المكونات"></input> يمنع تحديث البيانات في المكونات<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك استخدام خاصية `provide/inject` في Vue.js؟</p>
+                <input type="radio" name="q26" value="لتبادل البيانات بين المكونات غير المتصلة"></input> لتبادل البيانات بين المكونات غير المتصلة<br>
+                <input type="radio" name="q26" value="لتكرار البيانات داخل المكونات"></input> لتكرار البيانات داخل المكونات<br>
+                <input type="radio" name="q26" value="لتنفيذ إجراءات غير متزامنة"></input> لتنفيذ إجراءات غير متزامنة<br>
+            </div>
+            <div class="question">
+                <p>ما هي وظيفة خاصية `errorCaptured` في Vue.js؟</p>
+                <input type="radio" name="q27" value="للتحكم في الأخطاء التي تحدث داخل المكونات"></input> للتحكم في الأخطاء التي تحدث داخل المكونات<br>
+                <input type="radio" name="q27" value="لإدارة حالة المكونات"></input> لإدارة حالة المكونات<br>
+                <input type="radio" name="q27" value="لتنفيذ إجراءات ما بعد التحديث"></input> لتنفيذ إجراءات ما بعد التحديث<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك التعامل مع التغييرات في `props` في Vue.js؟</p>
+                <input type="radio" name="q28" value="باستخدام `watch` لمراقبة التغييرات"></input> باستخدام `watch` لمراقبة التغييرات<br>
+                <input type="radio" name="q28" value="بإعادة تعيين القيم في المكون الأب"></input> بإعادة تعيين القيم في المكون الأب<br>
+                <input type="radio" name="q28" value="باستخدام `data` فقط"></input> باستخدام `data` فقط<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة الصحيحة للتعامل مع التحديثات الكبيرة في Vue.js؟</p>
+                <input type="radio" name="q29" value="باستخدام `nextTick` للتعامل مع التحديثات بعد التغيير"></input> باستخدام `nextTick` للتعامل مع التحديثات بعد التغيير<br>
+                <input type="radio" name="q29" value="بإعادة تحميل الصفحة بالكامل"></input> بإعادة تحميل الصفحة بالكامل<br>
+                <input type="radio" name="q29" value="بتحديث البيانات مباشرة دون استخدام `nextTick`"></input> بتحديث البيانات مباشرة دون استخدام `nextTick`<br>
+            </div>
+            <div class="question">
+                <p>ما هي الميزة الأساسية لاستخدام `Vue CLI`؟</p>
+                <input type="radio" name="q30" value="توفير إعدادات وتكوينات جاهزة للتطبيقات"></input> توفير إعدادات وتكوينات جاهزة للتطبيقات<br>
+                <input type="radio" name="q30" value="تسهيل إدارة الحزم فقط"></input> تسهيل إدارة الحزم فقط<br>
+                <input type="radio" name="q30" value="تحسين أداء الرسوميات في التطبيقات"></input> تحسين أداء الرسوميات في التطبيقات<br>
+            </div>
+        </div>
+    </div>
+
+ 
+        <button onclick="submitQuiz()">طمنى بسرعه</button>
+    </div>
+
+    <!-- نافذة النتيجة -->
+    <div id="resultPopup" class="evaluation-popup">
+        <p id="resultText"></p>
+        <button onclick="closePopup()">إغلاق</button>
+    </div>
+
+    <script>
+        const levelSelect = document.getElementById('levelSelect');
+        const levelContents = document.querySelectorAll('.level-content');
+        const resultPopup = document.getElementById('resultPopup');
+        const resultText = document.getElementById('resultText');
+
+        levelSelect.addEventListener('change', (e) => {
+            const selectedLevel = e.target.value;
+
+            levelContents.forEach(content => {
+                if (content.id === selectedLevel) {
+                    content.classList.remove('hidden');
+                } else {
+                    content.classList.add('hidden');
+                }
+            });
+        });
+
+        function submitQuiz() {
+            const selectedLevel = levelSelect.value;
+            const questions = document.querySelectorAll(`#${selectedLevel} .question`);
+            let score = 0;
+
+            questions.forEach(question => {
+                const selectedOption = question.querySelector('input[type="radio"]:checked');
+                if (selectedOption && selectedOption.value === getCorrectAnswer(question)) {
+                    score++;
+                }
+            });
+
+            resultText.textContent = `لقد أجبت بشكل صحيح على ${score} من ${questions.length} سؤال.`;
+            resultPopup.style.display = 'block';
+        }
+
+        function getCorrectAnswer(question) {
+              const correctAnswers = {
+                easy: {
+                    q1: 'Vue',
+                    q2: 'Vue.component(\'my-component\', { /* options */ })',
+                    q3: 'v-model',
+                    q4: 'this.$set',
+                    q5: 'props',
+                    q6: '@click',
+                    q7: 'methods',
+                    q8: 'template, script, style',
+                    q9: 'v-for',
+                    q10: 'ربط الخصائص مع البيانات'
+                },
+                medium: {
+                    q11: 'من خلال `v-` prefix',
+                    q12: 'تحسب القيم بناءً على البيانات',
+                    q13: '`computed` تُستخدم لحساب القيم و`watch` تُستخدم لمراقبة التغييرات',
+                    q14: 'باستخدام الخاصية `filters` في Vue instance',
+                    q15: 'باستخدام `v-for`',
+                    q16: 'باستخدام `v-on`',
+                    q17: 'إدارة الحالة في التطبيقات الكبيرة',
+                    q18: 'عن طريق تسجيلها في خاصية `components`',
+                    q19: 'تراقب التغييرات في البيانات وتنفذ الدوال عند حدوث تغييرات',
+                    q20: 'لتوجيه المستخدمين إلى صفحات مختلفة'
+                },
+                hard: {
+                    q21: 'باستخدام `component` tag مع خاصية `:is`',
+                    q22: 'في دوال `methods` عند الحاجة إلى عمليات غير متزامنة',
+                    q23: 'باستخدام `async components` و `code splitting`',
+                    q24: 'إعادة استخدام الوظائف المشتركة بين المكونات',
+                    q25: 'يحافظ على حالة المكونات بين التنقلات',
+                    q26: 'لتبادل البيانات بين المكونات غير المتصلة',
+                    q27: 'للتحكم في الأخطاء التي تحدث داخل المكونات',
+                    q28: 'باستخدام `watch` لمراقبة التغييرات',
+                    q29: 'باستخدام `nextTick` للتعامل مع التحديثات بعد التغيير',
+                    q30: 'توفير إعدادات وتكوينات جاهزة للتطبيقات'
+                }
+              };
+
+            const questionId = question.querySelector('input[type="radio"]').name;
+            return correctAnswers[selectedLevel][questionId];
+        }
+
+        function closePopup() {
+            resultPopup.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
+

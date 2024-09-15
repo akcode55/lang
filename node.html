@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>امتحان Node.js</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Oswald:wght@500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #0f0e17;
+            color: #f0e8e8;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #0f0e17;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #ff8906;
+            margin-bottom: 30px;
+        }
+        .level-title {
+            color: #ff8906;
+            margin-top: 40px;
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .question p {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #ff8906;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #ff8b06a9;
+        }
+        .result {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 30px;
+            color: #333;
+        }
+        .evaluation-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #0f0e17;
+            color: orange;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+        }
+        .evaluation-popup button {
+            background-color: #ff8906;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .evaluation-popup button:hover {
+            background-color: #ff8b06a9;
+        }
+        .hidden {
+            display: none;
+        }
+        select {
+            background-color: #333;
+            color: #fff;
+            border: 2px solid #ff8906;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            font-family: 'Cairo', sans-serif;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        select:hover {
+            background-color: #444;
+            border-color: #ff8b06a9;
+        }
+        option {
+            background-color: #222;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>امتحان Node.js</h1>
+        
+        <!-- القائمة المنسدلة لاختيار المستوى -->
+        <select id="levelSelect">
+            <option value="easy">المستوى السهل</option>
+            <option value="medium">المستوى المتوسط</option>
+            <option value="hard">المستوى الصعب</option>
+        </select>
+
+        <!-- أسئلة المستوى السهل -->
+        <div id="easy" class="level-content">
+            <h2 class="level-title">المستوى السهل</h2>
+            <div class="question">
+                <p>ما هو الأمر الذي تستخدمه لتثبيت حزمة في Node.js باستخدام npm؟</p>
+                <input type="radio" name="q1" value="npm install"> npm install<br>
+                <input type="radio" name="q1" value="node install"> node install<br>
+                <input type="radio" name="q1" value="npm add"> npm add<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك قراءة ملف في Node.js؟</p>
+                <input type="radio" name="q2" value="fs.readFileSync"> fs.readFileSync<br>
+                <input type="radio" name="q2" value="file.read"> file.read<br>
+                <input type="radio" name="q2" value="readFile"> readFile<br>
+            </div>
+            <div class="question">
+                <p>ما هي وظيفة مكتبة Express في Node.js؟</p>
+                <input type="radio" name="q3" value="إدارة الطلبات والاستجابات على الويب"> إدارة الطلبات والاستجابات على الويب<br>
+                <input type="radio" name="q3" value="التعامل مع قواعد البيانات"> التعامل مع قواعد البيانات<br>
+                <input type="radio" name="q3" value="إنشاء ملفات نصية"> إنشاء ملفات نصية<br>
+            </div>
+            <div class="question">
+                <p>ما هو مخرجات الكود التالي؟ <br> console.log(process.env.NODE_ENV);</p>
+                <input type="radio" name="q4" value="undefined"> undefined<br>
+                <input type="radio" name="q4" value="development"> development<br>
+                <input type="radio" name="q4" value="production"> production<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك إنشاء خادم HTTP بسيط في Node.js؟</p>
+                <input type="radio" name="q5" value="http.createServer"> http.createServer<br>
+                <input type="radio" name="q5" value="createServer"> createServer<br>
+                <input type="radio" name="q5" value="server.create"> server.create<br>
+            </div>
+            <div class="question">
+                <p>ما هي وظيفة مكتبة 'path' في Node.js؟</p>
+                <input type="radio" name="q6" value="التعامل مع مسارات الملفات والمجلدات"> التعامل مع مسارات الملفات والمجلدات<br>
+                <input type="radio" name="q6" value="إدارة قواعد البيانات"> إدارة قواعد البيانات<br>
+                <input type="radio" name="q6" value="إنشاء ملفات جديدة"> إنشاء ملفات جديدة<br>
+            </div>
+            <div class="question">
+                <p>ما هو مخرجات الكود التالي؟ <br> console.log(__dirname);</p>
+                <input type="radio" name="q7" value="مسار الدليل الحالي"> مسار الدليل الحالي<br>
+                <input type="radio" name="q7" value="مسار ملف التشغيل"> مسار ملف التشغيل<br>
+                <input type="radio" name="q7" value="undefined"> undefined<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك إرسال استجابة من الخادم في Node.js باستخدام Express؟</p>
+                <input type="radio" name="q8" value="res.send()"> res.send()<br>
+                <input type="radio" name="q8" value="res.response()"> res.response()<br>
+                <input type="radio" name="q8" value="send.response()"> send.response()<br>
+            </div>
+            <div class="question">
+                <p>ما هو نوع البيانات الذي يمثل مسار ملف في Node.js؟</p>
+                <input type="radio" name="q9" value="string"> string<br>
+                <input type="radio" name="q9" value="number"> number<br>
+                <input type="radio" name="q9" value="object"> object<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المستخدمة لتعريف دالة غير متزامنة في Node.js؟</p>
+                <input type="radio" name="q10" value="async"> async<br>
+                <input type="radio" name="q10" value="await"> await<br>
+                <input type="radio" name="q10" value="promise"> promise<br>
+            </div>
+        </div>
+
+        <!-- أسئلة المستوى المتوسط -->
+        <div id="medium" class="level-content hidden">
+            <h2 class="level-title">المستوى المتوسط</h2>
+            <div class="question">
+                <p>ما هو مخرجات الكود التالي؟ <br> console.log(typeof new Buffer('hello'));</p>
+                <input type="radio" name="q11" value="Buffer"> Buffer<br>
+                                <input type="radio" name="q11" value="string"> string<br>
+                <input type="radio" name="q11" value="object"> object<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة التي تستخدم لانتظار استجابة غير متزامنة في دالة غير متزامنة؟</p>
+                <input type="radio" name="q12" value="await"> await<br>
+                <input type="radio" name="q12" value="async"> async<br>
+                <input type="radio" name="q12" value="promise"> promise<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك استيراد ملف في Node.js؟</p>
+                <input type="radio" name="q13" value="require()"> require()<br>
+                <input type="radio" name="q13" value="import()"> import()<br>
+                <input type="radio" name="q13" value="include()"> include()<br>
+            </div>
+            <div class="question">
+                <p>ما هو المكون الأساسي لبنية مشروع Node.js؟</p>
+                <input type="radio" name="q14" value="package.json"> package.json<br>
+                <input type="radio" name="q14" value="index.js"> index.js<br>
+                <input type="radio" name="q14" value="node_modules"> node_modules<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك التعامل مع الأخطاء في Node.js؟</p>
+                <input type="radio" name="q15" value="try...catch"> try...catch<br>
+                <input type="radio" name="q15" value="catch...try"> catch...try<br>
+                <input type="radio" name="q15" value="error...handle"> error...handle<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة المستخدمة لإنشاء مثيل من فئة في Node.js؟</p>
+                <input type="radio" name="q16" value="new ClassName()"> new ClassName()<br>
+                <input type="radio" name="q16" value="ClassName.create()"> ClassName.create()<br>
+                <input type="radio" name="q16" value="createInstance()"> createInstance()<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة الرئيسية التي تستخدم لإنشاء وحدة في Node.js؟</p>
+                <input type="radio" name="q17" value="module.exports"> module.exports<br>
+                <input type="radio" name="q17" value="export"> export<br>
+                <input type="radio" name="q17" value="exports"> exports<br>
+            </div>
+            <div class="question">
+                <p>ما هو الغرض من استخدام مكتبة 'dotenv' في Node.js؟</p>
+                <input type="radio" name="q18" value="إدارة متغيرات البيئة"> إدارة متغيرات البيئة<br>
+                <input type="radio" name="q18" value="تحليل طلبات HTTP"> تحليل طلبات HTTP<br>
+                <input type="radio" name="q18" value="تخزين بيانات الجلسة"> تخزين بيانات الجلسة<br>
+            </div>
+            <div class="question">
+                <p>ما هو مخرجات الكود التالي؟ <br> console.log(process.version);</p>
+                <input type="radio" name="q19" value="نسخة Node.js"> نسخة Node.js<br>
+                <input type="radio" name="q19" value="إصدار النظام"> إصدار النظام<br>
+                <input type="radio" name="q19" value="رقم البناء"> رقم البناء<br>
+            </div>
+            <div class="question">
+                <p>ما هو الأمر الذي تستخدمه لتثبيت الحزم المحددة في ملف package.json؟</p>
+                <input type="radio" name="q20" value="npm install"> npm install<br>
+                <input type="radio" name="q20" value="npm update"> npm update<br>
+                <input type="radio" name="q20" value="npm fetch"> npm fetch<br>
+            </div>
+        </div>
+
+        <!-- أسئلة المستوى الصعب -->
+        <div id="hard" class="level-content hidden">
+            <h2 class="level-title">المستوى الصعب</h2>
+            <div class="question">
+                <p>ما هو تأثير استخدام "process.nextTick()" في Node.js؟</p>
+                <input type="radio" name="q21" value="تنفيذ الوظائف بعد نهاية الدورة الحالية للحدث"> تنفيذ الوظائف بعد نهاية الدورة الحالية للحدث<br>
+                <input type="radio" name="q21" value="تنفيذ الوظائف قبل الدورة الحالية للحدث"> تنفيذ الوظائف قبل الدورة الحالية للحدث<br>
+                <input type="radio" name="q21" value="تنفيذ الوظائف بشكل غير متزامن"> تنفيذ الوظائف بشكل غير متزامن<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك تحسين أداء تطبيق Node.js باستخدام الكتل الصغيرة؟</p>
+                <input type="radio" name="q22" value="استخدام التقسيم المودولي"> استخدام التقسيم المودولي<br>
+                <input type="radio" name="q22" value="زيادة عدد المعالجات"> زيادة عدد المعالجات<br>
+                <input type="radio" name="q22" value="استخدام التخزين المؤقت"> استخدام التخزين المؤقت<br>
+            </div>
+            <div class="question">
+                <p>ما هو دور مكتبة 'cluster' في Node.js؟</p>
+                <input type="radio" name="q23" value="تشغيل عدة عمليات Node.js على نوى متعددة"> تشغيل عدة عمليات Node.js على نوى متعددة<br>
+                <input type="radio" name="q23" value="إدارة جلسات المستخدمين"> إدارة جلسات المستخدمين<br>
+                <input type="radio" name="q23" value="توزيع الحمل بين الخوادم"> توزيع الحمل بين الخوادم<br>
+            </div>
+            <div class="question">
+                <p>ما هي وظيفة مكتبة 'child_process' في Node.js؟</p>
+                <input type="radio" name="q24" value="تنفيذ أوامر النظام وإنشاء عمليات فرعية"> تنفيذ أوامر النظام وإنشاء عمليات فرعية<br>
+                <input type="radio" name="q24" value="إدارة قواعد البيانات"> إدارة قواعد البيانات<br>
+                <input type="radio" name="q24" value="معالجة الطلبات الواردة"> معالجة الطلبات الواردة<br>
+            </div>
+            <div class="question">
+                <p>ما هو معنى الرسالة "ECONNREFUSED" في Node.js؟</p>
+                <input type="radio" name="q25" value="رفض الاتصال بالخادم"> رفض الاتصال بالخادم<br>
+                <input type="radio" name="q25" value="عدم توفر الخدمة"> عدم توفر الخدمة<br>
+                <input type="radio" name="q25" value="الوقت المستغرق لطلب الاتصال"> الوقت المستغرق لطلب الاتصال<br>
+            </div>
+            <div class="question">
+                <p>ما هي كيفية التعامل مع ذاكرة التخزين المؤقت (caching) في Node.js؟</p>
+                <input type="radio" name="q26" value="استخدام مكتبات مثل 'node-cache' أو 'memory-cache'"> استخدام مكتبات مثل 'node-cache' أو 'memory-cache'<br>
+                <input type="radio" name="q26" value="التخزين في الملفات النصية"> التخزين في الملفات النصية<br>
+                <input type="radio" name="q26" value="استخدام قواعد البيانات فقط"> استخدام قواعد البيانات فقط<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة المثلى لتحسين الأداء عند التعامل مع قواعد البيانات في Node.js؟</p>
+                <input type="radio" name="q27" value="استخدام الاستعلامات غير المتزامنة"> استخدام الاستعلامات غير المتزامنة<br>
+                <input type="radio" name="q27" value="زيادة عدد المعالجات"> زيادة عدد المعالجات<br>
+                <input type="radio" name="q27" value="التخزين المؤقت لنتائج الاستعلامات"> التخزين المؤقت لنتائج الاستعلامات<br>
+            </div>
+            <div class="question">
+                <p>ما هو مخرجات الكود التالي؟ <br> console.log(require.main === module);</p>
+                <input type="radio" name="q28" value="true"> true<br>
+                <input type="radio" name="q28" value="false"> false<br>
+                <input type="radio" name="q28" value="undefined"> undefined<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك معالجة الأخطاء في دوال غير متزامنة في Node.js؟</p>
+                <input type="radio" name="q29" value="استخدام بلوكات try...catch أو معالجات الأخطاء في الوعود"> استخدام بلوكات try...catch أو معالجات الأخطاء في الوعود<br>
+                <input type="radio" name="q29" value="التعامل مع الأخطاء فقط في الوعود"> التعامل مع الأخطاء فقط في الوعود<br>
+                <input type="radio" name="q29" value="استخدام الاستثناءات فقط"> استخدام الاستثناءات فقط<br>
+            </div>
+            <div class="question">
+                <p>ما هي وظيفة مكتبة 'compression' في Node.js؟</p>
+                <input type="radio" name="q30" value="ضغط استجابات HTTP"> ضغط استجابات HTTP<br>
+                <input type="radio" name="q30" value="تشغيل قواعد بيانات مؤقتة"> تشغيل قواعد بيانات مؤقتة<br>
+                <input type="radio" name="q30" value="إدارة جلسات المستخدمين"> إدارة جلسات المستخدمين<br>
+            </div>
+            <div class="question">
+                <p>ما هي أهمية استخدام 'async_hooks' في Node.js؟</p>
+                <input type="radio" name="q31" value="تتبع السياقات غير المتزامنة"> تتبع السياقات غير المتزامنة<br>
+                <input type="radio" name="q31" value="تخزين البيانات في الذاكرة"> تخزين البيانات في الذاكرة<br>
+                <input type="radio" name="q31" value="إدارة ملفات التكوين"> إدارة ملفات التكوين<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك اختبار تطبيق Node.js باستخدام مكتبة 'mocha'? </p>
+                <input type="radio" name="q32" value="كتابة اختبارات في ملفات .js واستخدام الأوامر mocha"> كتابة اختبارات في ملفات .js واستخدام الأوامر mocha<br>
+                <input type="radio" name="q32" value="استخدام أدوات اختبارات مدمجة في Node.js"> استخدام أدوات اختبارات مدمجة في Node.js<br>
+                <input type="radio" name="q32" value="تشغيل اختبارات عبر الأوامر npm فقط"> تشغيل اختبارات عبر الأوامر npm فقط<br>
+            </div>
+            <div class="question">
+                <p>ما هي الميزة الرئيسية لاستخدام 'async/await' بدلاً من 'callbacks' في Node.js؟</p>
+                <input type="radio" name="q33" value="تحسين قراءة الكود وتقليل تعقيده"> تحسين قراءة الكود وتقليل تعقيده<br>
+                <input type="radio" name="q33" value="زيادة سرعة تنفيذ الكود"> زيادة سرعة تنفيذ الكود<br>
+                <input type="radio" name="q33" value="تقليل استخدام الذاكرة"> تقليل استخدام الذاكرة<br>
+            </div>
+            <div class="question">
+                <p>ما هو الفرق بين 'process.nextTick()' و 'setImmediate()' في Node.js؟</p>
+                <input type="radio" name="q34" value="يتم تنفيذ 'process.nextTick()' قبل الدورة الحالية للحدث، بينما يتم تنفيذ 'setImmediate()' بعد الدورة الحالية للحدث"> يتم تنفيذ 'process.nextTick()' قبل الدورة الحالية للحدث، بينما يتم تنفيذ 'setImmediate()' بعد الدورة الحالية للحدث<br>
+                <input type="radio" name="q34" value="يتم تنفيذ كلاهما في نفس الوقت"> يتم تنفيذ كلاهما في نفس الوقت<br>
+                <input type="radio" name="q34" value="يتم تنفيذ 'setImmediate()' قبل 'process.nextTick()'"> يتم تنفيذ 'setImmediate()' قبل 'process.nextTick()'<br>
+            </div>
+            <div class="question">
+                <p>ما هي فائدة استخدام مكتبة 'helmet' في تطبيقات Node.js؟</p>
+                <input type="radio" name="q35" value="تحسين أمان تطبيقات الويب"> تحسين أمان تطبيقات الويب<br>
+                <input type="radio" name="q35" value="إدارة الجلسات"> إدارة الجلسات<br>
+                <input type="radio" name="q35" value="ضغط البيانات"> ضغط البيانات<br>
+            </div>
+        </div>
+    </div>
+
+  
+        <button onclick="submitQuiz()">طمنى بسرعه</button>
+    </div>
+
+    <!-- نافذة النتيجة -->
+    <div id="resultPopup" class="evaluation-popup">
+        <p id="resultText"></p>
+        <button onclick="closePopup()">إغلاق</button>
+    </div>
+
+    <script>
+        const levelSelect = document.getElementById('levelSelect');
+        const levelContents = document.querySelectorAll('.level-content');
+        const resultPopup = document.getElementById('resultPopup');
+        const resultText = document.getElementById('resultText');
+
+        levelSelect.addEventListener('change', (e) => {
+            const selectedLevel = e.target.value;
+
+            levelContents.forEach(content => {
+                if (content.id === selectedLevel) {
+                    content.classList.remove('hidden');
+                } else {
+                    content.classList.add('hidden');
+                }
+            });
+        });
+
+        function submitQuiz() {
+            const selectedLevel = levelSelect.value;
+            const questions = document.querySelectorAll(`#${selectedLevel} .question`);
+            let score = 0;
+
+            questions.forEach(question => {
+                const selectedOption = question.querySelector('input[type="radio"]:checked');
+                if (selectedOption && selectedOption.value === getCorrectAnswer(question)) {
+                    score++;
+                }
+            });
+
+            resultText.textContent = `لقد أجبت بشكل صحيح على ${score} من ${questions.length} سؤال.`;
+            resultPopup.style.display = 'block';
+        }
+
+        function getCorrectAnswer(question) {
+           
+          const correctAnswers = {
+            easy: {
+                q1: "npm install",
+                q2: "fs.readFileSync",
+                q3: "إدارة الطلبات والاستجابات على الويب",
+                q4: "undefined",
+                q5: "http.createServer",
+                q6: "التعامل مع مسارات الملفات والمجلدات",
+                q7: "مسار الدليل الحالي",
+                q8: "res.send()",
+                q9: "string",
+                q10: "async"
+            },
+            medium: {
+                q11: "Buffer",
+                q12: "await",
+                q13: "require()",
+                q14: "package.json",
+                q15: "try...catch",
+                q16: "new ClassName()",
+                q17: "module.exports",
+                q18: "إدارة متغيرات البيئة",
+                q19: "نسخة Node.js",
+                q20: "npm install"
+            },
+            hard: {
+                q21: "تنفيذ الوظائف بعد نهاية الدورة الحالية للحدث",
+                q22: "استخدام التقسيم المودولي",
+                q23: "تشغيل عدة عمليات Node.js على نوى متعددة",
+                q24: "تنفيذ أوامر النظام وإنشاء عمليات فرعية",
+                q25: "رفض الاتصال بالخادم",
+                q26: "استخدام مكتبات مثل 'node-cache' أو 'memory-cache'",
+                q27: "استخدام الاستعلامات غير المتزامنة",
+                q28: "true",
+                q29: "استخدام بلوكات try...catch أو معالجات الأخطاء في الوعود",
+                q30: "ضغط استجابات HTTP",
+                q31: "تتبع السياقات غير المتزامنة",
+                q32: "كتابة اختبارات في ملفات .js واستخدام الأوامر mocha",
+                q33: "تحسين قراءة الكود وتقليل تعقيده",
+                q34: "يتم تنفيذ 'process.nextTick()' قبل الدورة الحالية للحدث، بينما يتم تنفيذ 'setImmediate()' بعد الدورة الحالية للحدث",
+                q35: "تحسين أمان تطبيقات الويب"
+            }
+          };
+
+            const questionId = question.querySelector('input[type="radio"]').name;
+            return correctAnswers[selectedLevel][questionId];
+        }
+
+        function closePopup() {
+            resultPopup.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

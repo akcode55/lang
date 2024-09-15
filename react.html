@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>امتحان React</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Oswald:wght@500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #0f0e17;
+            color: #f0e8e8;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #0f0e17;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #ff8906;
+            margin-bottom: 30px;
+        }
+        .level-title {
+            color: #ff8906;
+            margin-top: 40px;
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .question p {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #ff8906;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #ff8b06a9;
+        }
+        .result {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 30px;
+            color: #333;
+        }
+        .evaluation-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #0f0e17;
+            color: orange;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+        }
+        .evaluation-popup button {
+            background-color: #ff8906;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .evaluation-popup button:hover {
+            background-color: #ff8b06a9;
+        }
+        .hidden {
+            display: none;
+        }
+        select {
+            background-color: #333;
+            color: #fff;
+            border: 2px solid #ff8906;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            font-family: 'Cairo', sans-serif;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        select:hover {
+            background-color: #444;
+            border-color: #ff8b06a9;
+        }
+        option {
+            background-color: #222;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>امتحان React</h1>
+        
+        <!-- القائمة المنسدلة لاختيار المستوى -->
+        <select id="levelSelect">
+            <option value="easy">المستوى السهل</option>
+            <option value="medium">المستوى المتوسط</option>
+            <option value="hard">المستوى الصعب</option>
+        </select>
+
+        <!-- أسئلة المستوى السهل -->
+        <div id="easy" class="level-content">
+            <h2 class="level-title">المستوى السهل</h2>
+            <div class="question">
+                <p>ما هي مكتبة تستخدم لبناء واجهات المستخدم في React؟</p>
+                <input type="radio" name="q1" value="React"> React<br>
+                <input type="radio" name="q1" value="Angular"> Angular<br>
+                <input type="radio" name="q1" value="Vue"> Vue<br>
+            </div>
+            <div class="question">
+                <p>ما هي الدالة التي تستخدم لإنشاء عنصر جديد في React؟</p>
+                <input type="radio" name="q2" value="createElement"> createElement<br>
+                <input type="radio" name="q2" value="render"> render<br>
+                <input type="radio" name="q2" value="Component"> Component<br>
+            </div>
+            <div class="question">
+                <p>ما هو الاسم الذي يتم من خلاله تصدير مكون في React؟</p>
+                <input type="radio" name="q3" value="export default"> export default<br>
+                <input type="radio" name="q3" value="module.exports"> module.exports<br>
+                <input type="radio" name="q3" value="require"> require<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة المستخدمة لتحديث الحالة في مكون React؟</p>
+                <input type="radio" name="q4" value="setState"> setState<br>
+                <input type="radio" name="q4" value="updateState"> updateState<br>
+                <input type="radio" name="q4" value="changeState"> changeState<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة التي تستخدم لإضافة عناصر إلى القائمة في React؟</p>
+                <input type="radio" name="q5" value="map"> map<br>
+                <input type="radio" name="q5" value="filter"> filter<br>
+                <input type="radio" name="q5" value="reduce"> reduce<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم "props" في React؟</p>
+                <input type="radio" name="q6" value="الخصائص التي يتم تمريرها إلى المكونات"> الخصائص التي يتم تمريرها إلى المكونات<br>
+                <input type="radio" name="q6" value="الحالة الداخلية للمكون"> الحالة الداخلية للمكون<br>
+                <input type="radio" name="q6" value="طريقة لإدارة الحالة"> طريقة لإدارة الحالة<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك تعريف مكون في React؟</p>
+                <input type="radio" name="q7" value="function MyComponent() {}"> function MyComponent() {}<br>
+                <input type="radio" name="q7" value="class MyComponent {}"> class MyComponent {}<br>
+                <input type="radio" name="q7" value="const MyComponent = () => {}"> const MyComponent = () => {}<br>
+            </div>
+            <div class="question">
+                <p>ما هي الميزة الرئيسية لاستخدام React Hooks؟</p>
+                <input type="radio" name="q8" value="إدارة الحالة بدون استخدام class"> إدارة الحالة بدون استخدام class<br>
+                <input type="radio" name="q8" value="تحسين أداء التفاعل"> تحسين أداء التفاعل<br>
+                <input type="radio" name="q8" value="إنشاء مكونات جديدة"> إنشاء مكونات جديدة<br>
+            </div>
+            <div class="question">
+                <p>ما هي الدالة المستخدمة في React لإدارة دورة حياة المكون؟</p>
+                <input type="radio" name="q9" value="componentDidMount"> componentDidMount<br>
+                <input type="radio" name="q9" value="componentWillUnmount"> componentWillUnmount<br>
+                <input type="radio" name="q9" value="render"> render<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك تمرير الدالة إلى مكون في React؟</p>
+                <input type="radio" name="q10" value="من خلال props"> من خلال props<br>
+                <input type="radio" name="q10" value="من خلال state"> من خلال state<br>
+                <input type="radio" name="q10" value="من خلال context"> من خلال context<br>
+            </div>
+        </div>
+
+        <!-- أسئلة المستوى المتوسط -->
+        <div id="medium" class="level-content hidden">
+            <h2 class="level-title">المستوى المتوسط</h2>
+            <div class="question">
+                <p>ما هي الدالة التي تستخدم لربط أحداث في React؟</p>
+                <input type="radio" name="q11" value="addEventListener"> addEventListener<br>
+               
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+                <input type="radio" name="q11" value="onClick"> onClick<br>                    
+                <input type="radio" name="q11" value="handleEvent"> handleEvent<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك استخدام useState في React؟</p>
+                <input type="radio" name="q12" value="const [state, setState] = useState(initialState)"> const [state, setState] = useState(initialState)<br>
+                <input type="radio" name="q12" value="const [state, setState] = createState(initialState)"> const [state, setState] = createState(initialState)<br>
+                <input type="radio" name="q12" value="const [state, setState] = defineState(initialState)"> const [state, setState] = defineState(initialState)<br>
+            </div>
+            <div class="question">
+                <p>ما هو استخدام الدالة useEffect في React؟</p>
+                <input type="radio" name="q13" value="إدارة تأثيرات جانبية"> إدارة تأثيرات جانبية<br>
+                <input type="radio" name="q13" value="إدارة الحالة"> إدارة الحالة<br>
+                <input type="radio" name="q13" value="إدارة الأحداث"> إدارة الأحداث<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك تمرير props من مكون إلى مكون في React؟</p>
+                <input type="radio" name="q14" value="من خلال خاصية props"> من خلال خاصية props<br>
+                <input type="radio" name="q14" value="من خلال state"> من خلال state<br>
+                <input type="radio" name="q14" value="من خلال context"> من خلال context<br>
+            </div>
+            <div class="question">
+                <p>ما هو الهدف من استخدام React Context؟</p>
+                <input type="radio" name="q15" value="لمشاركة البيانات بين المكونات دون الحاجة للتمرير عبر props"> لمشاركة البيانات بين المكونات دون الحاجة للتمرير عبر props<br>
+                <input type="radio" name="q15" value="لإدارة الحالة"> لإدارة الحالة<br>
+                <input type="radio" name="q15" value="لتحسين الأداء"> لتحسين الأداء<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة التي يمكن استخدامها لتعديل قيمة state في مكون React؟</p>
+                <input type="radio" name="q16" value="من خلال setState"> من خلال setState<br>
+                <input type="radio" name="q16" value="من خلال updateState"> من خلال updateState<br>
+                <input type="radio" name="q16" value="من خلال changeState"> من خلال changeState<br>
+            </div>
+            <div class="question">
+                <p>ما هي ميزة استخدام useMemo في React؟</p>
+                <input type="radio" name="q17" value="تخزين القيم المحسوبة لتحسين الأداء"> تخزين القيم المحسوبة لتحسين الأداء<br>
+                <input type="radio" name="q17" value="إدارة تأثيرات جانبية"> إدارة تأثيرات جانبية<br>
+                <input type="radio" name="q17" value="تخزين القيم الأولية"> تخزين القيم الأولية<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكنك استخدام useReducer في React؟</p>
+                <input type="radio" name="q18" value="لإدارة الحالة الأكثر تعقيدًا"> لإدارة الحالة الأكثر تعقيدًا<br>
+                <input type="radio" name="q18" value="لتحديث حالة واحدة فقط"> لتحديث حالة واحدة فقط<br>
+                <input type="radio" name="q18" value="لإدارة تأثيرات جانبية"> لإدارة تأثيرات جانبية<br>
+            </div>
+            <div class="question">
+                <p>ما هو مفهوم "HOC" في React؟</p>
+                <input type="radio" name="q19" value="Higher Order Component"> Higher Order Component<br>
+                <input type="radio" name="q19" value="Higher Order Container"> Higher Order Container<br>
+                <input type="radio" name="q19" value="Higher Order Context"> Higher Order Context<br>
+            </div>
+            <div class="question">
+                <p>ما هي الميزة الأساسية لاستخدام "React.lazy"؟</p>
+                <input type="radio" name="q20" value="التحميل الكسول للمكونات"> التحميل الكسول للمكونات<br>
+                <input type="radio" name="q20" value="تحسين أداء التفاعل"> تحسين أداء التفاعل<br>
+                <input type="radio" name="q20" value="إدارة الحالة"> إدارة الحالة<br>
+            </div>
+        </div>
+
+        <!-- أسئلة المستوى الصعب -->
+        <div id="hard" class="level-content hidden">
+            <h2 class="level-title">المستوى الصعب</h2>
+            <div class="question">
+                <p>ما هي الطريقة التي يمكن استخدامها لتنفيذ التحقق من الصحة في React؟</p>
+                <input type="radio" name="q21" value="من خلال PropTypes"> من خلال PropTypes<br>
+                <input type="radio" name="q21" value="من خلال validate"> من خلال validate<br>
+                <input type="radio" name="q21" value="من خلال check"> من خلال check<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة الصحيحة لإنشاء "Error Boundary" في React؟</p>
+                <input type="radio" name="q22" value="إنشاء مكون class مع دالة componentDidCatch"> إنشاء مكون class مع دالة componentDidCatch<br>
+                <input type="radio" name="q22" value="استخدام useEffect"> استخدام useEffect<br>
+                <input type="radio" name="q22" value="استخدام useState"> استخدام useState<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكن تحسين أداء مكون React عن طريق تجنب عمليات إعادة التكوين غير الضرورية؟</p>
+                <input type="radio" name="q23" value="استخدام React.memo"> استخدام React.memo<br>
+                <input type="radio" name="q23" value="استخدام useEffect"> استخدام useEffect<br>
+                <input type="radio" name="q23" value="استخدام useState"> استخدام useState<br>
+            </div>
+            <div class="question">
+                <p>ما هي الميزة الرئيسية لاستخدام "React.StrictMode"؟</p>
+                <input type="radio" name="q24" value="اكتشاف مشكلات في التطبيق أثناء التطوير"> اكتشاف مشكلات في التطبيق أثناء التطوير<br>
+                <input type="radio" name="q24" value="تحسين أداء التفاعل"> تحسين أداء التفاعل<br>
+                <input type="radio" name="q24" value="إدارة الحالة"> إدارة الحالة<br>
+            </div>
+            <div class="question">
+                <p>ما هو "Reconciliation" في React؟</p>
+                <input type="radio" name="q25" value="العملية التي يقوم بها React لتحديث DOM بكفاءة"> العملية التي يقوم بها React لتحديث DOM بكفاءة<br>
+                <input type="radio" name="q25" value="العملية التي يقوم بها React لإنشاء مكونات جديدة"> العملية التي يقوم بها React لإنشاء مكونات جديدة<br>
+                <input type="radio" name="q25" value="العملية التي يقوم بها React لإدارة الحالة"> العملية التي يقوم بها React لإدارة الحالة<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكن مشاركة الحالة بين مكونات غير متصلة في React؟</p>
+                <input type="radio" name="q26" value="استخدام Context API"> استخدام Context API<br>
+                <input type="radio" name="q26" value="استخدام props"> استخدام props<br>
+                <input type="radio" name="q26" value="استخدام state"> استخدام state<br>
+            </div>
+            <div class="question">
+                <p>ما هو "React Portals" وكيف يُستخدم؟</p>
+                <input type="radio" name="q27" value="السماح بتركيب المكونات في عقد DOM غير تابعة للمكون الحالي"> السماح بتركيب المكونات في عقد DOM غير تابعة للمكون الحالي<br>
+                <input type="radio" name="q27" value="توفير طريقة لتنظيم الحالة"> توفير طريقة لتنظيم الحالة<br>
+                <input type="radio" name="q27" value="إدارة المكونات بشكل غير متزامن"> إدارة المكونات بشكل غير متزامن<br>
+            </div>
+            <div class="question">
+                <p>ما هي الميزة الأساسية لاستخدام "React Suspense"؟</p>
+                <input type="radio" name="q28" value="تأجيل تحميل مكونات حتى تصبح جاهزة"> تأجيل تحميل مكونات حتى تصبح جاهزة<br>
+                <input type="radio" name="q28" value="إدارة الحالة غير المتزامنة"> إدارة الحالة غير المتزامنة<br>
+                <input type="radio" name="q28" value="تحسين أداء تحميل البيانات"> تحسين أداء تحميل البيانات<br>
+            </div>
+            <div class="question">
+                <p>كيف يمكن استخدام "useCallback" في React؟</p>
+                <input type="radio" name="q29" value="لتجنب إعادة إنشاء الدوال على كل إعادة عرض"> لتجنب إعادة إنشاء الدوال على كل إعادة عرض<br>
+                <input type="radio" name="q29" value="لتحديث الحالة"> لتحديث الحالة<br>
+                <input type="radio" name="q29" value="لتغيير سياق التفاعل"> لتغيير سياق التفاعل<br>
+            </div>
+            <div class="question">
+                <p>ما هو الفرق بين useLayoutEffect و useEffect في React؟</p>
+                <input type="radio" name="q30" value="useLayoutEffect ينفذ بعد رسم DOM، useEffect بعد تحديثات DOM"> useLayoutEffect ينفذ بعد رسم DOM، useEffect بعد تحديثات DOM<br>
+                <input type="radio" name="q30" value="لا يوجد فرق"> لا يوجد فرق<br>
+                <input type="radio" name="q30" value="useLayoutEffect لتنفيذ عمليات غير متزامنة، useEffect للتزامن"> useLayoutEffect لتنفيذ عمليات غير متزامنة، useEffect للتزامن<br>
+            </div>
+        </div>
+
+        <button onclick="submitQuiz()">طمنى بسرعه</button>
+    </div>
+
+    <!-- نافذة النتيجة -->
+    <div id="resultPopup" class="evaluation-popup">
+        <p id="resultText"></p>
+        <button onclick="closePopup()">إغلاق</button>
+    </div>
+
+    <script>
+        const levelSelect = document.getElementById('levelSelect');
+        const levelContents = document.querySelectorAll('.level-content');
+        const resultPopup = document.getElementById('resultPopup');
+        const resultText = document.getElementById('resultText');
+
+        levelSelect.addEventListener('change', (e) => {
+            const selectedLevel = e.target.value;
+
+            levelContents.forEach(content => {
+                if (content.id === selectedLevel) {
+                    content.classList.remove('hidden');
+                } else {
+                    content.classList.add('hidden');
+                }
+            });
+        });
+
+        function submitQuiz() {
+            const selectedLevel = levelSelect.value;
+            const questions = document.querySelectorAll(`#${selectedLevel} .question`);
+            let score = 0;
+
+            questions.forEach(question => {
+                const selectedOption = question.querySelector('input[type="radio"]:checked');
+                if (selectedOption && selectedOption.value === getCorrectAnswer(question)) {
+                    score++;
+                }
+            });
+
+            resultText.textContent = `لقد أجبت بشكل صحيح على ${score} من ${questions.length} سؤال.`;
+            resultPopup.style.display = 'block';
+        }
+
+        function getCorrectAnswer(question) {
+            // هذا مجرد مثال. يجب استبداله بالمنطق الحقيقي لتحديد الإجابة الصحيحة.
+         const correctAnswers = {
+                easy: {
+                    q1: "React",
+                    q2: "createElement",
+                    q3: "export default",
+                    q4: "setState",
+                    q5: "map",
+                    q6: "الخصائص التي يتم تمريرها إلى المكونات",
+                    q7: "function MyComponent() {}",
+                    q8: "إدارة الحالة بدون استخدام class",
+                    q9: "componentDidMount",
+                    q10: "من خلال props"
+                },
+                medium: {
+                    q11: "onClick",
+                    q12: "const [state, setState] = useState(initialState)",
+                    q13: "إدارة تأثيرات جانبية",
+                    q14: "من خلال props",
+                    q15: "لمشاركة البيانات بين المكونات دون الحاجة للتمرير عبر props",
+                    q16: "من خلال setState",
+                    q17: "تخزين القيم المحسوبة لتحسين الأداء",
+                    q18: "لإدارة الحالة الأكثر تعقيدًا",
+                    q19: "Higher Order Component",
+                    q20: "التحميل الكسول للمكونات"
+                },
+                hard: {
+                    q21: "من خلال PropTypes",
+                    q22: "إنشاء مكون class مع دالة componentDidCatch",
+                    q23: "استخدام React.memo",
+                    q24: "اكتشاف مشكلات في التطبيق أثناء التطوير",
+                    q25: "العملية التي يقوم بها React لتحديث DOM بكفاءة",
+                    q26: "استخدام Context API",
+                    q27: "السماح بتركيب المكونات في عقد DOM غير تابعة للمكون الحالي",
+                    q28: "تأجيل تحميل مكونات حتى تصبح جاهزة",
+                    q29: "لتجنب إعادة إنشاء الدوال على كل إعادة عرض",
+                    q30: "useLayoutEffect ينفذ بعد رسم DOM، useEffect بعد تحديثات DOM"
+                }
+         };
+
+            const questionId = question.querySelector('input[type="radio"]').name;
+            return correctAnswers[selectedLevel][questionId];
+        }
+
+        function closePopup() {
+            resultPopup.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

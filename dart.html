@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>امتحان Dart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Oswald:wght@500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #0f0e17;
+            color: #f0e8e8;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #0f0e17;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #ff8906;
+            margin-bottom: 30px;
+        }
+        .level-title {
+            color: #ff8906;
+            margin-top: 40px;
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .question p {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #ff8906;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #ff8b06a9;
+        }
+        .result {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 30px;
+            color: #333;
+        }
+        .evaluation-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #0f0e17;
+            color: orange;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+        }
+        .evaluation-popup button {
+            background-color: #ff8906;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .evaluation-popup button:hover {
+            background-color: #ff8b06a9;
+        }
+        .hidden {
+            display: none;
+        }
+        select {
+            background-color: #333;
+            color: #fff;
+            border: 2px solid #ff8906;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            font-family: 'Cairo', sans-serif;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        select:hover {
+            background-color: #444;
+            border-color: #ff8b06a9;
+        }
+        option {
+            background-color: #222;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>امتحان Dart</h1>
+        
+        <!-- القائمة المنسدلة لاختيار المستوى -->
+        <select id="levelSelect">
+            <option value="easy">المستوى السهل</option>
+            <option value="medium">المستوى المتوسط</option>
+            <option value="hard">المستوى الصعب</option>
+        </select>
+
+        <!-- أسئلة المستوى السهل -->
+        <div id="easy" class="level-content">
+            <h2 class="level-title">المستوى السهل</h2>
+            <!-- الأسئلة المضافة -->
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية لإنشاء دالة في Dart؟</p>
+                <input type="radio" name="q1" value="void"> void<br>
+                <input type="radio" name="q1" value="function"> function<br>
+                <input type="radio" name="q1" value="method"> method<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية لتحديد المتغير كـ "ثابت" في Dart؟</p>
+                <input type="radio" name="q2" value="final"> final<br>
+                <input type="radio" name="q2" value="const"> const<br>
+                <input type="radio" name="q2" value="static"> static<br>
+            </div>
+            <div class="question">
+                <p>ما هو نوع البيانات المستخدم لتمثيل الأعداد الصحيحة في Dart؟</p>
+                <input type="radio" name="q3" value="int"> int<br>
+                <input type="radio" name="q3" value="double"> double<br>
+                <input type="radio" name="q3" value="number"> number<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية لطباعة البيانات في Dart؟</p>
+                <input type="radio" name="q4" value="print"> print<br>
+                <input type="radio" name="q4" value="log"> log<br>
+                <input type="radio" name="q4" value="echo"> echo<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية لإنشاء حلقة تكرار في Dart؟</p>
+                <input type="radio" name="q5" value="for"> for<br>
+                <input type="radio" name="q5" value="while"> while<br>
+                <input type="radio" name="q5" value="loop"> loop<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية للتعامل مع الاستثناءات في Dart؟</p>
+                <input type="radio" name="q6" value="try"> try<br>
+                <input type="radio" name="q6" value="catch"> catch<br>
+                <input type="radio" name="q6" value="throw"> throw<br>
+            </div>
+            <div class="question">
+                <p>كيف تقوم بإنشاء فئة جديدة في Dart؟</p>
+                <input type="radio" name="q7" value="class MyClass { }"> class MyClass { }<br>
+                <input type="radio" name="q7" value="new MyClass()"> new MyClass()<br>
+                <input type="radio" name="q7" value="MyClass { }"> MyClass { }<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة المستخدمة لإنشاء كائن من فئة في Dart؟</p>
+                <input type="radio" name="q8" value="new MyClass()"> new MyClass()<br>
+                <input type="radio" name="q8" value="create MyClass()"> create MyClass()<br>
+                <input type="radio" name="q8" value="MyClass()"> MyClass()<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة المستخدمة لإضافة عنصر إلى قائمة في Dart؟</p>
+                <input type="radio" name="q9" value="add"> add<br>
+                <input type="radio" name="q9" value="push"> push<br>
+                <input type="radio" name="q9" value="insert"> insert<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة المستخدمة لتكرار العناصر في قائمة في Dart؟</p>
+                <input type="radio" name="q10" value="forEach"> forEach<br>
+                <input type="radio" name="q10" value="map"> map<br>
+                <input type="radio" name="q10" value="each"> each<br>
+            </div>
+            <!-- إضافة 10 أسئلة أخرى للمستوى السهل -->
+            <div class="question">
+                <p>ما هو نوع البيانات المستخدم لتمثيل الأعداد العشرية في Dart؟</p>
+                <input type="radio" name="q11" value="double"> double<br>
+                <input type="radio" name="q11" value="int"> int<br>
+                <input type="radio" name="q11" value="num"> num<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية لتحديد نوع المتغير في Dart؟</p>
+                <input type="radio" name="q12" value="var"> var<br>
+                <input type="radio" name="q12" value="dynamic"> dynamic<br>
+                <input type="radio" name="q12" value="type"> type<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية لإنشاء متغير ثابت في Dart؟</p>
+                <input type="radio" name="q13" value="const"> const<br>
+                <input type="radio" name="q13" value="final"> final<br>
+                <input type="radio" name="q13" value="static"> static<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية لتحديد متغير من نوع String في Dart؟</p>
+                <input type="radio" name="q14" value="String"> String<br>
+                <input type="radio" name="q14" value="string"> string<br>
+                <input type="radio" name="q14" value="text"> text<br>
+            </div>
+            <div class="question">
+                <p>ما هو رمز العملية الرياضية المستخدمة للتكعيب في Dart؟</p>
+                <input type="radio" name="q15" value="^"> ^<br>
+                <input type="radio" name="q15" value="**"> **<br>
+                <input type="radio" name="q15" value="**"> **<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية لإنشاء دالة غير متزامنة في Dart؟</p>
+                <input type="radio" name="q16" value="async"> async<br>
+                <input type="radio" name="q16" value="await"> await<br>
+                <input type="radio" name="q16" value="future"> future<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة لتعريف واجهة (Interface) في Dart؟</p>
+                <input type="radio" name="q17" value="interface"> interface<br>
+                <input type="radio" name="q17" value="implements"> implements<br>
+                <input type="radio" name="q17" value="abstract"> abstract<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية لتحديد وظيفة غير متزامنة في Dart؟</p>
+                <input type="radio" name="q18" value="async"> async<br>
+                <input type="radio" name="q18" value="await"> await<br>
+                <input type="radio" name="q18" value="future"> future<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية لإنشاء متغير غير ثابت في Dart؟</p>
+                <input type="radio" name="q19" value="var"> var<br>
+                <input type="radio" name="q19" value="dynamic"> dynamic<br>
+                <input type="radio" name="q19" value="final"> final<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية التي تحدد فئة غير ملموسة في Dart؟</p>
+                <input type="radio" name="q20" value="abstract"> abstract<br>
+                <input type="radio" name="q20" value="interface"> interface<br>
+                <input type="radio" name="q20" value="final"> final<br>
+            </div>
+        </div>
+
+        <!-- أسئلة المستوى المتوسط -->
+        <div id="medium" class="level-content hidden">
+            <h2 class="level-title">المستوى المتوسط</h2>
+            <!-- الأسئلة المضافة -->
+            <div class="question">
+                <p>ما هو نوع البيانات المستخدم لتمثيل القيم البوليانية في Dart؟</p>
+                <input type="radio" name="q21" value="bool"> bool<br>
+                <input type="radio" name="q21" value="boolean"> boolean<br>
+                <input type="radio" name="q21" value="true"> true<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة المستخدمة لتحويل سلسلة نصية إلى عدد صحيح في Dart؟</p>
+                <input type="radio" name="q22" value="int.parse()"> int.parse()<br>
+                <input type="radio" name="q22" value="toInt()"> toInt()<br>
+                <input type="radio" name="q22" value="parseInt()"> parseInt()<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية لإنشاء فئة في Dart؟</p>
+                <input type="radio" name="q23" value="class"> class<br>
+                <input type="radio" name="q23" value="object"> object<br>
+                <input type="radio" name="q23" value="new"> new<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة المستخدمة لتكرار عناصر قائمة معينة في Dart؟</p>
+                <input type="radio" name="q24" value="map()"> map()<br>
+                <input type="radio" name="q24" value="forEach()"> forEach()<br>
+                <input type="radio" name="q24" value="each()"> each()<br>
+            </div>
+            <div class="question">
+                <p>ما هو نوع البيانات المستخدم لتمثيل النصوص الكبيرة في Dart؟</p>
+                <input type="radio" name="q25" value="String"> String<br>
+                <input type="radio" name="q25" value="Text"> Text<br>
+                <input type="radio" name="q25" value="Char"> Char<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة لتحديد متغير من نوع List في Dart؟</p>
+                <input type="radio" name="q26" value="List"> List<br>
+                <input type="radio" name="q26" value="Array"> Array<br>
+                <input type="radio" name="q26" value="Collection"> Collection<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية لإنشاء خاصية في Dart؟</p>
+                <input type="radio" name="q27" value="get"> get<br>
+                <input type="radio" name="q27" value="property"> property<br>
+                <input type="radio" name="q27" value="value"> value<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية لإنشاء وظيفة غير متزامنة في Dart؟</p>
+                <input type="radio" name="q28" value="async"> async<br>
+                <input type="radio" name="q28" value="await"> await<br>
+                <input type="radio" name="q28" value="deferred"> deferred<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة لإضافة مكتبة إلى برنامج في Dart؟</p>
+                <input type="radio" name="q29" value="import"> import<br>
+                <input type="radio" name="q29" value="include"> include<br>
+                <input type="radio" name="q29" value="require"> require<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة المستخدمة لاختبار كود في Dart؟</p>
+                <input type="radio" name="q30" value="test()"> test()<br>
+                <input type="radio" name="q30" value="check()"> check()<br>
+                <input type="radio" name="q30" value="verify()"> verify()<br>
+            </div>
+            <div class="question">
+                <p>ما هو الكائن الذي يمثل القيمة الافتراضية في Dart؟</p>
+                <input type="radio" name="q31" value="null"> null<br>
+                <input type="radio" name="q31" value="default"> default<br>
+                <input type="radio" name="q31" value="nil"> nil<br>
+            </div>
+            <div class="question">
+                <p>ما هو نوع البيانات المستخدم لتخزين مجموعة من القيم غير المتكررة في Dart؟</p>
+                <input type="radio" name="q32" value="Set"> Set<br>
+                <input type="radio" name="q32" value="List"> List<br>
+                <input type="radio" name="q32" value="Map"> Map<br>
+            </div>
+            <div class="question">
+                <p>ما هو الكائن الذي يستخدم لتخزين قيم مفتاح وقيمة في Dart؟</p>
+                <input type="radio" name="q33" value="Map"> Map<br>
+                <input type="radio" name="q33" value="Dictionary"> Dictionary<br>
+                <input type="radio" name="q33" value="Hashtable"> Hashtable<br>
+            </div>
+            <div class="question">
+                <p>ما هو الكائن الذي يستخدم لتخزين سلسلة من العناصر في Dart؟</p>
+                <input type="radio" name="q34" value="List"> List<br>
+                <input type="radio" name="q34" value="Set"> Set<br>
+                <input type="radio" name="q34" value="Map"> Map<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة لتحديد دالة ذات قيمة متوقعة في Dart؟</p>
+                <input type="radio" name="q35" value="Future"> Future<br>
+                <input type="radio" name="q35" value="Promise"> Promise<br>
+                <input type="radio" name="q35" value="Deferred"> Deferred<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة المستخدمة لإنشاء كائن ثابت في Dart؟</p>
+                <input type="radio" name="q36" value="const"> const<br>
+                <input type="radio" name="q36" value="final"> final<br>
+                <input type="radio" name="q36" value="static"> static<br>
+            </div>
+            <div class="question">
+                <p>ما هو نوع البيانات الذي يمثل سلسلة من الأحرف في Dart؟</p>
+                <input type="radio" name="q37" value="String"> String<br>
+                <input type="radio" name="q37" value="Text"> Text<br>
+                <input type="radio" name="q37" value="Char"> Char<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة لتعريف مجموعة من القيم غير المتكررة في Dart؟</p>
+                <input type="radio" name="q38" value="Set"> Set<br>
+                <input type="radio" name="q38" value="List"> List<br>
+                <input type="radio" name="q38" value="Map"> Map<br>
+            </div>
+            <div class="question">
+                <p>ما هو نوع البيانات المستخدم لتخزين مجموعة من القيم ذات العلاقة في Dart؟</p>
+                <input type="radio" name="q39" value="Map"> Map<br>
+                <input type="radio" name="q39" value="List"> List<br>
+                <input type="radio" name="q39" value="Set"> Set<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة لتحديد دالة غير متزامنة في Dart؟</p>
+                <input type="radio" name="q40" value="async"> async<br>
+                <input type="radio" name="q40" value="await"> await<br>
+                <input type="radio" name="q40" value="deferred"> deferred<br>
+            </div>
+        </div>
+
+        <!-- أسئلة المستوى الصعب -->
+        <div id="hard" class="level-content hidden">
+            <h2 class="level-title">المستوى الصعب</h2>
+            <!-- الأسئلة المضافة -->
+            <div class="question">
+                <p>ما هو الأسلوب الذي تستخدمه Dart لإنشاء دالة يمكن أن ترجع قيمة غير محددة؟</p>
+                <input type="radio" name="q41" value="Future"> Future<br>
+                <input type="radio" name="q41" value="Async"> Async<br>
+                <input type="radio" name="q41" value="Promise"> Promise<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية التي تستخدم لإنشاء كائن ثابت في Dart؟</p>
+                <input type="radio" name="q42" value="final"> final<br>
+                <input type="radio" name="q42" value="const"> const<br>
+                <input type="radio" name="q42" value="static"> static<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية التي تستخدم لإنشاء فئة غير ملموسة في Dart؟</p>
+                <input type="radio" name="q43" value="abstract"> abstract<br>
+                <input type="radio" name="q43" value="interface"> interface<br>
+                <input type="radio" name="q43" value="final"> final<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة المستخدمة لإدارة الدوال غير المتزامنة في Dart؟</p>
+                <input type="radio" name="q44" value="await"> await<br>
+                <input type="radio" name="q44" value="async"> async<br>
+                <input type="radio" name="q44" value="deferred"> deferred<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة المستخدمة لاختبار كود في Dart باستخدام إطار عمل اختبار؟</p>
+                <input type="radio" name="q45" value="test"> test<br>
+                <input type="radio" name="q45" value="check"> check<br>
+                <input type="radio" name="q45" value="verify"> verify<br>
+            </div>
+            <div class="question">
+                <p>ما هو الكائن الذي يمثل نتيجة دالة غير متزامنة في Dart؟</p>
+                <input type="radio" name="q46" value="Future"> Future<br>
+                <input type="radio" name="q46" value="Async"> Async<br>
+                <input type="radio" name="q46" value="Promise"> Promise<br>
+            </div>
+            <div class="question">
+                <p>ما هو نوع البيانات المستخدم لتخزين القيم التي قد تكون غير محددة في Dart؟</p>
+                <input type="radio" name="q47" value="Nullable"> Nullable<br>
+                <input type="radio" name="q47" value="Optional"> Optional<br>
+                <input type="radio" name="q47" value="Future"> Future<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة المستخدمة لتحديد أن دالة ترجع قيمة غير محددة في Dart؟</p>
+                <input type="radio" name="q48" value="Future"> Future<br>
+                <input type="radio" name="q48" value="Async"> Async<br>
+                <input type="radio" name="q48" value="Promise"> Promise<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة المستخدمة لتحديد واجهة في Dart؟</p>
+                <input type="radio" name="q49" value="interface"> interface<br>
+                <input type="radio" name="q49" value="abstract"> abstract<br>
+                <input type="radio" name="q49" value="class"> class<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة المستخدمة للتعامل مع القيم غير المتزامنة في Dart؟</p>
+                <input type="radio" name="q50" value="async/await"> async/await<br>
+                <input type="radio" name="q50" value="Promises"> Promises<br>
+                <input type="radio" name="q50" value="Deferred"> Deferred<br>
+            </div>
+            <div class="question">
+                <p>ما هو الكائن الذي يمثل القيمة غير المحددة في Dart؟</p>
+                <input type="radio" name="q51" value="null"> null<br>
+                <input type="radio" name="q51" value="undefined"> undefined<br>
+                <input type="radio" name="q51" value="void"> void<br>
+            </div>
+            <div class="question">
+                <p>ما هو الأسلوب الذي يستخدم لتحديد وظائف ضمن فئة في Dart؟</p>
+                <input type="radio" name="q52" value="Methods"> Methods<br>
+                <input type="radio" name="q52" value="Functions"> Functions<br>
+                <input type="radio" name="q52" value="Operations"> Operations<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة المستخدمة لتحديد متغيرات ثابتة في Dart؟</p>
+                <input type="radio" name="q53" value="final"> final<br>
+                <input type="radio" name="q53" value="const"> const<br>
+                <input type="radio" name="q53" value="static"> static<br>
+            </div>
+        </div>
+
+        <!-- زر تقديم -->
+        <button onclick="submitQuiz()">طمنى بسرعه</button>
+
+        <!-- نافذة عرض النتيجة -->
+        <div id="evaluationPopup" class="evaluation-popup">
+            <p id="resultMessage"></p>
+            <button onclick="closePopup()">إغلاق</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('levelSelect').addEventListener('change', function() {
+            var level = this.value;
+            document.querySelectorAll('.level-content').forEach(function(div) {
+                div.classList.add('hidden');
+            });
+            document.getElementById(level).classList.remove('hidden');
+        });
+
+        function submitQuiz() {
+            var score = 0;
+            var totalQuestions = 40;
+            var correctAnswers = {
+                'q1': 'Dart',
+                'q2': 'flutter',
+                'q3': 'for',
+                'q4': 'int',
+                'q5': 'dynamic',
+                'q6': 'final',
+                'q7': 'List',
+                'q8': 'Map',
+                'q9': 'Set',
+                'q10': 'async',
+                'q11': 'num',
+                'q12': 'var',
+                'q13': 'const',
+                'q14': 'String',
+                'q15': '**',
+                'q16': 'async',
+                'q17': 'abstract',
+                'q18': 'async',
+                'q19': 'var',
+                'q20': 'abstract',
+                'q21': 'bool',
+                'q22': 'int.parse()',
+                'q23': 'class',
+                'q24': 'forEach()',
+                'q25': 'String',
+                'q26': 'List',
+                'q27': 'get',
+                'q28': 'async',
+                'q29': 'import',
+                'q30': 'test()',
+                'q31': 'null',
+                'q32': 'Set',
+                'q33': 'Map',
+                'q34': 'List',
+                'q35': 'Future',
+                'q36': 'const',
+                'q37': 'String',
+                'q38': 'Set',
+                'q39': 'Map',
+                'q40': 'async',
+                'q41': 'Future',
+                'q42': 'const',
+                'q43': 'abstract',
+                'q44': 'await',
+                'q45': 'test',
+                'q46': 'Future',
+                'q47': 'Future',
+                'q48': 'Future',
+                'q49': 'abstract',
+                'q50': 'async/await',
+                'q51': 'null',
+                'q52': 'Methods',
+                'q53': 'final'
+            };
+
+            for (var key in correctAnswers) {
+                var selectedOption = document.querySelector(`input[name="${key}"]:checked`);
+                if (selectedOption && selectedOption.value === correctAnswers[key]) {
+                    score++;
+                }
+            }
+
+            var resultMessage = `لقد حصلت على ${score} من ${totalQuestions} إجابة صحيحة.`;
+            document.getElementById('resultMessage').innerText = resultMessage;
+            document.getElementById('evaluationPopup').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('evaluationPopup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>امتحان F#</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Oswald:wght@500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #0f0e17;
+            color: #f0e8e8;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #0f0e17;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #ff8906;
+            margin-bottom: 30px;
+        }
+        .level-title {
+            color: #ff8906;
+            margin-top: 40px;
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .question p {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #ff8906;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #ff8b06a9;
+        }
+        .result {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 30px;
+            color: #333;
+        }
+        .evaluation-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #0f0e17;
+            color: orange;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+        }
+        .evaluation-popup button {
+            background-color: #ff8906;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .evaluation-popup button:hover {
+            background-color: #ff8b06a9;
+        }
+        .hidden {
+            display: none;
+        }
+        select {
+            background-color: #333;
+            color: #fff;
+            border: 2px solid #ff8906;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            font-family: 'Cairo', sans-serif;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        select:hover {
+            background-color: #444;
+            border-color: #ff8b06a9;
+        }
+        option {
+            background-color: #222;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h1>اختبار CoffeeScript</h1>
+    <select id="levelSelect">
+        <option value="easy">المستوى السهل</option>
+        <option value="medium">المستوى المتوسط</option>
+        <option value="hard">المستوى الصعب</option>
+    </select>
+
+    <!-- أسئلة المستوى السهل -->
+    <div id="easy" class="level-content">
+        <h2 class="level-title">المستوى السهل</h2>
+        <div class="question">
+            <p>ما هي الكلمة المفتاحية لتعريف متغير في CoffeeScript؟</p>
+            <input type="radio" name="q1" value="var"> var<br>
+            <input type="radio" name="q1" value="let"> let<br>
+            <input type="radio" name="q1" value="coffee"> coffee<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكن تعريف دالة في CoffeeScript؟</p>
+            <input type="radio" name="q2" value="->"> -><br>
+            <input type="radio" name="q2" value="=>"> =><br>
+            <input type="radio" name="q2" value="function"> function<br>
+        </div>
+        <div class="question">
+            <p>ما هو النوع الذي يستخدم لتمثيل القيم المنطقية في CoffeeScript؟</p>
+            <input type="radio" name="q3" value="boolean"> boolean<br>
+            <input type="radio" name="q3" value="bool"> bool<br>
+            <input type="radio" name="q3" value="true/false"> true/false<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكن تعريف مصفوفة في CoffeeScript؟</p>
+            <input type="radio" name="q4" value="[1, 2, 3]"> [1, 2, 3]<br>
+            <input type="radio" name="q4" value="array(1, 2, 3)"> array(1, 2, 3)<br>
+            <input type="radio" name="q4" value="{1, 2, 3}"> {1, 2, 3}<br>
+        </div>
+        <div class="question">
+            <p>ما هي الكلمة المفتاحية لإنشاء كائن جديد في CoffeeScript؟</p>
+            <input type="radio" name="q5" value="new"> new<br>
+            <input type="radio" name="q5" value="create"> create<br>
+            <input type="radio" name="q5" value="object"> object<br>
+        </div>
+        <!-- الأسئلة الإضافية -->
+        <div class="question">
+            <p>ما هي الكلمة المفتاحية لتعريف دالة بدون كلمة "function" في CoffeeScript؟</p>
+            <input type="radio" name="q6" value="->"> -><br>
+            <input type="radio" name="q6" value="=>"> =><br>
+            <input type="radio" name="q6" value="fn"> fn<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكن تعريف الكائنات في CoffeeScript؟</p>
+            <input type="radio" name="q7" value="{}"> {}<br>
+            <input type="radio" name="q7" value="object()"> object()<br>
+            <input type="radio" name="q7" value="new Object()"> new Object()<br>
+        </div>
+        <div class="question">
+            <p>ما هي الطريقة المناسبة لإرجاع قيمة من دالة في CoffeeScript؟</p>
+            <input type="radio" name="q8" value="return"> return<br>
+            <input type="radio" name="q8" value="=>"> =><br>
+            <input type="radio" name="q8" value="return value"> return value<br>
+        </div>
+        <div class="question">
+            <p>ما هي الكلمة المفتاحية لتعريف الكلاسات في CoffeeScript؟</p>
+            <input type="radio" name="q9" value="class"> class<br>
+            <input type="radio" name="q9" value="object"> object<br>
+            <input type="radio" name="q9" value="function"> function<br>
+        </div>
+        <div class="question">
+            <p>ما هي الصيغة الصحيحة لإنشاء مصفوفة في CoffeeScript؟</p>
+            <input type="radio" name="q10" value="[1, 2, 3]"> [1, 2, 3]<br>
+            <input type="radio" name="q10" value="array(1, 2, 3)"> array(1, 2, 3)<br>
+            <input type="radio" name="q10" value="list(1, 2, 3)"> list(1, 2, 3)<br>
+        </div>
+        <div class="question">
+            <p>ما هي الكلمة المفتاحية لتعريف الثوابت في CoffeeScript؟</p>
+            <input type="radio" name="q11" value="const"> const<br>
+            <input type="radio" name="q11" value="let"> let<br>
+            <input type="radio" name="q11" value="constant"> constant<br>
+        </div>
+        <div class="question">
+            <p>ما هي الطريقة المناسبة لتعريف دالة مجهولة في CoffeeScript؟</p>
+            <input type="radio" name="q12" value="->"> -><br>
+            <input type="radio" name="q12" value="function"> function<br>
+            <input type="radio" name="q12" value="anonymous"> anonymous<br>
+        </div>
+        <div class="question">
+            <p>كيف يتم استخدام الـ "for" في CoffeeScript؟</p>
+            <input type="radio" name="q13" value="for item in list"> for item in list<br>
+            <input type="radio" name="q13" value="for(item of list)"> for(item of list)<br>
+            <input type="radio" name="q13" value="foreach(item in list)"> foreach(item in list)<br>
+        </div>
+        <div class="question">
+            <p>ما هي طريقة تعريف الخصائص العامة في CoffeeScript؟</p>
+            <input type="radio" name="q14" value="public"> public<br>
+            <input type="radio" name="q14" value="protected"> protected<br>
+            <input type="radio" name="q14" value="private"> private<br>
+        </div>
+        <div class="question">
+            <p>ما هي الطريقة المناسبة لإنشاء كائن متداخل في CoffeeScript؟</p>
+            <input type="radio" name="q15" value="{}"> {}<br>
+            <input type="radio" name="q15" value="nestedObject()"> nestedObject()<br>
+            <input type="radio" name="q15" value="new Object()"> new Object()<br>
+        </div>
+    </div>
+
+    <!-- أسئلة المستوى المتوسط -->
+    <div id="medium" class="level-content hidden">
+        <h2 class="level-title">المستوى المتوسط</h2>
+        <div class="question">
+            <p>ما هي الطريقة المستخدمة لتعريف متغير في CoffeeScript داخل كائن؟</p>
+            <input type="radio" name="q16" value="@"> @<br>
+            <input type="radio" name="q16" value="this"> this<br>
+            <input type="radio" name="q16" value="self"> self<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكن استخدام العمليات غير المتزامنة في CoffeeScript؟</p>
+            <input type="radio" name="q17" value="callbacks"> callbacks<br>
+            <input type="radio" name="q17" value="promises"> promises<br>
+            <input type="radio" name="q17" value="async/await"> async/await<br>
+        </div>
+        <div class="question">
+            <p>ما هي طريقة استخدام الوراثة في CoffeeScript؟</p>
+            <input type="radio" name="q18" value="extends"> extends<br>
+            <input type="radio" name="q18" value="inherits"> inherits<br>
+            <input type="radio" name="q18" value="super"> super<br>
+        </div>
+        <div class="question">
+            <p>ما هو مفتاح تعريف الأساليب في CoffeeScript؟</p>
+            <input type="radio" name="q19" value="functions"> functions<br>
+            <input type="radio" name="q19" value="methods"> methods<br>
+            <input type="radio" name="q19" value="procedures"> procedures<br>
+        </div>
+        <div class="question">
+            <p>ما هي الطريقة المستخدمة للوصول إلى الخصائص في CoffeeScript؟</p>
+            <input type="radio" name="q20" value="@property"> @property<br>
+            <input type="radio" name="q20" value="this.property"> this.property<br>
+            <input type="radio" name="q20" value="self.property"> self.property<br>
+        </div>
+        <!-- الأسئلة الإضافية -->
+        <div class="question">
+            <p>ما هي الطريقة الصحيحة لتعريف دالة في CoffeeScript؟</p>
+            <input type="radio" name="q21" value="->"> -><br>
+            <input type="radio" name="q21" value="=>"> =><br>
+            <input type="radio" name="q21" value="fn"> fn<br>
+        </div>
+        <div class="question">
+            <p>ما هي الكلمة المفتاحية المستخدمة لتعريف فئة جديدة في CoffeeScript؟</p>
+            <input type="radio" name="q22" value="class"> class<br>
+            <input type="radio" name="q22" value="type"> type<br>
+            <input type="radio" name="q22" value="define"> define<br>
+        </div>
+        <div class="question">
+            <p>كيف يتم تعريف المتغيرات المحلية في CoffeeScript؟</p>
+            <input type="radio" name="q23" value="let"> let<br>
+            <input type="radio" name="q23" value="var"> var<br>
+            <input type="radio" name="q23" value="local"> local<br>
+        </div>
+        <div class="question">
+            <p>ما هي الطريقة المناسبة لإنشاء كائن في CoffeeScript؟</p>
+            <input type="radio" name="q24" value="{}"> {}<br>
+            <input type="radio" name="q24" value="new Object()"> new Object()<br>
+            <input type="radio" name="q24" value="Object.create()"> Object.create()<br>
+        </div>
+        <div class="question">
+            <p>ما هي الطريقة الصحيحة لتعريف وظيفة تعتمد على الكائن في CoffeeScript؟</p>
+            <input type="radio" name="q25" value="->"> -><br>
+            <input type="radio" name="q25" value="fn"> fn<br>
+            <input type="radio" name="q25" value="function"> function<br>
+        </div>
+        <div class="question">
+            <p>ما هي الطريقة المناسبة لتعريف متغير ثابت في CoffeeScript؟</p>
+            <input type="radio" name="q26" value="const"> const<br>
+            <input type="radio" name="q26" value="let"> let<br>
+            <input type="radio" name="q26" value="final"> final<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكن استخدام العمليات غير المتزامنة في CoffeeScript؟</p>
+            <input type="radio" name="q27" value="callbacks"> callbacks<br>
+            <input type="radio" name="q27" value="promises"> promises<br>
+            <input type="radio" name="q27" value="async/await"> async/await<br>
+        </div>
+        <div class="question">
+            <p>ما هي الطريقة المناسبة لإنشاء كائن جديد باستخدام CoffeeScript؟</p>
+            <input type="radio" name="q28" value="{}"> {}<br>
+            <input type="radio" name="q28" value="new Object()"> new Object()<br>
+            <input type="radio" name="q28" value="Object.create()"> Object.create()<br>
+        </div>
+        <div class="question">
+            <p>ما هي الطريقة المناسبة لتعريف خاصية ثابتة في CoffeeScript؟</p>
+            <input type="radio" name="q29" value="const"> const<br>
+            <input type="radio" name="q29" value="let"> let<br>
+            <input type="radio" name="q29" value="static"> static<br>
+        </div>
+        <div class="question">
+            <p>ما هي الطريقة المناسبة لتعريف خاصية عامة في CoffeeScript؟</p>
+            <input type="radio" name="q30" value="public"> public<br>
+            <input type="radio" name="q30" value="protected"> protected<br>
+            <input type="radio" name="q30" value="private"> private<br>
+        </div>
+    </div>
+
+    <!-- أسئلة المستوى الصعب -->
+    <div id="hard" class="level-content hidden">
+        <h2 class="level-title">المستوى الصعب</h2>
+        <div class="question">
+            <p>ما هي الميزات الأساسية للبرمجة الموجهة للكائنات في CoffeeScript؟</p>
+            <input type="radio" name="q31" value="inheritance"> inheritance<br>
+            <input type="radio" name="q31" value="encapsulation"> encapsulation<br>
+            <input type="radio" name="q31" value="polymorphism"> polymorphism<br>
+        </div>
+        <div class="question">
+            <p>ما هي طريقة التعامل مع التوازي في CoffeeScript؟</p>
+            <input type="radio" name="q32" value="threads"> threads<br>
+            <input type="radio" name="q32" value="workers"> workers<br>
+            <input type="radio" name="q32" value="callbacks"> callbacks<br>
+        </div>
+        <div class="question">
+            <p>ما هي مكتبة CoffeeScript المستخدمة لإدارة الحزم؟</p>
+            <input type="radio" name="q33" value="npm"> npm<br>
+            <input type="radio" name="q33" value="bower"> bower<br>
+            <input type="radio" name="q33" value="pkg"> pkg<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكن التعامل مع الاستثناءات في CoffeeScript؟</p>
+            <input type="radio" name="q34" value="try...catch"> try...catch<br>
+            <input type="radio" name="q34" value="handle"> handle<br>
+            <input type="radio" name="q34" value="error"> error<br>
+        </div>
+        <div class="question">
+            <p>ما هي الخصائص الأساسية للكائنات في CoffeeScript؟</p>
+            <input type="radio" name="q35" value="inheritance"> inheritance<br>
+            <input type="radio" name="q35" value="constructor functions"> constructor functions<br>
+            <input type="radio" name="q35" value="prototype"> prototype<br>
+        </div>
+        <!-- الأسئلة الإضافية -->
+        <div class="question">
+            <p>كيف يمكن تعريف الأساليب العامة في CoffeeScript؟</p>
+            <input type="radio" name="q36" value="public"> public<br>
+            <input type="radio" name="q36" value="protected"> protected<br>
+            <input type="radio" name="q36" value="private"> private<br>
+        </div>
+        <div class="question">
+            <p>ما هي الطريقة الأفضل لتعريف الأنماط البيانية في CoffeeScript؟</p>
+            <input type="radio" name="q37" value="type annotations"> type annotations<br>
+            <input type="radio" name="q37" value="type inference"> type inference<br>
+            <input type="radio" name="q37" value="generics"> generics<br>
+        </div>
+        <div class="question">
+            <p>ما هي المكتبة الشائعة لتسهيل تطوير تطبيقات الويب باستخدام CoffeeScript؟</p>
+            <input type="radio" name="q38" value="Express"> Express<br>
+            <input type="radio" name="q38" value="Koa"> Koa<br>
+            <input type="radio" name="q38" value="Sails"> Sails<br>
+        </div>
+        <div class="question">
+            <p>كيف يتم التعامل مع البيانات الكبيرة في CoffeeScript؟</p>
+            <input type="radio" name="q39" value="streams"> streams<br>
+            <input type="radio" name="q39" value="buffers"> buffers<br>
+            <input type="radio" name="q39" value="chunks"> chunks<br>
+        </div>
+        <div class="question">
+            <p>ما هي الطريقة المستخدمة لتعريف أنماط التصميم في CoffeeScript؟</p>
+            <input type="radio" name="q40" value="patterns"> patterns<br>
+            <input type="radio" name="q40" value="interfaces"> interfaces<br>
+            <input type="radio" name="q40" value="blueprints"> blueprints<br>
+        </div>
+        <div class="question">
+            <p>ما هي المكتبة المناسبة لإدارة الحالة في تطبيقات CoffeeScript؟</p>
+            <input type="radio" name="q41" value="Redux"> Redux<br>
+            <input type="radio" name="q41" value="MobX"> MobX<br>
+            <input type="radio" name="q41" value="Flux"> Flux<br>
+        </div>
+        <div class="question">
+            <p>ما هي الأساليب المفضلة لتحسين أداء CoffeeScript؟</p>
+            <input type="radio" name="q42" value="minification"> minification<br>
+            <input type="radio" name="q42" value="bundling"> bundling<br>
+            <input type="radio" name="q42" value="optimization"> optimization<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكن التعامل مع البيانات الواردة من API في CoffeeScript؟</p>
+            <input type="radio" name="q43" value="fetch"> fetch<br>
+            <input type="radio" name="q43" value="axios"> axios<br>
+            <input type="radio" name="q43" value="request"> request<br>
+        </div>
+        <div class="question">
+            <p>ما هي الطريقة المناسبة لتعريف الخصائص والطرق الخاصة في CoffeeScript؟</p>
+            <input type="radio" name="q44" value="private"> private<br>
+            <input type="radio" name="q44" value="protected"> protected<br>
+            <input type="radio" name="q44" value="public"> public<br>
+        </div>
+        <div class="question">
+            <p>ما هي الطريقة المفضلة لتحسين أمان التطبيقات المكتوبة بـ CoffeeScript؟</p>
+            <input type="radio" name="q45" value="encryption"> encryption<br>
+            <input type="radio" name="q45" value="authentication"> authentication<br>
+            <input type="radio" name="q45" value="authorization"> authorization<br>
+        </div>
+    </div>
+
+    <button onclick="showResults()">تقديم</button>
+
+    <div id="evaluationPopup" class="evaluation-popup">
+        <h2>نتائج الاختبار</h2>
+        <p id="evaluationResult"></p>
+        <button onclick="closePopup()">إغلاق</button>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            easy: {
+                q1: 'var',
+                q2: '->',
+                q3: 'boolean',
+                q4: '[1, 2, 3]',
+                q5: 'new',
+                q6: '->',
+                q7: '{}',
+                q8: 'return',
+                q9: 'class',
+                q10: '[1, 2, 3]',
+                q11: 'const',
+                q12: '->',
+                q13: 'for item in list',
+                q14: 'public',
+                q15: '{}'
+            },
+            medium: {
+                q16: '@',
+                q17: 'callbacks',
+                q18: 'extends',
+                q19: 'functions',
+                q20: '@property',
+                q21: '->',
+                q22: 'class',
+                q23: 'let',
+                q24: '{}',
+                q25: '->',
+                q26: 'const',
+                q27: 'callbacks',
+                q28: '{}',
+                q29: 'const',
+                q30: 'public',
+                q31: 'inheritance',
+                q32: 'workers',
+                q33: 'npm',
+                q34: 'try...catch',
+                q35: 'constructor functions'
+            },
+            hard: {
+                q31: 'inheritance',
+                q32: 'workers',
+                q33: 'npm',
+                q34: 'try...catch',
+                q35: 'constructor functions',
+                q36: 'public',
+                q37: 'type annotations',
+                q38: 'Express',
+                q39: 'streams',
+                q40: 'patterns',
+                q41: 'Redux',
+                q42: 'minification',
+                q43: 'fetch',
+                q44: 'private',
+                q45: 'encryption'
+            }
+        };
+
+        document.getElementById('levelSelect').addEventListener('change', function() {
+            document.querySelectorAll('.level-content').forEach(div => div.classList.add('hidden'));
+            document.getElementById(this.value).classList.remove('hidden');
+        });
+
+        function showResults() {
+            const selectedLevel = document.getElementById('levelSelect').value;
+            const answers = document.querySelectorAll(`#${selectedLevel} input[type="radio"]:checked`);
+            const result = Array.from(answers).reduce((score, answer) => {
+                const question = answer.name;
+                const selectedAnswer = answer.value;
+                if (correctAnswers[selectedLevel][question] === selectedAnswer) {
+                    score++;
+                }
+                return score;
+            }, 0);
+            document.getElementById('evaluationResult').innerText = `لقد حصلت على ${result} من ${Object.keys(correctAnswers[selectedLevel]).length} إجابة صحيحة.`;
+            document.getElementById('evaluationPopup').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('evaluationPopup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

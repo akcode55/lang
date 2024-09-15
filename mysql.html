@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>امتحان MySQL</title>
+    <style>
+
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #0f0e17;
+            color: #f0e8e8;
+            padding: 20px;
+        }
+        button{
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #ff8906;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover{
+            background-color: #ff8b06a9;
+        }
+
+        .button:active {
+            transform: scale(0.98);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #0f0e17;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff8906;
+            margin-bottom: 30px;
+        }
+
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .question label {
+            display: block;
+            font-weight: bold;
+        }
+
+        .options {
+            margin-bottom: 10px;
+        }
+
+        .options input {
+            margin-right: 10px;
+        }
+
+        .result {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #0f0e17;
+            color: orange;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .modal-close {
+            cursor: pointer;
+            color: whitesmoke;
+            background-color: orange;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            float: left;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>امتحان MySQL</h1>
+        <form id="quiz-form">
+            <!-- Question 1 -->
+            <div class="question">
+                <p>1. ما هي الكلمة المفتاحية التي تُستخدم لإنشاء قاعدة بيانات جديدة في MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="CREATE DATABASE"> CREATE DATABASE</label>
+                    <label><input type="radio" name="q1" value="NEW DATABASE"> NEW DATABASE</label>
+                    <label><input type="radio" name="q1" value="ADD DATABASE"> ADD DATABASE</label>
+                    <label><input type="radio" name="q1" value="INIT DATABASE"> INIT DATABASE</label>
+                </div>
+            </div>
+            <!-- Question 2 -->
+            <div class="question">
+                <p>2. كيف يمكنك حذف قاعدة بيانات في MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="DROP DATABASE"> DROP DATABASE</label>
+                    <label><input type="radio" name="q2" value="REMOVE DATABASE"> REMOVE DATABASE</label>
+                    <label><input type="radio" name="q2" value="DELETE DATABASE"> DELETE DATABASE</label>
+                    <label><input type="radio" name="q2" value="CLEAR DATABASE"> CLEAR DATABASE</label>
+                </div>
+            </div>
+            <!-- Question 3 -->
+            <div class="question">
+                <p>3. ما هي الطريقة الصحيحة لإنشاء جدول في قاعدة بيانات MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="CREATE TABLE table_name"> CREATE TABLE table_name</label>
+                    <label><input type="radio" name="q3" value="NEW TABLE table_name"> NEW TABLE table_name</label>
+                    <label><input type="radio" name="q3" value="ADD TABLE table_name"> ADD TABLE table_name</label>
+                    <label><input type="radio" name="q3" value="INIT TABLE table_name"> INIT TABLE table_name</label>
+                </div>
+            </div>
+            <!-- Question 4 -->
+            <div class="question">
+                <p>4. ما هي الكلمة المفتاحية التي تُستخدم لإضافة بيانات جديدة إلى جدول في MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="INSERT INTO"> INSERT INTO</label>
+                    <label><input type="radio" name="q4" value="ADD TO"> ADD TO</label>
+                    <label><input type="radio" name="q4" value="UPDATE"> UPDATE</label>
+                    <label><input type="radio" name="q4" value="APPEND TO"> APPEND TO</label>
+                </div>
+            </div>
+            <!-- Question 5 -->
+            <div class="question">
+                <p>5. كيف يمكنك تحديث قيمة حقل في جدول MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="UPDATE table_name SET column_name = value"> UPDATE table_name SET column_name = value</label>
+                    <label><input type="radio" name="q5" value="MODIFY table_name SET column_name = value"> MODIFY table_name SET column_name = value</label>
+                    <label><input type="radio" name="q5" value="ALTER table_name SET column_name = value"> ALTER table_name SET column_name = value</label>
+                    <label><input type="radio" name="q5" value="CHANGE table_name SET column_name = value"> CHANGE table_name SET column_name = value</label>
+                </div>
+            </div>
+            <!-- Question 6 -->
+            <div class="question">
+                <p>6. ما هي الكلمة المفتاحية التي تُستخدم لحذف بيانات من جدول في MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q6" value="DELETE FROM"> DELETE FROM</label>
+                    <label><input type="radio" name="q6" value="REMOVE FROM"> REMOVE FROM</label>
+                    <label><input type="radio" name="q6" value="DROP FROM"> DROP FROM</label>
+                    <label><input type="radio" name="q6" value="CLEAR FROM"> CLEAR FROM</label>
+                </div>
+            </div>
+            <!-- Question 7 -->
+            <div class="question">
+                <p>7. كيف يمكنك استرجاع جميع البيانات من جدول في MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q7" value="SELECT * FROM table_name"> SELECT * FROM table_name</label>
+                    <label><input type="radio" name="q7" value="GET * FROM table_name"> GET * FROM table_name</label>
+                    <label><input type="radio" name="q7" value="FETCH * FROM table_name"> FETCH * FROM table_name</label>
+                    <label><input type="radio" name="q7" value="RETRIEVE * FROM table_name"> RETRIEVE * FROM table_name</label>
+                </div>
+            </div>
+            <!-- Question 8 -->
+            <div class="question">
+                <p>8. ما هي الكلمة المفتاحية التي تُستخدم لإنشاء فهرس في جدول MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q8" value="CREATE INDEX"> CREATE INDEX</label>
+                    <label><input type="radio" name="q8" value="ADD INDEX"> ADD INDEX</label>
+                    <label><input type="radio" name="q8" value="MAKE INDEX"> MAKE INDEX</label>
+                    <label><input type="radio" name="q8" value="NEW INDEX"> NEW INDEX</label>
+                </div>
+            </div>
+            <!-- Question 9 -->
+            <div class="question">
+                <p>9. كيف يمكنك تعريف مفتاح أساسي في جدول MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q9" value="PRIMARY KEY"> PRIMARY KEY</label>
+                    <label><input type="radio" name="q9" value="UNIQUE KEY"> UNIQUE KEY</label>
+                    <label><input type="radio" name="q9" value="FOREIGN KEY"> FOREIGN KEY</label>
+                    <label><input type="radio" name="q9" value="INDEX KEY"> INDEX KEY</label>
+                </div>
+            </div>
+            <!-- Question 10 -->
+            <div class="question">
+                <p>10. ما هي الكلمة المفتاحية التي تُستخدم لإنشاء علاقة بين جدولين في MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q10" value="FOREIGN KEY"> FOREIGN KEY</label>
+                    <label><input type="radio" name="q10" value="RELATION KEY"> RELATION KEY</label>
+                    <label><input type="radio" name="q10" value="LINK KEY"> LINK KEY</label>
+                    <label><input type="radio" name="q10" value="ASSOCIATION KEY"> ASSOCIATION KEY</label>
+                </div>
+            </div>
+            <!-- Question 11 -->
+            <div class="question">
+                <p>11. كيف يمكنك ترتيب نتائج استعلام في MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q11" value="ORDER BY"> ORDER BY</label>
+                    <label><input type="radio" name="q11" value="SORT BY"> SORT BY</label>
+                    <label><input type="radio" name="q11" value="ARRANGE BY"> ARRANGE BY</label>
+                    <label><input type="radio" name="q11" value="ORGANIZE BY"> ORGANIZE BY</label>
+                </div>
+            </div>
+            <!-- Question 12 -->
+            <div class="question">
+                <p>12. ما هي الكلمة المفتاحية التي تُستخدم لتحديد شرط في استعلام MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q12" value="WHERE"> WHERE</label>
+                    <label><input type="radio" name="q12" value="IF"> IF</label>
+                    <label><input type="radio" name="q12" value="CONDITION"> CONDITION</label>
+                    <label><input type="radio" name="q12" value="FILTER"> FILTER</label>
+                </div>
+            </div>
+            <!-- Question 13 -->
+            <div class="question">
+                <p>13. ما هي الكلمة المفتاحية التي تُستخدم لحساب عدد الصفوف في جدول MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q13" value="COUNT"> COUNT</label>
+                    <label><input type="radio" name="q13" value="TOTAL"> TOTAL</label>
+                    <label><input type="radio" name="q13" value="SUM"> SUM</label>
+                    <label><input type="radio" name="q13" value="NUM"> NUM</label>
+                </div>
+            </div>
+            <!-- Question 14 -->
+            <div class="question">
+                <p>14. كيف يمكنك الحصول على القيم المميزة في استعلام MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q14" value="DISTINCT"> DISTINCT</label>
+                    <label><input type="radio" name="q14" value="UNIQUE"> UNIQUE</label>
+                    <label><input type="radio" name="q14" value="SEPARATE"> SEPARATE</label>
+                    <label><input type="radio" name="q14" value="DIFFERENT"> DIFFERENT</label>
+                </div>
+            </div>
+            <!-- Question 15 -->
+            <div class="question">
+                <p>15. ما هي الكلمة المفتاحية التي تُستخدم لتجميع البيانات في MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q15" value="GROUP BY"> GROUP BY</label>
+                    <label><input type="radio" name="q15" value="BUNDLE BY"> BUNDLE BY</label>
+                    <label><input type="radio" name="q15" value="AGGREGATE BY"> AGGREGATE BY</label>
+                    <label><input type="radio" name="q15" value="CLUSTER BY"> CLUSTER BY</label>
+                </div>
+            </div>
+            <!-- Question 16 -->
+            <div class="question">
+                <p>16. كيف يمكنك تحديد عدد الصفوف التي سيتم إرجاعها في MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q16" value="LIMIT"> LIMIT</label>
+                    <label><input type="radio" name="q16" value="MAX"> MAX</label>
+                    <label><input type="radio" name="q16" value="TOP"> TOP</label>
+                    <label><input type="radio" name="q16" value="RESTRICT"> RESTRICT</label>
+                </div>
+            </div>
+            <!-- Question 17 -->
+            <div class="question">
+                <p>17. كيف يمكنك إضافة تعليق إلى استعلام MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q17" value="--"> --</label>
+                    <label><input type="radio" name="q17" value="/* */"> /* */</label>
+                    <label><input type="radio" name="q17" value="#"> #</label>
+                    <label><input type="radio" name="q17" value="COMMENT"> COMMENT</label>
+                </div>
+            </div>
+            <!-- Question 18 -->
+            <div class="question">
+                <p>18. ما هي الكلمة المفتاحية التي تُستخدم لإنشاء قاعدة بيانات جديدة في MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q18" value="CREATE DATABASE"> CREATE DATABASE</label>
+                    <label><input type="radio" name="q18" value="NEW DATABASE"> NEW DATABASE</label>
+                    <label><input type="radio" name="q18" value="ADD DATABASE"> ADD DATABASE</label>
+                    <label><input type="radio" name="q18" value="INIT DATABASE"> INIT DATABASE</label>
+                </div>
+            </div>
+            <!-- Question 19 -->
+            <div class="question">
+                <p>19. كيف يمكنك تغيير هيكل جدول في MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q19" value="ALTER TABLE"> ALTER TABLE</label>
+                    <label><input type="radio" name="q19" value="MODIFY TABLE"> MODIFY TABLE</label>
+                    <label><input type="radio" name="q19" value="CHANGE TABLE"> CHANGE TABLE</label>
+                    <label><input type="radio" name="q19" value="UPDATE TABLE"> UPDATE TABLE</label>
+                </div>
+            </div>
+            <!-- Question 20 -->
+            <div class="question">
+                <p>20. ما هي الكلمة المفتاحية التي تُستخدم لنسخ قاعدة بيانات MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q20" value="CREATE DATABASE ... LIKE"> CREATE DATABASE ... LIKE</label>
+                    <label><input type="radio" name="q20" value="COPY DATABASE"> COPY DATABASE</label>
+                    <label><input type="radio" name="q20" value="DUPLICATE DATABASE"> DUPLICATE DATABASE</label>
+                    <label><input type="radio" name="q20" value="REPLICATE DATABASE"> REPLICATE DATABASE</label>
+                </div>
+            </div>
+            <!-- Question 21 -->
+            <div class="question">
+                <p>21. ما هي الكلمة المفتاحية التي تُستخدم لتصفية البيانات في MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q21" value="WHERE"> WHERE</label>
+                    <label><input type="radio" name="q21" value="FILTER"> FILTER</label>
+                    <label><input type="radio" name="q21" value="CONDITION"> CONDITION</label>
+                    <label><input type="radio" name="q21" value="SELECT"> SELECT</label>
+                </div>
+            </div>
+            <!-- Question 22 -->
+            <div class="question">
+                <p>22. ما هي الكلمة المفتاحية التي تُستخدم لتحديد نطاق القيم في MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q22" value="BETWEEN"> BETWEEN</label>
+                    <label><input type="radio" name="q22" value="WITHIN"> WITHIN</label>
+                    <label><input type="radio" name="q22" value="RANGE"> RANGE</label>
+                    <label><input type="radio" name="q22" value="LIMIT"> LIMIT</label>
+                </div>
+            </div>
+            <!-- Question 23 -->
+            <div class="question">
+                <p>23. ما هي الكلمة المفتاحية التي تُستخدم لتحديد ترتيب نتائج الاستعلام في MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q23" value="ORDER BY"> ORDER BY</label>
+                    <label><input type="radio" name="q23" value="SORT BY"> SORT BY</label>
+                    <label><input type="radio" name="q23" value="ARRANGE BY"> ARRANGE BY</label>
+                    <label><input type="radio" name="q23" value="GROUP BY"> GROUP BY</label>
+                </div>
+            </div>
+            <!-- Question 24 -->
+            <div class="question">
+                <p>24. ما هي الكلمة المفتاحية التي تُستخدم لحذف سجل من قاعدة بيانات MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q24" value="DELETE"> DELETE</label>
+                    <label><input type="radio" name="q24" value="REMOVE"> REMOVE</label>
+                    <label><input type="radio" name="q24" value="DROP"> DROP</label>
+                    <label><input type="radio" name="q24" value="ERASE"> ERASE</label>
+                </div>
+            </div>
+            <!-- Question 25 -->
+            <div class="question">
+                <p>25. ما هي الكلمة المفتاحية التي تُستخدم لتحديث بيانات موجودة في MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q25" value="UPDATE"> UPDATE</label>
+                    <label><input type="radio" name="q25" value="MODIFY"> MODIFY</label>
+                    <label><input type="radio" name="q25" value="CHANGE"> CHANGE</label>
+                    <label><input type="radio" name="q25" value="EDIT"> EDIT</label>
+                </div>
+            </div>
+            <!-- Question 26 -->
+            <div class="question">
+                <p>26. كيف يمكنك إضافة سجل جديد إلى جدول MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q26" value="INSERT INTO"> INSERT INTO</label>
+                    <label><input type="radio" name="q26" value="ADD TO"> ADD TO</label>
+                    <label><input type="radio" name="q26" value="PUT INTO"> PUT INTO</label>
+                    <label><input type="radio" name="q26" value="APPEND TO"> APPEND TO</label>
+                </div>
+            </div>
+            <!-- Question 27 -->
+            <div class="question">
+                <p>27. ما هي الكلمة المفتاحية التي تُستخدم لإنشاء جدول جديد في MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q27" value="CREATE TABLE"> CREATE TABLE</label>
+                    <label><input type="radio" name="q27" value="NEW TABLE"> NEW TABLE</label>
+                    <label><input type="radio" name="q27" value="ADD TABLE"> ADD TABLE</label>
+                    <label><input type="radio" name="q27" value="INIT TABLE"> INIT TABLE</label>
+                </div>
+            </div>
+            <!-- Question 28 -->
+            <div class="question">
+                <p>28. ما هي الكلمة المفتاحية التي تُستخدم لإزالة جدول في MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q28" value="DROP TABLE"> DROP TABLE</label>
+                    <label><input type="radio" name="q28" value="DELETE TABLE"> DELETE TABLE</label>
+                    <label><input type="radio" name="q28" value="REMOVE TABLE"> REMOVE TABLE</label>
+                    <label><input type="radio" name="q28" value="ERASE TABLE"> ERASE TABLE</label>
+                </div>
+            </div>
+            <!-- Question 29 -->
+            <div class="question">
+                <p>29. ما هي الكلمة المفتاحية التي تُستخدم لتعديل بنية جدول في MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q29" value="ALTER TABLE"> ALTER TABLE</label>
+                    <label><input type="radio" name="q29" value="MODIFY TABLE"> MODIFY TABLE</label>
+                    <label><input type="radio" name="q29" value="CHANGE TABLE"> CHANGE TABLE</label>
+                    <label><input type="radio" name="q29" value="UPDATE TABLE"> UPDATE TABLE</label>
+                </div>
+            </div>
+            <!-- Question 30 -->
+            <div class="question">
+                <p>30. ما هي الكلمة المفتاحية التي تُستخدم لحذف قاعدة بيانات MySQL؟</p>
+                <div class="options">
+                    <label><input type="radio" name="q30" value="DROP DATABASE"> DROP DATABASE</label>
+                    <label><input type="radio" name="q30" value="DELETE DATABASE"> DELETE DATABASE</label>
+                    <label><input type="radio" name="q30" value="REMOVE DATABASE"> REMOVE DATABASE</label>
+                    <label><input type="radio" name="q30" value="ERASE DATABASE"> ERASE DATABASE</label>
+                </div>
+            </div>
+            <button type="submit">طمنى بسرعه</button>
+        </form>
+    </div>
+    <div class="modal-overlay" id="modal-overlay"></div>
+    <div class="result" id="result">
+        <div id="result-content"></div>
+        <button class="modal-close" id="modal-close">اغلاق</button>
+        
+    </div>
+    <script>
+        // List of correct answers
+        const correctAnswers = {
+            q1: "CREATE DATABASE",
+            q2: "DROP DATABASE",
+            q3: "CREATE TABLE table_name",
+            q4: "INSERT INTO",
+            q5: "UPDATE table_name SET column_name = value",
+            q6: "DELETE FROM",
+            q7: "SELECT * FROM table_name",
+            q8: "CREATE INDEX",
+            q9: "PRIMARY KEY",
+            q10: "FOREIGN KEY",
+            q11: "ORDER BY",
+            q12: "WHERE",
+            q13: "COUNT",
+            q14: "DISTINCT",
+            q15: "GROUP BY",
+            q16: "LIMIT",
+            q17: "--",
+            q18: "CREATE DATABASE",
+            q19: "ALTER TABLE",
+            q20: "CREATE DATABASE ... LIKE",
+            q21: "WHERE",
+            q22: "BETWEEN",
+            q23: "ORDER BY",
+            q24: "DELETE",
+            q25: "UPDATE",
+            q26: "INSERT INTO",
+            q27: "CREATE TABLE",
+            q28: "DROP TABLE",
+            q29: "ALTER TABLE",
+            q30: "DROP DATABASE"
+        };
+
+        document.getElementById('quiz-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let score = 0;
+            for (let question in correctAnswers) {
+                const selectedOption = document.querySelector(`input[name=${question}]:checked`);
+                if (selectedOption && selectedOption.value === correctAnswers[question]) {
+                    score++;
+                }
+            }
+            const totalQuestions = Object.keys(correctAnswers).length;
+            const percentage = (score / totalQuestions) * 100;
+            document.getElementById('result-content').innerText = `النتيجة: ${score} من ${totalQuestions} (${percentage.toFixed(2)}%)`;
+            document.getElementById('modal-overlay').style.display = 'block';
+            document.getElementById('result').style.display = 'block';
+        });
+
+        document.getElementById('modal-close').addEventListener('click', function() {
+            document.getElementById('modal-overlay').style.display = 'none';
+            document.getElementById('result').style.display = 'none';
+        });
+    </script>
+</body>
+</html>

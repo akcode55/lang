@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>امتحان Flutter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Oswald:wght@500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #0f0e17;
+            color: #f0e8e8;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #0f0e17;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #ff8906;
+            margin-bottom: 30px;
+        }
+        .level-title {
+            color: #ff8906;
+            margin-top: 40px;
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .question p {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #ff8906;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #ff8b06a9;
+        }
+        .result {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 30px;
+            color: #333;
+        }
+        .evaluation-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #0f0e17;
+            color: orange;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+        }
+        .evaluation-popup button {
+            background-color: #ff8906;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .evaluation-popup button:hover {
+            background-color: #ff8b06a9;
+        }
+        .hidden {
+            display: none;
+        }
+        select {
+            background-color: #333;
+            color: #fff;
+            border: 2px solid #ff8906;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            font-family: 'Cairo', sans-serif;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        select:hover {
+            background-color: #444;
+            border-color: #ff8b06a9;
+        }
+        option {
+            background-color: #222;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>امتحان Swift</h1>
+        
+        <!-- القائمة المنسدلة لاختيار المستوى -->
+        <select id="levelSelect">
+            <option value="easy">المستوى السهل</option>
+            <option value="medium">المستوى المتوسط</option>
+            <option value="hard">المستوى الصعب</option>
+        </select>
+
+        <!-- أسئلة المستوى السهل -->
+        <div id="easy" class="level-content">
+            <h2 class="level-title">المستوى السهل</h2>
+            <!-- الأسئلة المضافة -->
+                 <div class="question">
+                <p>ما هو نوع البيانات الذي يستخدم لتخزين نص في Swift؟</p>
+                <input type="radio" name="q1" value="String"> String<br>
+                <input type="radio" name="q1" value="Text"> Text<br>
+                <input type="radio" name="q1" value="Character"> Character<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة لتعريف دالة في Swift؟</p>
+                <input type="radio" name="q2" value="func"> func<br>
+                <input type="radio" name="q2" value="define"> define<br>
+                <input type="radio" name="q2" value="method"> method<br>
+            </div>
+            <div class="question">
+                <p>ما هو نوع البيانات الذي يستخدم لتخزين عدد صحيح في Swift؟</p>
+                <input type="radio" name="q3" value="Int"> Int<br>
+                <input type="radio" name="q3" value="Integer"> Integer<br>
+                <input type="radio" name="q3" value="Number"> Number<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة لتعريف متغير ثابت في Swift؟</p>
+                <input type="radio" name="q4" value="let"> let<br>
+                <input type="radio" name="q4" value="const"> const<br>
+                <input type="radio" name="q4" value="final"> final<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لإنشاء كائنات في Swift؟</p>
+                <input type="radio" name="q5" value="Class"> Class<br>
+                <input type="radio" name="q5" value="Object"> Object<br>
+                <input type="radio" name="q5" value="Struct"> Struct<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة لإنشاء كتلة شرطية في Swift؟</p>
+                <input type="radio" name="q6" value="if"> if<br>
+                <input type="radio" name="q6" value="case"> case<br>
+                <input type="radio" name="q6" value="switch"> switch<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لتخزين قيمتين أو أكثر في Swift؟</p>
+                <input type="radio" name="q7" value="Tuple"> Tuple<br>
+                <input type="radio" name="q7" value="Array"> Array<br>
+                <input type="radio" name="q7" value="Dictionary"> Dictionary<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة لإنشاء حلقة تكرار في Swift؟</p>
+                <input type="radio" name="q8" value="for"> for<br>
+                <input type="radio" name="q8" value="while"> while<br>
+                <input type="radio" name="q8" value="repeat"> repeat<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لإنشاء مصفوفات في Swift؟</p>
+                <input type="radio" name="q9" value="Array"> Array<br>
+                <input type="radio" name="q9" value="List"> List<br>
+                <input type="radio" name="q9" value="Set"> Set<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة للتعامل مع الاستثناءات في Swift؟</p>
+                <input type="radio" name="q10" value="try"> try<br>
+                <input type="radio" name="q10" value="catch"> catch<br>
+                <input type="radio" name="q10" value="throw"> throw<br>
+            </div>
+            <!-- إضافة 10 أسئلة أخرى للمستوى السهل -->
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لإنشاء دوال غير متزامنة في Swift؟</p>
+                <input type="radio" name="q11" value="async"> async<br>
+                <input type="radio" name="q11" value="await"> await<br>
+                <input type="radio" name="q11" value="completion"> completion<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة لتعريف الكائنات القابلة للتوريث في Swift؟</p>
+                <input type="radio" name="q12" value="inherit"> inherit<br>
+                <input type="radio" name="q12" value="extends"> extends<br>
+                <input type="radio" name="q12" value="class"> class<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم المكون الذي يستخدم لإدراج نصوص متعددة الأسطر في Swift؟</p>
+                <input type="radio" name="q13" value="Multi-line String"> Multi-line String<br>
+                <input type="radio" name="q13" value="String"> String<br>
+                <input type="radio" name="q13" value="Text"> Text<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يُستخدم لتخزين مجموعة من القيم الفريدة في Swift؟</p>
+                <input type="radio" name="q14" value="Set"> Set<br>
+                <input type="radio" name="q14" value="Array"> Array<br>
+                <input type="radio" name="q14" value="Dictionary"> Dictionary<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لتخزين بيانات بصيغة ثنائية في Swift؟</p>
+                <input type="radio" name="q15" value="Data"> Data<br>
+                <input type="radio" name="q15" value="Binary"> Binary<br>
+                <input type="radio" name="q15" value="File"> File<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة التي تستخدمها لتعريف ميثود في بنية بيانات في Swift؟</p>
+                <input type="radio" name="q16" value="Method"> Method<br>
+                <input type="radio" name="q16" value="Function"> Function<br>
+                <input type="radio" name="q16" value="Procedure"> Procedure<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم المكون الذي يستخدم لإدارة الحالة في SwiftUI؟</p>
+                <input type="radio" name="q17" value="@State"> @State<br>
+                <input type="radio" name="q17" value="@Binding"> @Binding<br>
+                <input type="radio" name="q17" value="@Environment"> @Environment<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لتخزين بيانات في قاعدة بيانات محلية في Swift؟</p>
+                <input type="radio" name="q18" value="CoreData"> CoreData<br>
+                <input type="radio" name="q18" value="Realm"> Realm<br>
+                <input type="radio" name="q18" value="SQLite"> SQLite<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة التي تستخدمها لتحميل بيانات JSON في Swift؟</p>
+                <input type="radio" name="q19" value="JSONDecoder"> JSONDecoder<br>
+                <input type="radio" name="q19" value="JSONParser"> JSONParser<br>
+                <input type="radio" name="q19" value="DataLoader"> DataLoader<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم المكون الذي يستخدم لإدراج الصور في SwiftUI؟</p>
+                <input type="radio" name="q20" value="Image"> Image<br>
+                <input type="radio" name="q20" value="Picture"> Picture<br>
+                <input type="radio" name="q20" value="Photo"> Photo<br>
+            </div>
+        </div>
+
+        <!-- أسئلة المستوى المتوسط -->
+        <div id="medium" class="level-content hidden">
+            <h2 class="level-title">المستوى المتوسط</h2>
+            <!-- الأسئلة -->
+            <div class="question">
+                <p>ما هي الطريقة التي تستخدمها للتعامل مع البيانات المتغيرة في SwiftUI؟</p>
+                <input type="radio" name="q21" value="@Published"> @Published<br>
+                <input type="radio" name="q21" value="@StateObject"> @StateObject<br>
+                <input type="radio" name="q21" value="@EnvironmentObject"> @EnvironmentObject<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم المكون الذي يستخدم لإدراج بيانات قابلة للتكرار في SwiftUI؟</p>
+                <input type="radio" name="q22" value="ForEach"> ForEach<br>
+                <input type="radio" name="q22" value="List"> List<br>
+                <input type="radio" name="q22" value="ScrollView"> ScrollView<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة التي تستخدمها لتصميم واجهات المستخدم بشكل متقدم في SwiftUI؟</p>
+                <input type="radio" name="q23" value="CustomModifiers"> CustomModifiers<br>
+                <input type="radio" name="q23" value="CustomViews"> CustomViews<br>
+                <input type="radio" name="q23" value="ViewModifiers"> ViewModifiers<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم المكون الذي يستخدم لإدراج أشكال هندسية في SwiftUI؟</p>
+                <input type="radio" name="q24" value="Shape"> Shape<br>
+                <input type="radio" name="q24" value="Geometry"> Geometry<br>
+                <input type="radio" name="q24" value="Path"> Path<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة التي تستخدمها لإدارة البيانات غير المتزامنة في Swift؟</p>
+                <input type="radio" name="q25" value="Combine"> Combine<br>
+                <input type="radio" name="q25" value="AsyncAwait"> AsyncAwait<br>
+                <input type="radio" name="q25" value="NotificationCenter"> NotificationCenter<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم المكون الذي يستخدم لإنشاء أزرار مخصصة في SwiftUI؟</p>
+                <input type="radio" name="q26" value="ButtonStyle"> ButtonStyle<br>
+                <input type="radio" name="q26" value="CustomButton"> CustomButton<br>
+                <input type="radio" name="q26" value="Button"> Button<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم المكون الذي يستخدم لإدارة الحالة بشكل عام في SwiftUI؟</p>
+                <input type="radio" name="q27" value="ObservableObject"> ObservableObject<br>
+                <input type="radio" name="q27" value="State"> State<br>
+                <input type="radio" name="q27" value="Binding"> Binding<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة التي تستخدمها لإنشاء واجهات مستخدم متجاوبة في SwiftUI؟</p>
+                <input type="radio" name="q28" value="GeometryReader"> GeometryReader<br>
+                <input type="radio" name="q28" value="VStack"> VStack<br>
+                <input type="radio" name="q28" value="HStack"> HStack<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم المكون الذي يستخدم لإدراج البيانات في SwiftUI؟</p>
+                <input type="radio" name="q29" value="TextField"> TextField<br>
+                <input type="radio" name="q29" value="TextInput"> TextInput<br>
+                <input type="radio" name="q29" value="InputField"> InputField<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم المكون الذي يستخدم لإضافة تفاعلات في SwiftUI؟</p>
+                <input type="radio" name="q30" value="GestureRecognizer"> GestureRecognizer<br>
+                <input type="radio" name="q30" value="TapGesture"> TapGesture<br>
+                <input type="radio" name="q30" value="LongPressGesture"> LongPressGesture<br>
+            </div>
+            <!-- إضافة 10 أسئلة أخرى للمستوى المتوسط -->
+            <div class="question">
+                <p>ما هي الطريقة التي تستخدمها لعرض الصور في SwiftUI؟</p>
+                <input type="radio" name="q31" value="Image"> Image<br>
+                <input type="radio" name="q31" value="Picture"> Picture<br>
+                <input type="radio" name="q31" value="Photo"> Photo<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لإدارة الذاكرة في Swift؟</p>
+                <input type="radio" name="q32" value="ARC"> ARC<br>
+                <input type="radio" name="q32" value="MRC"> MRC<br>
+                <input type="radio" name="q32" value="GC"> GC<br>
+            </div>
+            <div class="question">
+                <p>ما هي الكلمة المفتاحية المستخدمة لتحديد متغير ضمن نطاق محدد في Swift؟</p>
+                <input type="radio" name="q33" value="private"> private<br>
+                <input type="radio" name="q33" value="protected"> protected<br>
+                <input type="radio" name="q33" value="internal"> internal<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم المكون الذي يستخدم لإدراج عناصر تفاعلية في SwiftUI؟</p>
+                <input type="radio" name="q34" value="Button"> Button<br>
+                <input type="radio" name="q34" value="Clickable"> Clickable<br>
+                <input type="radio" name="q34" value="Tap"> Tap<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم المكون الذي يستخدم لإدراج قائمة قابلة للتمرير في SwiftUI؟</p>
+                <input type="radio" name="q35" value="List"> List<br>
+                <input type="radio" name="q35" value="Scrollable"> Scrollable<br>
+                <input type="radio" name="q35" value="CollectionView"> CollectionView<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم المكون الذي يستخدم لإدراج نافذة منبثقة في SwiftUI؟</p>
+                <input type="radio" name="q36" value="Alert"> Alert<br>
+                <input type="radio" name="q36" value="Popup"> Popup<br>
+                <input type="radio" name="q36" value="Sheet"> Sheet<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة التي تستخدمها لربط البيانات بين النماذج في SwiftUI؟</p>
+                <input type="radio" name="q37" value="Binding"> Binding<br>
+                <input type="radio" name="q37" value="State"> State<br>
+                <input type="radio" name="q37" value="Observable"> Observable<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لتخزين بيانات في Swift؟</p>
+                <input type="radio" name="q38" value="Struct"> Struct<br>
+                <input type="radio" name="q38" value="Class"> Class<br>
+                <input type="radio" name="q38" value="Object"> Object<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة التي تستخدمها لإنشاء مجموعة من القيم في Swift؟</p>
+                <input type="radio" name="q39" value="Array"> Array<br>
+                <input type="radio" name="q39" value="Set"> Set<br>
+                <input type="radio" name="q39" value="Dictionary"> Dictionary<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم المكون الذي يستخدم لتطبيق تصاميم مخصصة في SwiftUI؟</p>
+                <input type="radio" name="q40" value="CustomView"> CustomView<br>
+                <input type="radio" name="q40" value="Modifier"> Modifier<br>
+                <input type="radio" name="q40" value="Style"> Style<br>
+            </div>
+        </div>
+
+        <!-- أسئلة المستوى الصعب -->
+        <div id="hard" class="level-content hidden">
+            <h2 class="level-title">المستوى الصعب</h2>
+            <!-- الأسئلة -->
+            <div class="question">
+                <p>ما هي الطريقة التي تستخدمها للتعامل مع العمليات غير المتزامنة في Swift؟</p>
+                <input type="radio" name="q41" value="AsyncAwait"> AsyncAwait<br>
+                <input type="radio" name="q41" value="Combine"> Combine<br>
+                <input type="radio" name="q41" value="DispatchQueue"> DispatchQueue<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم المكون الذي يستخدم لإدراج عناصر معقدة في SwiftUI؟</p>
+                <input type="radio" name="q42" value="ViewBuilder"> ViewBuilder<br>
+                <input type="radio" name="q42" value="Layout"> Layout<br>
+                <input type="radio" name="q42" value="Stack"> Stack<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لتحديد روابط بين بيانات متعددة في Swift؟</p>
+                <input type="radio" name="q43" value="Protocol"> Protocol<br>
+                <input type="radio" name="q43" value="Delegate"> Delegate<br>
+                <input type="radio" name="q43" value="Observer"> Observer<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة التي تستخدمها لإنشاء واجهات تفاعلية في SwiftUI؟</p>
+                <input type="radio" name="q44" value="CustomModifer"> CustomModifer<br>
+                <input type="radio" name="q44" value="InteractiveView"> InteractiveView<br>
+                <input type="radio" name="q44" value="DynamicView"> DynamicView<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لإنشاء فئات تعمل بشكل غير متزامن في Swift؟</p>
+                <input type="radio" name="q45" value="AsyncSequence"> AsyncSequence<br>
+                <input type="radio" name="q45" value="Task"> Task<br>
+                <input type="radio" name="q45" value="Future"> Future<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة التي تستخدمها لتحديث واجهة المستخدم عند تغير البيانات في SwiftUI؟</p>
+                <input type="radio" name="q46" value="StateObject"> StateObject<br>
+                <input type="radio" name="q46" value="Binding"> Binding<br>
+                <input type="radio" name="q46" value="ObservableObject"> ObservableObject<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لتخزين بيانات من نوعين مختلفين في Swift؟</p>
+                <input type="radio" name="q47" value="Enum"> Enum<br>
+                <input type="radio" name="q47" value="Tuple"> Tuple<br>
+                <input type="radio" name="q47" value="Union"> Union<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم المكون الذي يستخدم لإدراج قائمة من العناصر في SwiftUI؟</p>
+                <input type="radio" name="q48" value="List"> List<br>
+                <input type="radio" name="q48" value="Collection"> Collection<br>
+                <input type="radio" name="q48" value="Array"> Array<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لتخزين القيم التي تتغير بمرور الوقت في SwiftUI؟</p>
+                <input type="radio" name="q49" value="State"> State<br>
+                <input type="radio" name="q49" value="Binding"> Binding<br>
+                <input type="radio" name="q49" value="ObservableObject"> ObservableObject<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة التي تستخدمها لإنشاء بيانات معقدة في Swift؟</p>
+                <input type="radio" name="q50" value="Struct"> Struct<br>
+                <input type="radio" name="q50" value="Class"> Class<br>
+                <input type="radio" name="q50" value="Enum"> Enum<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لإدارة العمليات الخلفية في Swift؟</p>
+                <input type="radio" name="q51" value="OperationQueue"> OperationQueue<br>
+                <input type="radio" name="q51" value="DispatchQueue"> DispatchQueue<br>
+                <input type="radio" name="q51" value="Task"> Task<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لإدارة الاستثناءات في Swift؟</p>
+                <input type="radio" name="q52" value="Result"> Result<br>
+                <input type="radio" name="q52" value="TryCatch"> TryCatch<br>
+                <input type="radio" name="q52" value="Error"> Error<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لإنشاء تطبيقات مخصصة في SwiftUI؟</p>
+                <input type="radio" name="q53" value="App"> App<br>
+                <input type="radio" name="q53" value="Scene"> Scene<br>
+                <input type="radio" name="q53" value="Window"> Window<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لإدراج إشعارات في Swift؟</p>
+                <input type="radio" name="q54" value="Notification"> Notification<br>
+                <input type="radio" name="q54" value="Alert"> Alert<br>
+                <input type="radio" name="q54" value="Message"> Message<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة التي تستخدمها لإنشاء واجهات مستخدم معقدة في SwiftUI؟</p>
+                <input type="radio" name="q55" value="CustomView"> CustomView<br>
+                <input type="radio" name="q55" value="AdvancedView"> AdvancedView<br>
+                <input type="radio" name="q55" value="DynamicView"> DynamicView<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم المكون الذي يستخدم لإدراج صور متعددة في SwiftUI؟</p>
+                <input type="radio" name="q56" value="Image"> Image<br>
+                <input type="radio" name="q56" value="Picture"> Picture<br>
+                <input type="radio" name="q56" value="Gallery"> Gallery<br>
+            </div>
+            <div class="question">
+                <p>ما هي الطريقة التي تستخدمها لإنشاء وظائف معقدة في Swift؟</p>
+                <input type="radio" name="q57" value="Closure"> Closure<br>
+                <input type="radio" name="q57" value="Function"> Function<br>
+                <input type="radio" name="q57" value="Method"> Method<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم المكون الذي يستخدم لإدراج عناصر تفاعلية متعددة في SwiftUI؟</p>
+                <input type="radio" name="q58" value="Stack"> Stack<br>
+                <input type="radio" name="q58" value="HStack"> HStack<br>
+                <input type="radio" name="q58" value="VStack"> VStack<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم النوع الذي يستخدم لتخزين البيانات بطريقة غير متزامنة في Swift؟</p>
+                <input type="radio" name="q59" value="Future"> Future<br>
+                <input type="radio" name="q59" value="Promise"> Promise<br>
+                <input type="radio" name="q59" value="Task"> Task<br>
+            </div>
+            <div class="question">
+                <p>ما هو اسم المكون الذي يستخدم لإنشاء تطبيقات مخصصة في SwiftUI؟</p>
+                <input type="radio" name="q60" value="App"> App<br>
+                <input type="radio" name="q60" value="Scene"> Scene<br>
+                <input type="radio" name="q60" value="Window"> Window<br>
+            </div>
+        </div>
+
+        <!-- زر تقديم -->
+        <button onclick="submitQuiz()">طمنى بسرعه</button>
+
+        <!-- نافذة عرض النتيجة -->
+        <div id="evaluationPopup" class="evaluation-popup">
+            <p id="resultMessage"></p>
+            <button onclick="closePopup()">إغلاق</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('levelSelect').addEventListener('change', function() {
+            var level = this.value;
+            document.querySelectorAll('.level-content').forEach(function(div) {
+                div.classList.add('hidden');
+            });
+            document.getElementById(level).classList.remove('hidden');
+        });
+
+         function submitQuiz() {
+            var score = 0;
+            var totalQuestions = 60;
+            var correctAnswers = {
+                "q1": "SwiftUI",
+                "q2": "Text",
+                "q3": "TextField",
+                "q4": "VStack",
+                "q5": "HStack",
+                "q6": "ZStack",
+                "q7": "@State",
+                "q8": "@Binding",
+                "q9": "@Environment",
+                "q10": "@ObservedObject",
+                "q11": "Color",
+                "q12": "Font",
+                "q13": "Background",
+                "q14": "Spacer",
+                "q15": "List",
+                "q16": "NavigationView",
+                "q17": "CoreData",
+                "q18": "Realm",
+                "q19": "JSONDecoder",
+                "q20": "Image",
+                "q21": "@Published",
+                "q22": "ForEach",
+                "q23": "CustomModifiers",
+                "q24": "Shape",
+                "q25": "Combine",
+                "q26": "ButtonStyle",
+                "q27": "ObservableObject",
+                "q28": "GeometryReader",
+                "q29": "TextField",
+                "q30": "TapGesture",
+                "q31": "Image",
+                "q32": "ARC",
+                "q33": "private",
+                "q34": "Button",
+                "q35": "List",
+                "q36": "Sheet",
+                "q37": "Binding",
+                "q38": "Struct",
+                "q39": "Array",
+                "q40": "CustomView",
+                "q41": "AsyncAwait",
+                "q42": "ViewBuilder",
+                "q43": "Protocol",
+                "q44": "CustomModifer",
+                "q45": "AsyncSequence",
+                "q46": "StateObject",
+                "q47": "Tuple",
+                "q48": "List",
+                "q49": "ObservableObject",
+                "q50": "Class",
+                "q51": "OperationQueue",
+                "q52": "Result",
+                "q53": "App",
+                "q54": "Notification",
+                "q55": "CustomView",
+                "q56": "Gallery",
+                "q57": "Closure",
+                "q58": "Stack",
+                "q59": "Future",
+                "q60": "App"
+            };
+
+            for (var key in correctAnswers) {
+                var selectedOption = document.querySelector(`input[name="${key}"]:checked`);
+                if (selectedOption && selectedOption.value === correctAnswers[key]) {
+                    score++;
+                }
+            }
+
+            var resultMessage = `لقد حصلت على ${score} من ${totalQuestions} إجابة صحيحة.`;
+            document.getElementById('resultMessage').innerText = resultMessage;
+            document.getElementById('evaluationPopup').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('evaluationPopup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>امتحان Rust</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Oswald:wght@500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #0f0e17;
+            color: #f0e8e8;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #0f0e17;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #ff8906;
+            margin-bottom: 30px;
+        }
+        .level-title {
+            color: #ff8906;
+            margin-top: 40px;
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .question p {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #ff8906;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #ff8b06a9;
+        }
+        .result {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 30px;
+            color: #333;
+        }
+        .evaluation-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #0f0e17;
+            color: orange;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+        }
+        .evaluation-popup button {
+            background-color: #ff8906;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .evaluation-popup button:hover {
+            background-color: #ff8b06a9;
+        }
+        .hidden {
+            display: none;
+        }
+        select {
+            background-color: #333;
+            color: #fff;
+            border: 2px solid #ff8906;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            font-family: 'Cairo', sans-serif;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        select:hover {
+            background-color: #444;
+            border-color: #ff8b06a9;
+        }
+        option {
+            background-color: #222;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h1>اختبار Rust</h1>
+    <select id="levelSelect">
+        <option value="easy">المستوى السهل</option>
+        <option value="medium">المستوى المتوسط</option>
+        <option value="hard">المستوى الصعب</option>
+    </select>
+    <!-- أسئلة المستوى السهل -->
+    <div id="easy" class="level-content">
+        <h2 class="level-title">المستوى السهل</h2>
+        <div class="question">
+            <p>ما هي الكلمة المفتاحية لتعريف متغير في Rust؟</p>
+            <input type="radio" name="q1" value="let"> let<br>
+            <input type="radio" name="q1" value="var"> var<br>
+            <input type="radio" name="q1" value="const"> const<br>
+        </div>
+        <div class="question">
+            <p>ما هي الكلمة المفتاحية لتعريف دالة في Rust؟</p>
+            <input type="radio" name="q2" value="fn"> fn<br>
+            <input type="radio" name="q2" value="func"> func<br>
+            <input type="radio" name="q2" value="function"> function<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكنك تعريف مصفوفة ثابتة الحجم في Rust؟</p>
+            <input type="radio" name="q3" value="let arr = [1, 2, 3];"> let arr = [1, 2, 3];<br>
+            <input type="radio" name="q3" value="let arr = vec![1, 2, 3];"> let arr = vec![1, 2, 3];<br>
+            <input type="radio" name="q3" value="let arr = array![1, 2, 3];"> let arr = array![1, 2, 3];<br>
+        </div>
+        <div class="question">
+            <p>ما هي الكلمة المفتاحية لتعريف هيكل بيانات في Rust؟</p>
+            <input type="radio" name="q4" value="struct"> struct<br>
+            <input type="radio" name="q4" value="class"> class<br>
+            <input type="radio" name="q4" value="data"> data<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكنك الحصول على طول مصفوفة في Rust؟</p>
+            <input type="radio" name="q5" value="arr.len()"> arr.len()<br>
+            <input type="radio" name="q5" value="arr.size()"> arr.size()<br>
+            <input type="radio" name="q5" value="arr.length()"> arr.length()<br>
+        </div>
+        <div class="question">
+            <p>كيف تقوم بإنشاء متغير غير قابل للتغيير في Rust؟</p>
+            <input type="radio" name="q6" value="let"> let<br>
+            <input type="radio" name="q6" value="const"> const<br>
+            <input type="radio" name="q6" value="immutable"> immutable<br>
+        </div>
+        <div class="question">
+            <p>ما هو نوع البيانات الذي يمثل مجموعة غير قابلة للتغيير في Rust؟</p>
+            <input type="radio" name="q7" value="tuple"> tuple<br>
+            <input type="radio" name="q7" value="vector"> vector<br>
+            <input type="radio" name="q7" value="array"> array<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكنك تعريف نوع بيانات قابل للتغيير في Rust؟</p>
+            <input type="radio" name="q8" value="let mut"> let mut<br>
+            <input type="radio" name="q8" value="var"> var<br>
+            <input type="radio" name="q8" value="let"> let<br>
+        </div>
+        <div class="question">
+            <p>ما هي الطريقة الصحيحة لإنشاء حلقة for في Rust؟</p>
+            <input type="radio" name="q9" value="for i in 0..10"> for i in 0..10<br>
+            <input type="radio" name="q9" value="for i = 0; i < 10; i += 1"> for i = 0; i < 10; i += 1<br>
+            <input type="radio" name="q9" value="foreach i in 0..10"> foreach i in 0..10<br>
+        </div>
+        <div class="question">
+            <p>ما هي الطريقة الصحيحة لإنشاء دالة ذات مدخلات متعددة في Rust؟</p>
+            <input type="radio" name="q10" value="fn my_function(a: i32, b: i32) -> i32"> fn my_function(a: i32, b: i32) -> i32<br>
+            <input type="radio" name="q10" value="fn my_function(a, b) -> i32"> fn my_function(a, b) -> i32<br>
+            <input type="radio" name="q10" value="function my_function(a: i32, b: i32) -> i32"> function my_function(a: i32, b: i32) -> i32<br>
+        </div>
+    </div>
+    
+    <!-- أسئلة المستوى المتوسط -->
+    <div id="medium" class="level-content hidden">
+        <h2 class="level-title">المستوى المتوسط</h2>
+        <div class="question">
+            <p>ما هي طريقة تعريف صفة متغيرة في هيكل بيانات في Rust؟</p>
+            <input type="radio" name="q1" value="field: type"> field: type<br>
+            <input type="radio" name="q1" value="property: type"> property: type<br>
+            <input type="radio" name="q1" value="attribute: type"> attribute: type<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكنك استخدام النمط الخيار (Option) في Rust؟</p>
+            <input type="radio" name="q2" value="Option::Some(value)"> Option::Some(value)<br>
+            <input type="radio" name="q2" value="Some(value)"> Some(value)<br>
+            <input type="radio" name="q2" value="Option(value)"> Option(value)<br>
+        </div>
+        <div class="question">
+            <p>ما هو الهدف من استخدام سمة (trait) في Rust؟</p>
+            <input type="radio" name="q3" value="تحديد واجهات يمكن تطبيقها على الأنواع"> تحديد واجهات يمكن تطبيقها على الأنواع<br>
+            <input type="radio" name="q3" value="إضافة خصائص للأنواع"> إضافة خصائص للأنواع<br>
+            <input type="radio" name="q3" value="تعريف نوع بيانات جديد"> تعريف نوع بيانات جديد<br>
+        </div>
+        <div class="question">
+            <p>ما هي الطريقة الصحيحة لتعامل مع الأخطاء في Rust؟</p>
+            <input type="radio" name="q4" value="Result"> Result<br>
+            <input type="radio" name="q4" value="Error"> Error<br>
+            <input type="radio" name="q4" value="Option"> Option<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكنك تعريف خصائص ثابتة في هيكل بيانات في Rust؟</p>
+            <input type="radio" name="q5" value="const"> const<br>
+            <input type="radio" name="q5" value="static"> static<br>
+            <input type="radio" name="q5" value="immutable"> immutable<br>
+        </div>
+        <div class="question">
+            <p>ما هي الطريقة الصحيحة لإنشاء نوع بيانات قابل للتغيير مع قيود في Rust؟</p>
+            <input type="radio" name="q6" value="struct"> struct<br>
+            <input type="radio" name="q6" value="enum"> enum<br>
+            <input type="radio" name="q6" value="trait"> trait<br>
+        </div>
+        <div class="question">
+            <p>كيف تقوم بإنشاء نقطة إدخال (entry point) في برنامج Rust؟</p>
+            <input type="radio" name="q7" value="fn main()"> fn main()<br>
+            <input type="radio" name="q7" value="entry_point()"> entry_point()<br>
+            <input type="radio" name="q7" value="start()"> start()<br>
+        </div>
+        <div class="question">
+            <p>ما هو نوع البيانات الذي يمثل مجموعة من القيم غير المتكررة في Rust؟</p>
+            <input type="radio" name="q8" value="HashSet"> HashSet<br>
+            <input type="radio" name="q8" value="Vec"> Vec<br>
+            <input type="radio" name="q8" value="BTreeSet"> BTreeSet<br>
+        </div>
+        <div class="question">
+            <p>ما هي الطريقة الصحيحة لتعريف متغير عالمي في Rust؟</p>
+            <input type="radio" name="q9" value="static"> static<br>
+            <input type="radio" name="q9" value="global"> global<br>
+            <input type="radio" name="q9" value="const"> const<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكن إنشاء مؤشر إلى هيكل بيانات في Rust؟</p>
+            <input type="radio" name="q10" value="Box"> Box<br>
+            <input type="radio" name="q10" value="Rc"> Rc<br>
+            <input type="radio" name="q10" value="Arc"> Arc<br>
+        </div>
+    </div>
+    
+    <!-- أسئلة المستوى الصعب -->
+    <div id="hard" class="level-content hidden">
+        <h2 class="level-title">المستوى الصعب</h2>
+        <div class="question">
+            <p>ما هي الطريقة الصحيحة لاستخدام المكالمات غير المتزامنة (asynchronous) في Rust؟</p>
+            <input type="radio" name="q1" value="async fn"> async fn<br>
+            <input type="radio" name="q1" value="await"> await<br>
+            <input type="radio" name="q1" value="async await"> async await<br>
+        </div>
+        <div class="question">
+            <p>ما هي المكتبة التي تستخدم في Rust للبرمجة غير المتزامنة؟</p>
+            <input type="radio" name="q2" value="Tokio"> Tokio<br>
+            <input type="radio" name="q2" value="async-std"> async-std<br>
+            <input type="radio" name="q2" value="Future"> Future<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكنك تنفيذ نمط البرمجة الوظيفية في Rust؟</p>
+            <input type="radio" name="q3" value="using closures"> using closures<br>
+            <input type="radio" name="q3" value="using functions"> using functions<br>
+            <input type="radio" name="q3" value="using traits"> using traits<br>
+        </div>
+        <div class="question">
+            <p>ما هو الهدف من استخدام المفاتيح (keys) في Rust؟</p>
+            <input type="radio" name="q4" value="لإدارة الموارد"> لإدارة الموارد<br>
+            <input type="radio" name="q4" value="للتحكم في الذاكرة"> للتحكم في الذاكرة<br>
+            <input type="radio" name="q4" value="لإدارة البيانات"> لإدارة البيانات<br>
+        </div>
+        <div class="question">
+            <p>ما هي الطريقة الصحيحة لاستخدام البنى المؤقتة (temporary structures) في Rust؟</p>
+            <input type="radio" name="q5" value="using temp structs"> using temp structs<br>
+            <input type="radio" name="q5" value="using temporary"> using temporary<br>
+            <input type="radio" name="q5" value="using dynamic"> using dynamic<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكن إدارة الوصول التنافسي (concurrent access) إلى الموارد في Rust؟</p>
+            <input type="radio" name="q6" value="Mutex"> Mutex<br>
+            <input type="radio" name="q6" value="Atomic"> Atomic<br>
+            <input type="radio" name="q6" value="RefCell"> RefCell<br>
+        </div>
+        <div class="question">
+            <p>ما هو الأسلوب الصحيح لتطبيق النمط المؤقت (temporary pattern) في Rust؟</p>
+            <input type="radio" name="q7" value="using temporary pattern"> using temporary pattern<br>
+            <input type="radio" name="q7" value="using pattern matching"> using pattern matching<br>
+            <input type="radio" name="q7" value="using temporary variables"> using temporary variables<br>
+        </div>
+        <div class="question">
+            <p>ما هو المفهوم الأساسي في Rust للبرمجة التزامنية (synchronous programming)؟</p>
+            <input type="radio" name="q8" value="using async/await"> using async/await<br>
+            <input type="radio" name="q8" value="using threads"> using threads<br>
+            <input type="radio" name="q8" value="using futures"> using futures<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكنك تنفيذ النمط المعتمد على المتغيرات (variable-dependent pattern) في Rust؟</p>
+            <input type="radio" name="q9" value="using enums"> using enums<br>
+            <input type="radio" name="q9" value="using traits"> using traits<br>
+            <input type="radio" name="q9" value="using pattern matching"> using pattern matching<br>
+        </div>
+        <div class="question">
+            <p>ما هي المكتبة التي تدعم البرمجة المتزامنة في Rust؟</p>
+            <input type="radio" name="q10" value="Rayon"> Rayon<br>
+            <input type="radio" name="q10" value="Crossbeam"> Crossbeam<br>
+            <input type="radio" name="q10" value="async-std"> async-std<br>
+                 </div>
+        </div>
+        <button onclick="submitQuiz()">طمنى بسرعه</button>
+    </div>
+
+    <div id="popup" class="evaluation-popup">
+        <p id="popupResult"></p>
+        <button onclick="closePopup()">إغلاق</button>
+    </div>
+    <script>
+        document.getElementById('levelSelect').addEventListener('change', function() {
+            document.querySelectorAll('.level-content').forEach(div => div.classList.add('hidden'));
+            document.getElementById(this.value).classList.remove('hidden');
+        });
+
+        const correctAnswers = {
+  easy: {
+                q1: "let",  // الإجابة الصحيحة للسؤال 1
+                q2: "fn",   // الإجابة الصحيحة للسؤال 2
+                q3: "let arr = [1, 2, 3];",  // الإجابة الصحيحة للسؤال 3
+                q4: "struct",  // الإجابة الصحيحة للسؤال 4
+                q5: "arr.len()",  // الإجابة الصحيحة للسؤال 5
+                q6: "const",  // الإجابة الصحيحة للسؤال 6
+                q7: "tuple",  // الإجابة الصحيحة للسؤال 7
+                q8: "let mut",  // الإجابة الصحيحة للسؤال 8
+                q9: "for i in 0..10"  // الإجابة الصحيحة للسؤال 9
+            },
+            medium: {
+                q1: "field: type",
+                q2: "Option::Some(value)",
+                q3: "تحديد واجهات يمكن تطبيقها على الأنواع",
+                q4: "Result",
+                q5: "static",
+                q6: "struct",
+                q7: "fn main()",
+                q8: "HashSet",
+                q9: "static",
+                q10: "Box"
+            },
+            hard: {
+                q1: "async fn",
+                q2: "Tokio",
+                q3: "using closures",
+                q4: "لإدارة البيانات",
+                q5: "using temp structs",
+                q6: "Mutex",
+                q7: "using temporary pattern",
+                q8: "using async/await",
+                q9: "using enums",
+                q10: "Rayon"
+            }
+        };
+    function getCorrectAnswer(questionId) {
+            const level = document.getElementById('levelSelect').value;
+            return correctAnswers[level][questionId];
+        }
+
+        function submitQuiz() {
+            const level = document.getElementById('levelSelect').value;
+            const questions = document.querySelectorAll(`#${level} .question`);
+            let score = 0;
+            questions.forEach((question) => {
+                const questionId = question.querySelector('p').textContent.trim().split(' ')[0].toLowerCase();
+                const selectedAnswer = question.querySelector('input[type="radio"]:checked');
+                if (selectedAnswer && selectedAnswer.value === getCorrectAnswer(questionId)) {
+                    score++;
+                }
+            });
+            const resultText = `نتيجتك هي: ${score} من ${questions.length}`;
+            document.getElementById('popupResult').innerText = resultText;
+            document.getElementById('popup').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

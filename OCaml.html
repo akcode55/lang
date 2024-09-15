@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>امتحان F#</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Oswald:wght@500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #0f0e17;
+            color: #f0e8e8;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #0f0e17;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #ff8906;
+            margin-bottom: 30px;
+        }
+        .level-title {
+            color: #ff8906;
+            margin-top: 40px;
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .question p {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #ff8906;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #ff8b06a9;
+        }
+        .result {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 30px;
+            color: #333;
+        }
+        .evaluation-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #0f0e17;
+            color: orange;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+        }
+        .evaluation-popup button {
+            background-color: #ff8906;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .evaluation-popup button:hover {
+            background-color: #ff8b06a9;
+        }
+        .hidden {
+            display: none;
+        }
+        select {
+            background-color: #333;
+            color: #fff;
+            border: 2px solid #ff8906;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            font-family: 'Cairo', sans-serif;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        select:hover {
+            background-color: #444;
+            border-color: #ff8b06a9;
+        }
+        option {
+            background-color: #222;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h1>اختبار OCaml</h1>
+  
+    <select id="levelSelect">
+        <option value="easy">المستوى السهل</option>
+        <option value="medium">المستوى المتوسط</option>
+        <option value="hard">المستوى الصعب</option>
+    </select>
+
+    <!-- أسئلة المستوى السهل -->
+    <div id="easy" class="level-content">
+        <h2 class="level-title">المستوى السهل</h2>
+        <div class="question">
+            <p>ما هي الكلمة المفتاحية لتعريف متغير في OCaml؟</p>
+            <input type="radio" name="q1" value="let"> let<br>
+            <input type="radio" name="q1" value="val"> val<br>
+            <input type="radio" name="q1" value="const"> const<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكن تعريف دالة في OCaml؟</p>
+            <input type="radio" name="q2" value="function"> function<br>
+            <input type="radio" name="q2" value="def"> def<br>
+            <input type="radio" name="q2" value="func"> func<br>
+        </div>
+        <div class="question">
+            <p>ما هو نوع البيانات الذي يستخدم لتمثيل الأعداد العشرية في OCaml؟</p>
+            <input type="radio" name="q3" value="float"> float<br>
+            <input type="radio" name="q3" value="int"> int<br>
+            <input type="radio" name="q3" value="string"> string<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكن تعريف قائمة في OCaml؟</p>
+            <input type="radio" name="q4" value="[1; 2; 3]"> [1; 2; 3]<br>
+            <input type="radio" name="q4" value="list(1, 2, 3)"> list(1, 2, 3)<br>
+            <input type="radio" name="q4" value="1, 2, 3"> 1, 2, 3<br>
+        </div>
+        <div class="question">
+            <p>ما هو نوع البيانات الذي يستخدم لتمثيل النصوص في OCaml؟</p>
+            <input type="radio" name="q5" value="string"> string<br>
+            <input type="radio" name="q5" value="char"> char<br>
+            <input type="radio" name="q5" value="text"> text<br>
+        </div>
+        <!-- الأسئلة الإضافية -->
+        <div class="question">
+            <p>ما هي الكلمة المفتاحية لإنشاء بنية بيانات جديدة في OCaml؟</p>
+            <input type="radio" name="q6" value="type"> type<br>
+            <input type="radio" name="q6" value="record"> record<br>
+            <input type="radio" name="q6" value="structure"> structure<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكن تعريف دالة ذات معلمة اختياريه في OCaml؟</p>
+            <input type="radio" name="q7" value="param ?"> param ?<br>
+            <input type="radio" name="q7" value="optional"> optional<br>
+            <input type="radio" name="q7" value="maybe"> maybe<br>
+        </div>
+        <div class="question">
+            <p>ما هي الطريقة التي يمكن بها التعامل مع القيم الافتراضية في OCaml؟</p>
+            <input type="radio" name="q8" value="default values"> default values<br>
+            <input type="radio" name="q8" value="optional arguments"> optional arguments<br>
+            <input type="radio" name="q8" value="maybe"> maybe<br>
+        </div>
+        <div class="question">
+            <p>ما هو نوع البيانات الذي يستخدم لتمثيل القيم البوليانية في OCaml؟</p>
+            <input type="radio" name="q9" value="bool"> bool<br>
+            <input type="radio" name="q9" value="boolean"> boolean<br>
+            <input type="radio" name="q9" value="flag"> flag<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكن استخدام الـ Pattern Matching في OCaml؟</p>
+            <input type="radio" name="q10" value="match"> match<br>
+            <input type="radio" name="q10" value="case"> case<br>
+            <input type="radio" name="q10" value="switch"> switch<br>
+        </div>
+    </div>
+
+    <!-- أسئلة المستوى المتوسط -->
+    <div id="medium" class="level-content hidden">
+        <h2 class="level-title">المستوى المتوسط</h2>
+        <div class="question">
+            <p>ما هي الكلمة المفتاحية المستخدمة لتعريف نوع بيانات في OCaml؟</p>
+            <input type="radio" name="q11" value="type"> type<br>
+            <input type="radio" name="q11" value="data"> data<br>
+            <input type="radio" name="q11" value="define"> define<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكن تعريف معلمة في دالة في OCaml؟</p>
+            <input type="radio" name="q12" value="parameter"> parameter<br>
+            <input type="radio" name="q12" value="arg"> arg<br>
+            <input type="radio" name="q12" value="param"> param<br>
+        </div>
+        <div class="question">
+            <p>ما هو نوع البيانات الذي يستخدم لتمثيل الخيارات في OCaml؟</p>
+            <input type="radio" name="q13" value="option"> option<br>
+            <input type="radio" name="q13" value="result"> result<br>
+            <input type="radio" name="q13" value="either"> either<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكن التعامل مع الأخطاء في OCaml؟</p>
+            <input type="radio" name="q14" value="exception handling"> exception handling<br>
+            <input type="radio" name="q14" value="error handling"> error handling<br>
+            <input type="radio" name="q14" value="try...catch"> try...catch<br>
+        </div>
+        <div class="question">
+            <p>ما هي الطريقة المستخدمة لتعريف نمط البيانات المتغير في OCaml؟</p>
+            <input type="radio" name="q15" value="ref"> ref<br>
+            <input type="radio" name="q15" value="mutable"> mutable<br>
+            <input type="radio" name="q15" value="var"> var<br>
+        </div>
+        <!-- الأسئلة الإضافية -->
+        <div class="question">
+            <p>ما هي مكتبة التزامن الأكثر استخداماً في OCaml؟</p>
+            <input type="radio" name="q16" value="Lwt"> Lwt<br>
+            <input type="radio" name="q16" value="Async"> Async<br>
+            <input type="radio" name="q16" value="Threads"> Threads<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكن التعامل مع العمليات غير المتزامنة في OCaml؟</p>
+            <input type="radio" name="q17" value="Lwt"> Lwt<br>
+            <input type="radio" name="q17" value="Async"> Async<br>
+            <input type="radio" name="q17" value="Future"> Future<br>
+        </div>
+        <div class="question">
+            <p>ما هي الطريقة المستخدمة لتعريف الدوال التي تقبل عدد غير محدد من المعاملات؟</p>
+            <input type="radio" name="q18" value="varargs"> varargs<br>
+            <input type="radio" name="q18" value="args"> args<br>
+            <input type="radio" name="q18" value="list"> list<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكن تعريف النماذج البيانية في OCaml؟</p>
+            <input type="radio" name="q19" value="type"> type<br>
+            <input type="radio" name="q19" value="module"> module<br>
+            <input type="radio" name="q19" value="data"> data<br>
+        </div>
+        <div class="question">
+            <p>ما هو معنى الـ pattern matching في OCaml؟</p>
+            <input type="radio" name="q20" value="match"> match<br>
+            <input type="radio" name="q20" value="case"> case<br>
+            <input type="radio" name="q20" value="switch"> switch<br>
+        </div>
+    </div>
+
+    <!-- أسئلة المستوى الصعب -->
+    <div id="hard" class="level-content hidden">
+        <h2 class="level-title">المستوى الصعب</h2>
+        <div class="question">
+            <p>ما هي البرمجة الوظيفية في OCaml؟</p>
+            <input type="radio" name="q21" value="functional programming"> functional programming<br>
+            <input type="radio" name="q21" value="object-oriented programming"> object-oriented programming<br>
+            <input type="radio" name="q21" value="imperative programming"> imperative programming<br>
+        </div>
+        <div class="question">
+            <p>ما هي طريقة التعامل مع الوظائف غير المتزامنة في OCaml؟</p>
+            <input type="radio" name="q22" value="async"> async<br>
+            <input type="radio" name="q22" value="await"> await<br>
+            <input type="radio" name="q22" value="defer"> defer<br>
+        </div>
+        <div class="question">
+            <p>ما هي الـ polymorphic variants في OCaml؟</p>
+            <input type="radio" name="q23" value="polymorphic variants"> polymorphic variants<br>
+            <input type="radio" name="q23" value="ad-hoc polymorphism"> ad-hoc polymorphism<br>
+            <input type="radio" name="q23" value="generic types"> generic types<br>
+        </div>
+        <div class="question">
+            <p>ما هي الـ pattern matching وكيف يتم استخدامها؟</p>
+            <input type="radio" name="q24" value="pattern matching"> pattern matching<br>
+            <input type="radio" name="q24" value="type checking"> type checking<br>
+            <input type="radio" name="q24" value="exception handling"> exception handling<br>
+        </div>
+        <div class="question">
+            <p>ما هي مكتبة opam؟</p>
+            <input type="radio" name="q25" value="opam"> opam<br>
+            <input type="radio" name="q25" value="npm"> npm<br>
+            <input type="radio" name="q25" value="pip"> pip<br>
+        </div>
+        <!-- الأسئلة الإضافية -->
+        <div class="question">
+            <p>ما هي الطريقة المستخدمة لتعريف الأنواع العامة في OCaml؟</p>
+            <input type="radio" name="q26" value="type 'a"> type 'a<br>
+            <input type="radio" name="q26" value="generic type"> generic type<br>
+            <input type="radio" name="q26" value="parametric type"> parametric type<br>
+        </div>
+        <div class="question">
+            <p>كيف يمكن استخدام الـ functors في OCaml؟</p>
+            <input type="radio" name="q27" value="functors"> functors<br>
+            <input type="radio" name="q27" value="modules"> modules<br>
+            <input type="radio" name="q27" value="structures"> structures<br>
+        </div>
+        <div class="question">
+            <p>ما هي الطريقة الأكثر فعالية لتحليل التعابير في OCaml؟</p>
+            <input type="radio" name="q28" value="parsing libraries"> parsing libraries<br>
+            <input type="radio" name="q28" value="syntax trees"> syntax trees<br>
+            <input type="radio" name="q28" value="manual parsing"> manual parsing<br>
+        </div>
+        <div class="question">
+            <p>ما هي مكتبة Lwt وكيف تستخدم؟</p>
+            <input type="radio" name="q29" value="Lwt"> Lwt<br>
+            <input type="radio" name="q29" value="Async"> Async<br>
+            <input type="radio" name="q29" value="Threads"> Threads<br>
+        </div>
+        <div class="question">
+            <p>ما هي الـ algebraic data types في OCaml؟</p>
+            <input type="radio" name="q30" value="algebraic data types"> algebraic data types<br>
+            <input type="radio" name="q30" value="functional data types"> functional data types<br>
+            <input type="radio" name="q30" value="compound types"> compound types<br>
+        </div>
+    </div>
+
+    <button onclick="showResult()">طمنى بسرعه</button>
+
+    <div id="evaluationPopup" class="evaluation-popup">
+        <p id="evaluationResult"></p>
+        <button onclick="closePopup()">إغلاق</button>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            easy: {
+                q1: "let",
+                q2: "function",
+                q3: "float",
+                q4: "[1; 2; 3]",
+                q5: "string",
+                q6: "type",
+                q7: "param ?",
+                q8: "default values",
+                q9: "bool",
+                q10: "match"
+            },
+            medium: {
+                q11: "type",
+                q12: "param",
+                q13: "option",
+                q14: "exception handling",
+                q15: "ref",
+                q16: "Lwt",
+                q17: "Lwt",
+                q18: "varargs",
+                q19: "type",
+                q20: "match"
+            },
+            hard: {
+                q21: "functional programming",
+                q22: "async",
+                q23: "polymorphic variants",
+                q24: "pattern matching",
+                q25: "opam",
+                q26: "type 'a",
+                q27: "functors",
+                q28: "parsing libraries",
+                q29: "Lwt",
+                q30: "algebraic data types"
+            }
+        };
+
+        document.getElementById('levelSelect').addEventListener('change', function () {
+            const level = this.value;
+            document.querySelectorAll('.level-content').forEach(div => div.classList.add('hidden'));
+            document.getElementById(level).classList.remove('hidden');
+        });
+
+        function showResult() {
+            const level = document.getElementById('levelSelect').value;
+            const questions = document.querySelectorAll(`#${level} .question`);
+            let score = 0;
+
+            questions.forEach(question => {
+                const qId = question.querySelector('input[type="radio"]').name;
+                const selectedAnswer = question.querySelector('input[type="radio"]:checked');
+                if (selectedAnswer && selectedAnswer.value === correctAnswers[level][qId]) {
+                    score++;
+                }
+            });
+
+            const totalQuestions = questions.length;
+            const resultText = `لقد حصلت على ${score} من ${totalQuestions} إجابة صحيحة.`;
+            document.getElementById('evaluationResult').innerText = resultText;
+            document.getElementById('evaluationPopup').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('evaluationPopup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
