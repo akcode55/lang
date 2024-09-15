@@ -2,7 +2,7 @@
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <title>امتحان F#</title>
+    <title>امتحان python</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Oswald:wght@500&display=swap" rel="stylesheet">
     <style>
         body {
@@ -116,6 +116,7 @@
     </style>
 </head>
 <body>
+    <div class="container">
     <h1>اختبار Python3</h1>
     <select id="levelSelect">
         <option value="easy">المستوى السهل</option>
@@ -438,24 +439,26 @@
             <input type="radio" name="q50" value="handle"> handle<br>
         </div>
     </div>
+</div>
 
-    <button onclick="submitQuiz()">تقديم</button>
+<button onclick="submitQuiz()">طمنى بسرعه</button>
+</div>
 
-    <div id="evaluationPopup" class="evaluation-popup">
-        <h2>نتائج الاختبار</h2>
-        <div id="resultContent"></div>
-        <button onclick="closePopup()">إغلاق</button>
-    </div>
+<!-- نافذة النتيجة -->
+<div id="resultPopup" class="evaluation-popup">
+<p id="resultText"></p>
+<button onclick="closePopup()">إغلاق</button>
+</div>
 
-    <script>
-        document.getElementById('levelSelect').addEventListener('change', function () {
-            const level = this.value;
-            document.querySelectorAll('.level-content').forEach(el => el.classList.add('hidden'));
-            document.getElementById(level).classList.remove('hidden');
-        });
+<script>
+// إظهار الأسئلة بناءً على المستوى المحدد
+document.getElementById('levelSelect').addEventListener('change', function() {
+    document.querySelectorAll('.level-content').forEach(div => div.classList.add('hidden'));
+    document.getElementById(this.value).classList.remove('hidden');
+});
 
-        function submitQuiz() {
-            const answers = {
+// الإجابات الصحيحة لكل مستوى
+const correctAnswers = {
                 easy: {
                     q1: 'def',
                     q2: '=',
@@ -516,28 +519,35 @@
                     q50: 'try...except'
                 }
             };
+    // الحصول على الإجابة الصحيحة بناءً على معرف السؤال
+    function getCorrectAnswer(questionId) {
+        const level = document.getElementById('levelSelect').value;
+        return correctAnswers[level][questionId];
+    }
 
-            let result = '';
-            ['easy', 'medium', 'hard'].forEach(level => {
-                document.querySelectorAll(`#${level} .question`).forEach((question) => {
-                    const qName = question.querySelector('input[type="radio"]:checked');
-                    const qId = question.querySelector('p').innerText.split(' ')[1].toLowerCase();
-                    const correctAnswer = answers[level][qId];
-                    if (qName && qName.value === correctAnswer) {
-                        result += `<p>السؤال ${qId} (مستوى ${level}): الإجابة صحيحة</p>`;
-                    } else {
-                        result += `<p>السؤال ${qId} (مستوى ${level}): الإجابة خاطئة</p>`;
-                    }
-                });
-            });
+    // تقديم الامتحان وحساب النتيجة
+    function submitQuiz() {
+        const level = document.getElementById('levelSelect').value;
+        const questions = document.querySelectorAll(`#${level} .question`);
+        let score = 0;
 
-            document.getElementById('resultContent').innerHTML = result;
-            document.getElementById('evaluationPopup').style.display = 'block';
-        }
+        questions.forEach((question) => {
+            const questionId = question.querySelector('input[type="radio"]').name;
+            const selectedAnswer = question.querySelector('input[type="radio"]:checked');
+            if (selectedAnswer && selectedAnswer.value === getCorrectAnswer(questionId)) {
+                score++;
+            }
+        });
 
-        function closePopup() {
-            document.getElementById('evaluationPopup').style.display = 'none';
-        }
-    </script>
+        const resultText = `نتيجتك هي: ${score} من ${questions.length}`;
+        document.getElementById('resultText').innerText = resultText;
+        document.getElementById('resultPopup').style.display = 'block';
+    }
+
+    // إغلاق نافذة النتيجة
+    function closePopup() {
+        document.getElementById('resultPopup').style.display = 'none';
+    }
+</script>
 </body>
 </html>
