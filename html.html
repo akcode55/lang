@@ -512,67 +512,110 @@
 </div>
 
 <script>
-    const levelSelect = document.getElementById('levelSelect');
-    const levelContents = document.querySelectorAll('.level-content');
-    const resultPopup = document.getElementById('resultPopup');
-    const resultText = document.getElementById('resultText');
-
-    levelSelect.addEventListener('change', (e) => {
-        const selectedLevel = e.target.value;
-
-        levelContents.forEach(content => {
-            if (content.id === selectedLevel) {
-                content.classList.remove('hidden');
-            } else {
-                content.classList.add('hidden');
-            }
-        });
+    // إظهار الأسئلة بناءً على المستوى المحدد
+    document.getElementById('levelSelect').addEventListener('change', function() {
+        document.querySelectorAll('.level-content').forEach(div => div.classList.add('hidden'));
+        document.getElementById(this.value).classList.remove('hidden');
     });
 
+    // الإجابات الصحيحة لكل مستوى
+    const correctAnswers = {
+        easy: {
+            q1: "header",
+            q2: "img src",
+            q3: "a",
+            q4: "ul",
+            q5: "table",
+            q6: "li",
+            q7: "div",
+            q8: "<!-- -->",
+            q9: "iframe",
+            q10: "form",
+            q11: "alt",
+            q12: "head",
+            q13: "link",
+            q14: "h1",
+            q15: "video",
+            q16: "button",
+            q17: "i",
+            q18: "ol",
+            q19: "code",
+            q20: "a href='#section'",
+            q21: "center",
+            q22: "fieldset",
+            q23: "thead",
+            q24: "tr",
+            q25: "td",
+            q26: "input type='text'",
+            q27: "map",
+            q28: "area",
+            q29: "header",
+            q30: "input"
+        },
+        medium: {
+            q31: "background-color",
+            q32: "font-size",
+            q33: "text-align",
+            q34: "font-style",
+            q35: "line-height",
+            q36: "border",
+            q37: "margin",
+            q38: "width",
+            q39: "height",
+            q40: "text-transform",
+            q41: "letter-spacing",
+            q42: "word-spacing",
+            q43: "background-image",
+            q44: "text-align",
+            q45: "direction"
+        },
+        hard: {
+            q46: "flex",
+            q47: "flex-grow",
+            q48: "order",
+            q49: "justify-content",
+            q50: "align-items",
+            q51: "gap",
+            q52: "background-size",
+            q53: "background-position",
+            q54: "order",
+            q55: "flex-wrap",
+            q56: "align-items",
+            q57: "justify-content"
+        }
+    };
+
+    // الحصول على الإجابة الصحيحة بناءً على معرف السؤال
+    function getCorrectAnswer(questionId) {
+        const level = document.getElementById('levelSelect').value;
+        return correctAnswers[level][questionId];
+    }
+
+    // تقديم الامتحان وحساب النتيجة
     function submitQuiz() {
-        const selectedLevel = levelSelect.value;
-        const questions = document.querySelectorAll(`#${selectedLevel} .question`);
+        const level = document.getElementById('levelSelect').value;
+        const questions = document.querySelectorAll(`#${level} .question`);
         let score = 0;
 
-        questions.forEach(question => {
-            const selectedOption = question.querySelector('input[type="radio"]:checked');
-            if (selectedOption && selectedOption.value === getCorrectAnswer(question)) {
+        questions.forEach((question) => {
+            const questionId = question.querySelector('input[type="radio"]').name;
+            const selectedAnswer = question.querySelector('input[type="radio"]:checked');
+            if (selectedAnswer && selectedAnswer.value === getCorrectAnswer(questionId)) {
                 score++;
             }
         });
 
-        resultText.textContent = `لقد أجبت بشكل صحيح على ${score} من ${questions.length} سؤال.`;
-        resultPopup.style.display = 'block';
+        const resultText = `نتيجتك هي: ${score} من ${questions.length}`;
+        document.getElementById('resultText').innerText = resultText;
+        document.getElementById('resultPopup').style.display = 'block';
     }
 
-    function getCorrectAnswer(question) {
-            const correctAnswers = {
-                "q1": "h1", "q2": "img src", "q3": "a",
-                "q4": "ul", "q5": "table", "q6": "li",
-                "q7": "div", "q8": "<!-- -->", "q9": "iframe",
-                "q10": "form", "q11": "alt", "q12": "head",
-                "q13": "link", "q14": "h1", "q15": "video",
-                "q16": "button", "q17": "i", "q18": "ol",
-                "q19": "code", "q20": "a href='#section'", "q21": "center",
-                "q22": "fieldset", "q23": "thead", "q24": "tr",
-                "q25": "td", "q26": "input type='text'", "q27": "map",
-                "q28": "area", "q29": "header", "q30": "input",
-                "q31": "background-color", "q32": "font-size", "q33": "text-align",
-                "q34": "font-style", "q35": "line-height", "q36": "border",
-                "q37": "margin", "q38": "width", "q39": "height",
-                "q40": "text-transform", "q41": "letter-spacing", "q42": "word-spacing",
-                "q43": "background-image", "q44": "text-align", "q45": "direction",
-                "q46": "flex", "q47": "flex-grow", "q48": "order",
-                "q49": "justify-content", "q50": "align-items", "q51": "gap"
-            };
-
-const questionId = question.querySelector('input[type="radio"]').name;
-return correctAnswers[selectedLevel][questionId];
-}
-
-function closePopup() {
-resultPopup.style.display = 'none';
-}
+    // إغلاق نافذة النتيجة
+    function closePopup() {
+        document.getElementById('resultPopup').style.display = 'none';
+    }
 </script>
+
+
 </body>
 </html>
