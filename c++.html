@@ -326,19 +326,17 @@
                 <input type="radio" name="q31" value="immutable"> immutable<br>
          </div>
         </div>
-        <button onclick="submitQuiz()">طمنى بسرعه</button>
-    </div>
+        <button onclick="showResults()">طمنى بسرعه</button>
 
-    <div id="popup" class="evaluation-popup">
-        <p id="popupResult"></p>
-        <button onclick="closePopup()">إغلاق</button>
+        <div id="evaluationPopup" class="evaluation-popup">
+            <h2>نتائج الاختبار</h2>
+            <p id="evaluationResult"></p>
+            <button onclick="closePopup()">إغلاق</button>
+      
     </div>
 
     <script>
-        document.getElementById('levelSelect').addEventListener('change', function() {
-            document.querySelectorAll('.level-content').forEach(div => div.classList.add('hidden'));
-            document.getElementById(this.value).classList.remove('hidden');
-        });
+      
 
         const correctAnswers = {
             easy: {
@@ -379,29 +377,28 @@
             }
         };
 
-        function getCorrectAnswer(questionId) {
-            const level = document.getElementById('levelSelect').value;
-            return correctAnswers[level][questionId];
-        }
+        document.getElementById('levelSelect').addEventListener('change', function() {
+            document.querySelectorAll('.level-content').forEach(div => div.classList.add('hidden'));
+            document.getElementById(this.value).classList.remove('hidden');
+        });
 
-        function submitQuiz() {
-            const level = document.getElementById('levelSelect').value;
-            const questions = document.querySelectorAll(`#${level} .question`);
-            let score = 0;
-            questions.forEach((question) => {
-                const questionId = question.querySelector('p').textContent.trim().split(' ')[0].toLowerCase();
-                const selectedAnswer = question.querySelector('input[type="radio"]:checked');
-                if (selectedAnswer && selectedAnswer.value === getCorrectAnswer(questionId)) {
+        function showResults() {
+            const selectedLevel = document.getElementById('levelSelect').value;
+            const answers = document.querySelectorAll(`#${selectedLevel} input[type="radio"]:checked`);
+            const result = Array.from(answers).reduce((score, answer) => {
+                const question = answer.name;
+                const selectedAnswer = answer.value;
+                if (correctAnswers[selectedLevel][question] === selectedAnswer) {
                     score++;
                 }
-            });
-            const resultText = `نتيجتك هي: ${score} من ${questions.length}`;
-            document.getElementById('popupResult').innerText = resultText;
-            document.getElementById('popup').style.display = 'block';
+                return score;
+            }, 0);
+            document.getElementById('evaluationResult').innerText = `لقد حصلت على ${result} من ${Object.keys(correctAnswers[selectedLevel]).length} إجابة صحيحة.`;
+            document.getElementById('evaluationPopup').style.display = 'block';
         }
 
         function closePopup() {
-            document.getElementById('popup').style.display = 'none';
+            document.getElementById('evaluationPopup').style.display = 'none';
         }
     </script>
 </body>
