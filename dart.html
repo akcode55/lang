@@ -463,93 +463,97 @@
             </div>
         </div>
 
-        <!-- زر تقديم -->
-        <button onclick="submitQuiz()">طمنى بسرعه</button>
+        <button onclick="showResults()">طمنى بسرعه</button>
 
-        <!-- نافذة عرض النتيجة -->
         <div id="evaluationPopup" class="evaluation-popup">
-            <p id="resultMessage"></p>
+            <h2>نتائج الاختبار</h2>
+            <p id="evaluationResult"></p>
             <button onclick="closePopup()">إغلاق</button>
-        </div>
+      
     </div>
 
     <script>
-        document.getElementById('levelSelect').addEventListener('change', function() {
-            var level = this.value;
-            document.querySelectorAll('.level-content').forEach(function(div) {
-                div.classList.add('hidden');
-            });
-            document.getElementById(level).classList.remove('hidden');
+
+        const correctAnswers = {
+    easy: {
+        q1: "void",
+        q2: "final",
+        q3: "int",
+        q4: "print",
+        q5: "for",
+        q6: "try",
+        q7: "class MyClass { }",
+        q8: "new MyClass()",
+        q9: "add",
+        q10: "forEach",
+        q11: "double",
+        q12: "var",
+        q13: "const",
+        q14: "String",
+        q15: "**",
+        q16: "async",
+        q17: "implements",
+        q18: "async",
+        q19: "var",
+        q20: "abstract"
+    },
+    medium: {
+        q21: "bool",
+        q22: "int.parse()",
+        q23: "class",
+        q24: "forEach()",
+        q25: "String",
+        q26: "List",
+        q27: "get",
+        q28: "async",
+        q29: "import",
+        q30: "test()",
+        q31: "null",
+        q32: "Set",
+        q33: "Map",
+        q34: "List",
+        q35: "Future",
+        q36: "const",
+        q37: "String",
+        q38: "Set",
+        q39: "Map",
+        q40: "async"
+    },
+    hard: {
+        q41: "Future",
+        q42: "const",
+        q43: "abstract",
+        q44: "await",
+        q45: "test",
+        q46: "Future",
+        q47: "Nullable",
+        q48: "Future",
+        q49: "interface",
+        q50: "async/await",
+        q51: "null",
+        q52: "Methods",
+        q53: "final"
+    }
+};
+
+
+document.getElementById('levelSelect').addEventListener('change', function() {
+            document.querySelectorAll('.level-content').forEach(div => div.classList.add('hidden'));
+            document.getElementById(this.value).classList.remove('hidden');
         });
 
-        function submitQuiz() {
-            var score = 0;
-            var totalQuestions = 40;
-            var correctAnswers = {
-                'q1': 'Dart',
-                'q2': 'flutter',
-                'q3': 'for',
-                'q4': 'int',
-                'q5': 'dynamic',
-                'q6': 'final',
-                'q7': 'List',
-                'q8': 'Map',
-                'q9': 'Set',
-                'q10': 'async',
-                'q11': 'num',
-                'q12': 'var',
-                'q13': 'const',
-                'q14': 'String',
-                'q15': '**',
-                'q16': 'async',
-                'q17': 'abstract',
-                'q18': 'async',
-                'q19': 'var',
-                'q20': 'abstract',
-                'q21': 'bool',
-                'q22': 'int.parse()',
-                'q23': 'class',
-                'q24': 'forEach()',
-                'q25': 'String',
-                'q26': 'List',
-                'q27': 'get',
-                'q28': 'async',
-                'q29': 'import',
-                'q30': 'test()',
-                'q31': 'null',
-                'q32': 'Set',
-                'q33': 'Map',
-                'q34': 'List',
-                'q35': 'Future',
-                'q36': 'const',
-                'q37': 'String',
-                'q38': 'Set',
-                'q39': 'Map',
-                'q40': 'async',
-                'q41': 'Future',
-                'q42': 'const',
-                'q43': 'abstract',
-                'q44': 'await',
-                'q45': 'test',
-                'q46': 'Future',
-                'q47': 'Future',
-                'q48': 'Future',
-                'q49': 'abstract',
-                'q50': 'async/await',
-                'q51': 'null',
-                'q52': 'Methods',
-                'q53': 'final'
-            };
-
-            for (var key in correctAnswers) {
-                var selectedOption = document.querySelector(`input[name="${key}"]:checked`);
-                if (selectedOption && selectedOption.value === correctAnswers[key]) {
+        function showResults() {
+            const selectedLevel = document.getElementById('levelSelect').value;
+            const answers = document.querySelectorAll(`#${selectedLevel} input[type="radio"]:checked`);
+            const result = Array.from(answers).reduce((score, answer) => {
+                const question = answer.name;
+                const selectedAnswer = answer.value;
+                if (correctAnswers[selectedLevel][question] === selectedAnswer) {
                     score++;
                 }
-            }
-
-            var resultMessage = `لقد حصلت على ${score} من ${totalQuestions} إجابة صحيحة.`;
-            document.getElementById('resultMessage').innerText = resultMessage;
+                return score;
+            }, 0);
+            document.getElementById('evaluationResult').innerText = `لقد حصلت على ${result} من ${Object.keys(correctAnswers[selectedLevel]).length} إجابة صحيحة.`;
             document.getElementById('evaluationPopup').style.display = 'block';
         }
 
