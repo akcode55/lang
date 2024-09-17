@@ -2,7 +2,7 @@
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <title>امتحان F#</title>
+    <title>امتحان Octav</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Oswald:wght@500&display=swap" rel="stylesheet">
     <style>
         body {
@@ -197,9 +197,9 @@
             <input type="radio" name="q12" value="run('file.m')"> run('file.m')<br>
             <input type="radio" name="q12" value="execute('file.m')"> execute('file.m')<br>
         </div>
-
+    </div>
         <!-- أسئلة المستوى المتوسط -->
-        <div id="medium" class="level-content hidden">
+        <div id="medium" class="level-content ">
             <h2 class="level-title">المستوى المتوسط</h2>
             <div class="question">
                 <p>كيف تقوم بإنشاء مصفوفة من أعداد عشوائية في Octave؟</p>
@@ -279,9 +279,9 @@
                 <input type="radio" name="q25" value="average()"> average()<br>
                 <input type="radio" name="q25" value="avg()"> avg()<br>
             </div>
-
+        </div>
         <!-- أسئلة المستوى الصعب -->
-        <div id="hard" class="level-content hidden">
+        <div id="hard" class="level-content ">
             <h2 class="level-title">المستوى الصعب</h2>
             <div class="question">
                 <p>كيف يمكنك التعامل مع الاستثناءات في Octave؟</p>
@@ -357,27 +357,20 @@
             </div>
         </div>
 
-    <button id="submitButton">تقديم</button>
+ 
+        <button onclick="showResults()">طمنى بسرعه</button>
 
-    <div id="evaluationPopup" class="evaluation-popup">
-        <h2>النتائج</h2>
-        <p id="resultText"></p>
-        <button onclick="closePopup()">إغلاق</button>
+        <div id="evaluationPopup" class="evaluation-popup">
+            <h2>نتائج الاختبار</h2>
+            <p id="evaluationResult"></p>
+            <button onclick="closePopup()">إغلاق</button>
+      
     </div>
 
     <script>
-        document.getElementById('levelSelect').addEventListener('change', function () {
-            document.querySelectorAll('.level-content').forEach(function (content) {
-                content.classList.add('hidden');
-            });
-            document.getElementById(this.value).classList.remove('hidden');
-        });
-
-        document.getElementById('submitButton').addEventListener('click', function () {
-            let score = 0;
-            let totalQuestions = 30;
-            // الأسئلة السهلة
-            let easyAnswers = {
+      
+      const correctAnswers = {
+        easy: {
                 q1: 'A = [1, 2, 3]',
                 q2: 'function',
                 q3: 'mean()',
@@ -390,9 +383,9 @@
                 q10: 'if condition',
                 q11: '% comment',
                 q12: 'source(\'file.m\')'
-            };
+            },
             // الأسئلة المتوسطة
-            let mediumAnswers = {
+            medium: {
                 q13: 'rand()',
                 q14: 'max()',
                 q15: 'A + B',
@@ -406,9 +399,9 @@
                 q23: 'disp()',
                 q24: '% comment',
                 q25: 'mean()'
-            };
+            },
             // الأسئلة الصعبة
-            let hardAnswers = {
+            hard: {
                 q26: 'try...catch',
                 q27: 'varargin',
                 q28: 'function [output] = myFunction(input1, input2, varargin)',
@@ -421,32 +414,33 @@
                 q35: 'real()',
                 q36: 'advanced_calculation',
                 q37: 'analysis'
-            };
-
-            function calculateScore(level, answers) {
-                let score = 0;
-                let questions = document.querySelectorAll(`#${level} .question`);
-                questions.forEach(function (question) {
-                    let selected = question.querySelector('input[type="radio"]:checked');
-                    let answerKey = question.querySelector('p').textContent.split(' ')[0].toLowerCase();
-                    if (selected && selected.value === answers[answerKey]) {
-                        score++;
-                    }
-                });
-                return score;
             }
+        };
 
-            score += calculateScore('easy', easyAnswers);
-            score += calculateScore('medium', mediumAnswers);
-            score += calculateScore('hard', hardAnswers);
-
-            document.getElementById('resultText').textContent = `لقد حصلت على ${score} من ${totalQuestions} في الاختبار.`;
-            document.getElementById('evaluationPopup').style.display = 'block';
+            document.getElementById('levelSelect').addEventListener('change', function() {
+            document.querySelectorAll('.level-content').forEach(div => div.classList.add('hidden'));
+            document.getElementById(this.value).classList.remove('hidden');
         });
+
+        function showResults() {
+            const selectedLevel = document.getElementById('levelSelect').value;
+            const answers = document.querySelectorAll(`#${selectedLevel} input[type="radio"]:checked`);
+            const result = Array.from(answers).reduce((score, answer) => {
+                const question = answer.name;
+                const selectedAnswer = answer.value;
+                if (correctAnswers[selectedLevel][question] === selectedAnswer) {
+                    score++;
+                }
+                return score;
+            }, 0);
+            document.getElementById('evaluationResult').innerText = `لقد حصلت على ${result} من ${Object.keys(correctAnswers[selectedLevel]).length} إجابة صحيحة.`;
+            document.getElementById('evaluationPopup').style.display = 'block';
+        }
 
         function closePopup() {
             document.getElementById('evaluationPopup').style.display = 'none';
         }
-    </script>
+</script>
 </body>
 </html>
+
