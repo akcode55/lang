@@ -2,7 +2,7 @@
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <title>امتحان Flutter</title>
+    <title>امتحان Swift</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Oswald:wght@500&display=swap" rel="stylesheet">
     <style>
         body {
@@ -507,28 +507,19 @@
         </div>
 
         <!-- زر تقديم -->
-        <button onclick="submitQuiz()">طمنى بسرعه</button>
+        <button onclick="showResults()">طمنى بسرعه</button>
 
-        <!-- نافذة عرض النتيجة -->
         <div id="evaluationPopup" class="evaluation-popup">
-            <p id="resultMessage"></p>
+            <h2>نتائج الاختبار</h2>
+            <p id="evaluationResult"></p>
             <button onclick="closePopup()">إغلاق</button>
-        </div>
+      
     </div>
 
     <script>
-        document.getElementById('levelSelect').addEventListener('change', function() {
-            var level = this.value;
-            document.querySelectorAll('.level-content').forEach(function(div) {
-                div.classList.add('hidden');
-            });
-            document.getElementById(level).classList.remove('hidden');
-        });
-
-         function submitQuiz() {
-            var score = 0;
-            var totalQuestions = 60;
-            var correctAnswers = {
+       const correctAnswers = {
+            // المستوى السهل (Easy)
+            "easy": {
                 "q1": "SwiftUI",
                 "q2": "Text",
                 "q3": "TextField",
@@ -548,7 +539,10 @@
                 "q17": "CoreData",
                 "q18": "Realm",
                 "q19": "JSONDecoder",
-                "q20": "Image",
+                "q20": "Image"
+            },
+            // المستوى المتوسط (Medium)
+            "medium": {
                 "q21": "@Published",
                 "q22": "ForEach",
                 "q23": "CustomModifiers",
@@ -568,7 +562,10 @@
                 "q37": "Binding",
                 "q38": "Struct",
                 "q39": "Array",
-                "q40": "CustomView",
+                "q40": "CustomView"
+            },
+            // المستوى الصعب (Hard)
+            "hard": {
                 "q41": "AsyncAwait",
                 "q42": "ViewBuilder",
                 "q43": "Protocol",
@@ -589,17 +586,25 @@
                 "q58": "Stack",
                 "q59": "Future",
                 "q60": "App"
-            };
+            }
+        };
+        document.getElementById('levelSelect').addEventListener('change', function() {
+            document.querySelectorAll('.level-content').forEach(div => div.classList.add('hidden'));
+            document.getElementById(this.value).classList.remove('hidden');
+        });
 
-            for (var key in correctAnswers) {
-                var selectedOption = document.querySelector(`input[name="${key}"]:checked`);
-                if (selectedOption && selectedOption.value === correctAnswers[key]) {
+        function showResults() {
+            const selectedLevel = document.getElementById('levelSelect').value;
+            const answers = document.querySelectorAll(`#${selectedLevel} input[type="radio"]:checked`);
+            const result = Array.from(answers).reduce((score, answer) => {
+                const question = answer.name;
+                const selectedAnswer = answer.value;
+                if (correctAnswers[selectedLevel][question] === selectedAnswer) {
                     score++;
                 }
-            }
-
-            var resultMessage = `لقد حصلت على ${score} من ${totalQuestions} إجابة صحيحة.`;
-            document.getElementById('resultMessage').innerText = resultMessage;
+                return score;
+            }, 0);
+            document.getElementById('evaluationResult').innerText = `لقد حصلت على ${result} من ${Object.keys(correctAnswers[selectedLevel]).length} إجابة صحيحة.`;
             document.getElementById('evaluationPopup').style.display = 'block';
         }
 
