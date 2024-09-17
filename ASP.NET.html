@@ -116,471 +116,357 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>امتحان ASP.NET</h1>
-        
-        <!-- القائمة المنسدلة لاختيار المستوى -->
+    <div class="quiz-container">
+        <h1>اختبار ASP.NET</h1>
         <select id="levelSelect">
-            <option value="easy">المستوى السهل</option>
-            <option value="medium">المستوى المتوسط</option>
-            <option value="hard">المستوى الصعب</option>
+            <option value="easy">سهل</option>
+            <option value="medium">متوسط</option>
+            <option value="hard">صعب</option>
         </select>
 
         <!-- أسئلة المستوى السهل -->
-        <div id="easy" class="level-content">
+       <div id="easy" class="level-content">
             <h2 class="level-title">المستوى السهل</h2>
             <div class="question">
-                <p>ما هي اللغة الأساسية المستخدمة في تطوير تطبيقات ASP.NET؟</p>
-                <input type="radio" name="q1" value="C#"> C#<br>
-                <input type="radio" name="q1" value="VB.NET"> VB.NET<br>
-                <input type="radio" name="q1" value="JavaScript"> JavaScript<br>
+                <p>ما هو ASP.NET؟</p>
+                <input type="radio" name="q1" value="إطار عمل لتطوير تطبيقات الويب"> إطار عمل لتطوير تطبيقات الويب<br>
+                <input type="radio" name="q1" value="لغة برمجة"> لغة برمجة<br>
+                <input type="radio" name="q1" value="خدمة استضافة"> خدمة استضافة<br>
             </div>
             <div class="question">
-                <p>ما هو الهدف من استخدام ملف Web.config في تطبيقات ASP.NET؟</p>
-                <input type="radio" name="q2" value="تكوين الإعدادات"> تكوين الإعدادات<br>
-                <input type="radio" name="q2" value="كتابة الكود"> كتابة الكود<br>
-                <input type="radio" name="q2" value="إدارة الأمان"> إدارة الأمان<br>
+                <p>كيف يمكنك إنشاء مشروع ASP.NET جديد؟</p>
+                <input type="radio" name="q2" value="باستخدام Visual Studio"> باستخدام Visual Studio<br>
+                <input type="radio" name="q2" value="باستخدام Notepad"> باستخدام Notepad<br>
+                <input type="radio" name="q2" value="باستخدام Command Prompt"> باستخدام Command Prompt<br>
             </div>
             <div class="question">
-                <p>ما هي الطريقة التي تستخدم لتوجيه المستخدم إلى صفحة أخرى في ASP.NET؟</p>
-                <input type="radio" name="q3" value="Response.Redirect"> Response.Redirect<br>
-                <input type="radio" name="q3" value="Server.Transfer"> Server.Transfer<br>
-                <input type="radio" name="q3" value="RedirectToAction"> RedirectToAction<br>
+                <p>ما هي العناصر الأساسية لتطبيق ASP.NET؟</p>
+                <input type="radio" name="q3" value="التحكمات، النماذج، والواجهات"> التحكمات، النماذج، والواجهات<br>
+                <input type="radio" name="q3" value="الملفات النصية فقط"> الملفات النصية فقط<br>
+                <input type="radio" name="q3" value="الصور والصوتيات فقط"> الصور والصوتيات فقط<br>
             </div>
             <div class="question">
-                <p>ما هو الفرق بين صفحة ASPX وملف ASCX؟</p>
-                <input type="radio" name="q4" value="ASPX هي صفحة، ASCX هي وحدة تحكم"> ASPX هي صفحة، ASCX هي وحدة تحكم<br>
-                <input type="radio" name="q4" value="ASPX و ASCX هما نفس الشيء"> ASPX و ASCX هما نفس الشيء<br>
-                <input type="radio" name="q4" value="ASPX هو ملف XML، ASCX هو ملف HTML"> ASPX هو ملف XML، ASCX هو ملف HTML<br>
+                <p>ما هو Model في ASP.NET MVC؟</p>
+                <input type="radio" name="q4" value="تمثل البيانات والنماذج"> تمثل البيانات والنماذج<br>
+                <input type="radio" name="q4" value="تمثل طرق العرض"> تمثل طرق العرض<br>
+                <input type="radio" name="q4" value="تمثل وحدة التحكم"> تمثل وحدة التحكم<br>
             </div>
             <div class="question">
-                <p>ما هي الطريقة التي تستخدم للوصول إلى قاعدة البيانات من تطبيق ASP.NET؟</p>
-                <input type="radio" name="q5" value="ADO.NET"> ADO.NET<br>
-                <input type="radio" name="q5" value="Entity Framework"> Entity Framework<br>
-                <input type="radio" name="q5" value="Dapper"> Dapper<br>
+                <p>ما هي وظيفة الـ Controller في ASP.NET MVC؟</p>
+                <input type="radio" name="q5" value="التعامل مع طلبات المستخدم وتوجيهها"> التعامل مع طلبات المستخدم وتوجيهها<br>
+                <input type="radio" name="q5" value="عرض البيانات فقط"> عرض البيانات فقط<br>
+                <input type="radio" name="q5" value="تخزين البيانات فقط"> تخزين البيانات فقط<br>
             </div>
             <div class="question">
-                <p>ما هي الميزة التي يوفرها ASP.NET Web API؟</p>
-                <input type="radio" name="q6" value="بناء واجهات برمجة التطبيقات"> بناء واجهات برمجة التطبيقات<br>
-                <input type="radio" name="q6" value="تطوير صفحات الويب"> تطوير صفحات الويب<br>
-                <input type="radio" name="q6" value="إدارة الجلسات"> إدارة الجلسات<br>
+                <p>ما هو Razor في ASP.NET؟</p>
+                <input type="radio" name="q6" value="محرك عرض لكتابة HTML مع C#"> محرك عرض لكتابة HTML مع C#<br>
+                <input type="radio" name="q6" value="أداة لتحليل البيانات"> أداة لتحليل البيانات<br>
+                <input type="radio" name="q6" value="مكتبة لكتابة JavaScript"> مكتبة لكتابة JavaScript<br>
             </div>
             <div class="question">
-                <p>ما هو المكون الذي يعرض البيانات في ASP.NET MVC؟</p>
-                <input type="radio" name="q7" value="View"> View<br>
-                <input type="radio" name="q7" value="Model"> Model<br>
-                <input type="radio" name="q7" value="Controller"> Controller<br>
+                <p>كيف يمكنك إضافة خدمة في ASP.NET Core؟</p>
+                <input type="radio" name="q7" value="باستخدام ConfigureServices"> باستخدام ConfigureServices<br>
+                <input type="radio" name="q7" value="باستخدام Configure"> باستخدام Configure<br>
+                <input type="radio" name="q7" value="باستخدام AddService"> باستخدام AddService<br>
             </div>
             <div class="question">
-                <p>ما هي الطريقة التي تستخدم لتخزين البيانات بين طلبات المستخدم في ASP.NET؟</p>
-                <input type="radio" name="q8" value="Session"> Session<br>
-                <input type="radio" name="q8" value="Cache"> Cache<br>
-                <input type="radio" name="q8" value="Cookies"> Cookies<br>
+                <p>ما هي `Startup` في ASP.NET Core؟</p>
+                <input type="radio" name="q8" value="الفئة التي تقوم بتكوين التطبيق والخدمات"> الفئة التي تقوم بتكوين التطبيق والخدمات<br>
+                <input type="radio" name="q8" value="الفئة التي تعرض البيانات فقط"> الفئة التي تعرض البيانات فقط<br>
+                <input type="radio" name="q8" value="الفئة التي تدير قواعد البيانات"> الفئة التي تدير قواعد البيانات<br>
             </div>
             <div class="question">
-                <p>ما هو المقصود بـ Model Binding في ASP.NET MVC؟</p>
-                <input type="radio" name="q9" value="ربط البيانات بين النموذج وواجهة المستخدم"> ربط البيانات بين النموذج وواجهة المستخدم<br>
-                <input type="radio" name="q9" value="إدارة الحالة"> إدارة الحالة<br>
-                <input type="radio" name="q9" value="تخزين البيانات"> تخزين البيانات<br>
+                <p>ما هي الميزة الرئيسية لاستخدام `Entity Framework`؟</p>
+                <input type="radio" name="q9" value="توفير واجهة برمجية للتعامل مع قواعد البيانات بشكل كائنات"> توفير واجهة برمجية للتعامل مع قواعد البيانات بشكل كائنات<br>
+                <input type="radio" name="q9" value="تحسين أداء تطبيقات الويب"> تحسين أداء تطبيقات الويب<br>
+                <input type="radio" name="q9" value="توفير أدوات لتحليل البيانات"> توفير أدوات لتحليل البيانات<br>
             </div>
             <div class="question">
-                <p>ما هو نظام التحكم في الوصول في ASP.NET؟</p>
-                <input type="radio" name="q10" value="Membership"> Membership<br>
-                <input type="radio" name="q10" value="Roles"> Roles<br>
-                <input type="radio" name="q10" value="Authentication"> Authentication<br>
+                <p>ما هو الفرق بين `View` و `Partial View` في ASP.NET MVC؟</p>
+                <input type="radio" name="q10" value="`View` تعرض صفحة كاملة و `Partial View` تعرض أجزاء منها"> `View` تعرض صفحة كاملة و `Partial View` تعرض أجزاء منها<br>
+                <input type="radio" name="q10" value="كلاهما يعرض صفحات كاملة"> كلاهما يعرض صفحات كاملة<br>
+                <input type="radio" name="q10" value="كلاهما يعرض بيانات فقط"> كلاهما يعرض بيانات فقط<br>
             </div>
-        </div>
+             <div class="question">
+                <p>ما هو الفرق بين ASP.NET و ASP.NET Core؟</p>
+                <input type="radio" name="q11" value="ASP.NET Core هو النسخة الحديثة والمفتوحة المصدر"> ASP.NET Core هو النسخة الحديثة والمفتوحة المصدر<br>
+                <input type="radio" name="q11" value="ASP.NET يدعم تطوير تطبيقات سطح المكتب فقط"> ASP.NET يدعم تطوير تطبيقات سطح المكتب فقط<br>
+                <input type="radio" name="q11" value="ASP.NET Core يستخدم فقط مع نظام ويندوز"> ASP.NET Core يستخدم فقط مع نظام ويندوز<br>
+            </div>
+            <div class="question">
+                <p>ما هو الفرق بين الـ WebForms و MVC في ASP.NET؟</p>
+                <input type="radio" name="q12" value="MVC يتيح فصل المهام بشكل أفضل"> MVC يتيح فصل المهام بشكل أفضل<br>
+                <input type="radio" name="q12" value="WebForms أسرع في التحميل"> WebForms أسرع في التحميل<br>
+                <input type="radio" name="q12" value="كلاهما لهما نفس الاستخدام"> كلاهما لهما نفس الاستخدام<br>
+            </div>
+            <div class="question">
+                <p>ما هي الفائدة من استخدام الجلسات (Sessions) في ASP.NET؟</p>
+                <input type="radio" name="q13" value="تخزين بيانات المستخدم بشكل مؤقت"> تخزين بيانات المستخدم بشكل مؤقت<br>
+                <input type="radio" name="q13" value="تحسين أداء الخادم"> تحسين أداء الخادم<br>
+                <input type="radio" name="q13" value="إدارة قواعد البيانات"> إدارة قواعد البيانات<br>
+            </div>
+            <div class="question">
+                <p>ما هي Middleware في ASP.NET Core؟</p>
+                <input type="radio" name="q14" value="مكونات لمعالجة الطلبات في التطبيق"> مكونات لمعالجة الطلبات في التطبيق<br>
+                <input type="radio" name="q14" value="أدوات لتحليل البيانات"> أدوات لتحليل البيانات<br>
+                <input type="radio" name="q14" value="خدمات لإدارة قواعد البيانات"> خدمات لإدارة قواعد البيانات<br>
+            </div>
+            <div class="question">
+                <p>ما هو دور الـ Identity في ASP.NET؟</p>
+                <input type="radio" name="q15" value="إدارة وتوثيق المستخدمين"> إدارة وتوثيق المستخدمين<br>
+                <input type="radio" name="q15" value="تحليل بيانات المستخدمين"> تحليل بيانات المستخدمين<br>
+                <input type="radio" name="q15" value="تحسين أداء التطبيق"> تحسين أداء التطبيق<br>
+            </div>
+            <div class="question">
+                <p>ما هو دور `IHostingEnvironment` في ASP.NET Core؟</p>
+                <input type="radio" name="q16" value="توفير معلومات عن بيئة الاستضافة"> توفير معلومات عن بيئة توفير معلومات عن بيئة الاستضافة<br>
+                <input type="radio" name="q16" value="إدارة بيانات المستخدم"> إدارة بيانات المستخدم<br>
+                <input type="radio" name="q16" value="تحسين أداء التطبيق"> تحسين أداء التطبيق<br>
+            </div>
+            <div class="question">
+                <p>ما هو استخدام الـ Tag Helpers في ASP.NET Core؟</p>
+                <input type="radio" name="q17" value="تسهيل كتابة شيفرة HTML مع C#"> تسهيل كتابة شيفرة HTML مع C#<br>
+                <input type="radio" name="q17" value="تحليل أداء الخادم"> تحليل أداء الخادم<br>
+                <input type="radio" name="q17" value="إدارة الجلسات"> إدارة الجلسات<br>
+            </div>
+            <div class="question">
+                <p>ما الفرق بين  `TempData` و `ViewBag` في ASP.NET MVC؟</p>
+                <input type="radio" name="q18" value="TempData يحتفظ بالبيانات لجلسة واحدة فقط"> TempData يحتفظ بالبيانات لجلسة واحدة فقط<br>
+                <input type="radio" name="q18" value="ViewBag يستخدم للتنقل بين الصفحات"> ViewBag يستخدم للتنقل بين الصفحات<br>
+                <input type="radio" name="q18" value="كلاهما يستخدم لتخزين الجلسات"> كلاهما يستخدم لتخزين الجلسات<br>
+            </div>
+            <div class="question">
+                <p>ما هو `Kestrel` في ASP.NET Core؟</p>
+                <input type="radio" name="q19" value="خادم ويب صغير مدمج"> خادم ويب صغير مدمج<br>
+                <input type="radio" name="q19" value="نظام توثيق المستخدمين"> نظام توثيق المستخدمين<br>
+                <input type="radio" name="q19" value="أداة لتحليل البيانات"> أداة لتحليل البيانات<br>
+            </div>
+            <div class="question">
+                <p>ما هو دور الـ `Services.AddScoped` في ASP.NET Core؟</p>
+                <input type="radio" name="q20" value="إنشاء مثيل للخدمة لكل طلب جديد"> إنشاء مثيل للخدمة لكل طلب جديد<br>
+                <input type="radio" name="q20" value="إنشاء مثيل دائم للخدمة"> إنشاء مثيل دائم للخدمة<br>
+                <input type="radio" name="q20" value="حذف البيانات المؤقتة"> حذف البيانات المؤقتة<br>
+            </div>
+        </div> 
+       
 
         <!-- أسئلة المستوى المتوسط -->
         <div id="medium" class="level-content hidden">
-                  <h2 class="level-title">المستوى المتوسط</h2>
+            <h2 class="level-title">المستوى المتوسط</h2>
             <div class="question">
-                <p>ما هو مفهوم الـ ViewState في ASP.NET؟</p>
-                <input type="radio" name="q1" value="تخزين حالة الصفحة"> تخزين حالة الصفحة<br>
-                <input type="radio" name="q1" value="إدارة الجلسات"> إدارة الجلسات<br>
-                <input type="radio" name="q1" value="إدارة التوجيهات"> إدارة التوجيهات<br>
+                <p>كيف يمكنك إنشاء استعلام LINQ في ASP.NET؟</p>
+                <input type="radio" name="q1" value="باستخدام كلمة مفتاحية from"> باستخدام كلمة مفتاحية from<br>
+                <input type="radio" name="q1" value="باستخدام كلمة مفتاحية select"> باستخدام كلمة مفتاحية select<br>
+                <input type="radio" name="q1" value="باستخدام كلمة مفتاحية query"> باستخدام كلمة مفتاحية query<br>
             </div>
             <div class="question">
-                <p>كيف يمكن استخدام الـ LINQ في ASP.NET؟</p>
-                <input type="radio" name="q2" value="الاستعلام عن البيانات"> الاستعلام عن البيانات<br>
-                <input type="radio" name="q2" value="التحكم في الجلسات"> التحكم في الجلسات<br>
-                <input type="radio" name="q2" value="إدارة الأمان"> إدارة الأمان<br>
+                <p>ما هو استخدام الـ ViewBag في ASP.NET MVC؟</p>
+                <input type="radio" name="q2" value="نقل البيانات بين وحدة التحكم والـ View"> نقل البيانات بين وحدة التحكم والـ View<br>
+                <input type="radio" name="q2" value="إنشاء نموذج بيانات"> إنشاء نموذج بيانات<br>
+                <input type="radio" name="q2" value="تعريف طرق العرض"> تعريف طرق العرض<br>
             </div>
             <div class="question">
-                <p>ما هو الفرق بين WebForms وMVC في ASP.NET؟</p>
-                <input type="radio" name="q3" value="WebForms يستخدم نماذج صفحة، بينما MVC يستخدم نموذج-عرض-تحكم"> WebForms يستخدم نماذج صفحة، بينما MVC يستخدم نموذج-عرض-تحكم<br>
-                <input type="radio" name="q3" value="لا يوجد فرق كبير"> لا يوجد فرق كبير<br>
-                <input type="radio" name="q3" value="WebForms أسرع من MVC"> WebForms أسرع من MVC<br>
+                <p>كيف يمكنك التعامل مع الأخطاء في تطبيق ASP.NET؟</p>
+                <input type="radio" name="q3" value="باستخدام الكتل try-catch"> باستخدام الكتل try-catch<br>
+                <input type="radio" name="q3" value="باستخدام الـ Debugger"> باستخدام الـ Debugger<br>
+                <input type="radio" name="q3" value="باستخدام Logs فقط"> باستخدام Logs فقط<br>
             </div>
             <div class="question">
-                <p>ما هي الأساليب التي يمكن استخدامها لتأمين تطبيق ASP.NET؟</p>
-                <input type="radio" name="q4" value="استخدام تشفير البيانات"> استخدام تشفير البيانات<br>
-                <input type="radio" name="q4" value="إدارة الأذونات"> إدارة الأذونات<br>
-                <input type="radio" name="q4" value="كلاهما"> كلاهما<br>
+                <p>ما هو الفرق بين الـ GET والـ POST في ASP.NET؟</p>
+                <input type="radio" name="q4" value="الـ GET يستخدم للحصول على البيانات والـ POST يستخدم لإرسال البيانات"> الـ GET يستخدم للحصول على البيانات والـ POST يستخدم لإرسال البيانات<br>
+                <input type="radio" name="q4" value="الـ GET و الـ POST يقومان بنفس الوظيفة"> الـ GET و الـ POST يقومان بنفس الوظيفة<br>
+                <input type="radio" name="q4" value="الـ GET يتميز بسرعة أكبر من الـ POST"> الـ GET يتميز بسرعة أكبر من الـ POST<br>
             </div>
             <div class="question">
-                <p>كيف يمكنك إدارة الأخطاء في تطبيق ASP.NET؟</p>
-                <input type="radio" name="q5" value="استخدام try-catch"> استخدام try-catch<br>
-                <input type="radio" name="q5" value="تسجيل الأخطاء في ملف"> تسجيل الأخطاء في ملف<br>
-                <input type="radio" name="q5" value="استخدام صفحات الخطأ المخصصة"> استخدام صفحات الخطأ المخصصة<br>
+                <p>ما هي `Partial View` في ASP.NET MVC؟</p>
+                <input type="radio" name="q5" value="جزء من View يعاد استخدامه في أماكن متعددة"> جزء من View يعاد استخدامه في أماكن متعددة<br>
+                <input type="radio" name="q5" value="صفحة كاملة تعرض بيانات"> صفحة كاملة تعرض بيانات<br>
+                <input type="radio" name="q5" value="نموذج بيانات"> نموذج بيانات<br>
             </div>
             <div class="question">
-                <p>ما هي الطريقة المستخدمة لإدارة الجلسات في ASP.NET؟</p>
-                <input type="radio" name="q6" value="جلسات الخادم"> جلسات الخادم<br>
-                <input type="radio" name="q6" value="جلسات العميل"> جلسات العميل<br>
-                <input type="radio" name="q6" value="كلاهما"> كلاهما<br>
+                <p>ما هو استخدام `Configure` في ASP.NET Core؟</p>
+                <input type="radio" name="q6" value="تكوين الـ Middleware و إعدادات التطبيق"> تكوين الـ Middleware و إعدادات التطبيق<br>
+                <input type="radio" name="q6" value="إضافة خدمات إلى التطبيق"> إضافة خدمات إلى التطبيق<br>
+                <input type="radio" name="q6" value="تحديد قواعد البيانات فقط"> تحديد قواعد البيانات فقط<br>
             </div>
             <div class="question">
-                <p>كيف يمكن تحسين أداء تطبيق ASP.NET؟</p>
-                <input type="radio" name="q7" value="استخدام التخزين المؤقت"> استخدام التخزين المؤقت<br>
-                <input type="radio" name="q7" value="توزيع الحمل"> توزيع الحمل<br>
-                <input type="radio" name="q7" value="تخزين البيانات بشكل محلي"> تخزين البيانات بشكل محلي<br>
+                <p>ما هي فائدة استخدام `Dependency Injection` في ASP.NET Core؟</p>
+                <input type="radio" name="q7" value="تحسين إدارة التبعيات وتسهيل اختبار الوحدة"> تحسين إدارة التبعيات وتسهيل اختبار الوحدة<br>
+                <input type="radio" name="q7" value="تحسين سرعة أداء التطبيق"> تحسين سرعة أداء التطبيق<br>
+                <input type="radio" name="q7" value="تقليل حجم التطبيق"> تقليل حجم التطبيق<br>
             </div>
             <div class="question">
-                <p>ما هو الفرق بين HTTP وHTTPS في ASP.NET؟</p>
-                <input type="radio" name="q8" value="HTTPS مشفر، HTTP غير مشفر"> HTTPS مشفر، HTTP غير مشفر<br>
-                <input type="radio" name="q8" value="HTTP أسرع من HTTPS"> HTTP أسرع من HTTPS<br>
-                <input type="radio" name="q8" value="لا يوجد فرق"> لا يوجد فرق<br>
+                <p>كيف يمكنك إدارة التكوينات (Configurations) في ASP.NET Core؟</p>
+                <input type="radio" name="q8" value="باستخدام ملف `appsettings.json`"> باستخدام ملف `appsettings.json`<br>
+                <input type="radio" name="q8" value="باستخدام ملفات XML فقط"> باستخدام ملفات XML فقط<br>
+                <input type="radio" name="q8" value="باستخدام ملفات نصية"> باستخدام ملفات نصية<br>
             </div>
             <div class="question">
-                <p>ما هي الطريقة التي تستخدم لإدماج JavaScript في تطبيق ASP.NET؟</p>
-                <input type="radio" name="q9" value="استخدام ScriptManager"> استخدام ScriptManager<br>
-                <input type="radio" name="q9" value="استخدام AJAX Control Toolkit"> استخدام AJAX Control Toolkit<br>
-                <input type="radio" name="q9" value="إضافة ملفات JavaScript مباشرة"> إضافة ملفات JavaScript مباشرة<br>
+                <p>ما هو الفرق بين `IActionResult` و `ActionResult` في ASP.NET Core؟</p>
+                <input type="radio" name="q9" value="`IActionResult` هو واجهة و `ActionResult` هو تطبيق لها"> `IActionResult` هو واجهة و `ActionResult` هو تطبيق لها<br>
+                <input type="radio" name="q9" value="`IActionResult` و `ActionResult` هما نفس الشيء"> `IActionResult` و `ActionResult` هما نفس الشيء<br>
+                <input type="radio" name="q9" value="`IActionResult` يستخدم فقط للعرض و `ActionResult` للمعالجة"> `IActionResult` يستخدم فقط للعرض و `ActionResult` للمعالجة<br>
             </div>
             <div class="question">
-                <p>ما هو هدف استخدام الـ Web API في ASP.NET؟</p>
-                <input type="radio" name="q10" value="تطوير واجهات برمجة التطبيقات الخاصة بالمواقع"> تطوير واجهات برمجة التطبيقات الخاصة بالمواقع<br>
-                <input type="radio" name="q10" value="تطوير واجهات المستخدم"> تطوير واجهات المستخدم<br>
-                <input type="radio" name="q10" value="إدارة الجلسات"> إدارة الجلسات<br>
+                <p>ما هي خدمة `IOptions` في ASP.NET Core؟</p>
+                <input type="radio" name="q10" value="خدمة لقراءة الإعدادات من ملفات التكوين"> خدمة لقراءة الإعدادات من ملفات التكوين<br>
+                <input type="radio" name="q10" value="خدمة لإدارة الجلسات"> خدمة لإدارة الجلسات<br>
+                <input type="radio" name="q10" value="خدمة للتعامل مع البيانات فقط"> خدمة للتعامل مع البيانات فقط<br>
             </div>
-            <div class="question">
-                <p>ما هو مفهوم Dependency Injection في ASP.NET؟</p>
-                <input type="radio" name="q11" value="إدخال الاعتماديات في وقت التشغيل"> إدخال الاعتماديات في وقت التشغيل<br>
-                <input type="radio" name="q11" value="إدارة حالة الجلسة"> إدارة حالة الجلسة<br>
-                <input type="radio" name="q11" value="تطوير واجهات المستخدم"> تطوير واجهات المستخدم<br>
-            </div>
-            <div class="question">
-                <p>ما هي التقنيات المستخدمة لبناء واجهات المستخدم في ASP.NET MVC؟</p>
-                <input type="radio" name="q12" value="HTML وCSS وJavaScript"> HTML وCSS وJavaScript<br>
-                <input type="radio" name="q12" value="Silverlight"> Silverlight<br>
-                <input type="radio" name="q12" value="WebForms"> WebForms<br>
-            </div>
-            <div class="question">
-                <p>ما هو مفهوم الـ Razor في ASP.NET؟</p>
-                <input type="radio" name="q13" value="محرك قوالب لعرض HTML من الكود"> محرك قوالب لعرض HTML من الكود<br>
-                <input type="radio" name="q13" value="لغة برمجة جديدة"> لغة برمجة جديدة<br>
-                <input type="radio" name="q13" value="نظام إدارة قواعد بيانات"> نظام إدارة قواعد بيانات<br>
-            </div>
-            <div class="question">
-                <p>ما هو دور الـ Middleware في ASP.NET Core؟</p>
-                <input type="radio" name="q14" value="معالجة الطلبات قبل وصولها إلى الـ Controller"> معالجة الطلبات قبل وصولها إلى الـ Controller<br>
-                <input type="radio" name="q14" value="تخزين البيانات"> تخزين البيانات<br>
-                <input type="radio" name="q14" value="إدارة جلسات المستخدم"> إدارة جلسات المستخدم<br>
-            </div>
-            <div class="question">
-                <p>ما هي تقنية SignalR في ASP.NET؟</p>
-                <input type="radio" name="q15" value="توفير الاتصالات في الوقت الحقيقي"> توفير الاتصالات في الوقت الحقيقي<br>
-                <input type="radio" name="q15" value="تخزين البيانات في الذاكرة"> تخزين البيانات في الذاكرة<br>
-                <input type="radio" name="q15" value="تحليل البيانات"> تحليل البيانات<br>
-            </div>
-            <div class="question">
-                <p>ما هي مكونات النموذج في ASP.NET MVC؟</p>
-                <input type="radio" name="q16" value="Model وView وController"> Model وView وController<br>
-                <input type="radio" name="q16" value="Model وView"> Model وView<br>
-                <input type="radio" name="q16" value="Controller وView"> Controller وView<br>
-            </div>
-            <div class="question">
-                <p>ما هو مفهوم الـ Caching في ASP.NET؟</p>
-                <input type="radio" name="q17" value="تخزين البيانات لتقليل أوقات الاستجابة"> تخزين البيانات لتقليل أوقات الاستجابة<br>
-                <input type="radio" name="q17" value="إدارة الجلسات"> إدارة الجلسات<br>
-                <input type="radio" name="q17" value="تخزين البيانات في قاعدة البيانات"> تخزين البيانات في قاعدة البيانات<br>
-            </div>
-            <div class="question">
-                <p>ما هو الهدف من استخدام الـ ASP.NET Identity؟</p>
-                <input type="radio" name="q18" value="إدارة المصادقة والأذونات"> إدارة المصادقة والأذونات<br>
-                <input type="radio" name="q18" value="تخزين البيانات"> تخزين البيانات<br>
-                <input type="radio" name="q18" value="تحليل البيانات"> تحليل البيانات<br>
-            </div>
-            <div class="question">
-                <p>ما هي طريقة التحقق من صحة البيانات في ASP.NET MVC؟</p>
-                <input type="radio" name="q19" value="استخدام DataAnnotations"> استخدام DataAnnotations<br>
-                <input type="radio" name="q19" value="استخدام ملفات التكوين"> استخدام ملفات التكوين<br>
-                <input type="radio" name="q19" value="استخدام قواعد البيانات"> استخدام قواعد البيانات<br>
-            </div>
-            <div class="question">
-                <p>ما هو مفهوم الـ Dependency Injection في ASP.NET Core؟</p>
-                <input type="radio" name="q20" value="توفير الاعتماديات لمكونات التطبيق بشكل ديناميكي"> توفير الاعتماديات لمكونات التطبيق بشكل ديناميكي<br>
-                <input type="radio" name="q20" value="تخزين البيانات في الذاكرة"> تخزين البيانات في الذاكرة<br>
-                <input type="radio" name="q20" value="إدارة الجلسات"> إدارة الجلسات<br>
-            </div>
+            <!-- المزيد من الأسئلة بنفس النمط -->
         </div>
 
         <!-- أسئلة المستوى الصعب -->
         <div id="hard" class="level-content hidden">
             <h2 class="level-title">المستوى الصعب</h2>
             <div class="question">
-                <p>ما هو مفهوم الـ Entity Framework في ASP.NET؟</p>
-                <input type="radio" name="q1" value="أداة لتعامل مع قواعد البيانات باستخدام البرمجة الكائنية"> أداة لتعامل مع قواعد البيانات باستخدام البرمجة الكائنية<br>
-                <input type="radio" name="q1" value="نظام لإدارة الجلسات"> نظام لإدارة الجلسات<br>
-                <input type="radio" name="q1" value="أداة لتأمين البيانات"> أداة لتأمين البيانات<br>
+                <p>كيف يمكنك إنشاء Middleware مخصص في ASP.NET Core؟</p>
+                <input type="radio" name="q1" value="بإنشاء فئة تحقق واجهة `IMiddleware`"> بإنشاء فئة تحقق واجهة `IMiddleware`<br>
+                <input type="radio" name="q1" value="بإضافة Middleware في `Configure` فقط"> بإضافة Middleware في `Configure` فقط<br>
+                <input type="radio" name="q1" value="باستخدام `app.UseMiddleware` فقط"> باستخدام `app.UseMiddleware` فقط<br>
             </div>
             <div class="question">
-                <p>ما هي الطريقة المثلى لتنفيذ الـ Unit Testing في ASP.NET Core؟</p>
-                <input type="radio" name="q2" value="استخدام xUnit"> استخدام xUnit<br>
-                <input type="radio" name="q2" value="استخدام NUnit"> استخدام NUnit<br>
-                <input type="radio" name="q2" value="استخدام MSTest"> استخدام MSTest<br>
+                <p>ما هي طرق تحسين أداء التطبيقات في ASP.NET Core؟</p>
+                <input type="radio" name="q2" value="استخدام Caching و Compression و تحسين الاستعلامات"> استخدام Caching و Compression و تحسين الاستعلامات<br>
+                <input type="radio" name="q2" value="تقليل حجم الملفات فقط"> تقليل حجم الملفات فقط<br>
+                <input type="radio" name="q2" value="إضافة المزيد من الخوادم"> إضافة المزيد من الخوادم<br>
             </div>
             <div class="question">
-                <p>كيف يمكن التعامل مع استعلامات SQL غير الآمنة في ASP.NET؟</p>
-                <input type="radio" name="q3" value="استخدام الاستعلامات المعدة مسبقاً"> استخدام الاستعلامات المعدة مسبقاً<br>
-                <input type="radio" name="q3" value="استخدام الاستعلامات النصية"> استخدام الاستعلامات النصية<br>
-                <input type="radio" name="q3" value="استخدام المعاملات"> استخدام المعاملات<br>
+                <p>كيف يمكنك استخدام `Hangfire` في ASP.NET Core؟</p>
+                <input type="radio" name="q3" value="لتنفيذ المهام المؤجلة في الخلفية"> لتنفيذ المهام المؤجلة في الخلفية<br>
+                <input type="radio" name="q3" value="لتخزين البيانات في قاعدة البيانات فقط"> لتخزين البيانات في قاعدة البيانات فقط<br>
+                <input type="radio" name="q3" value="لإدارة الجلسات فقط"> لإدارة الجلسات فقط<br>
             </div>
             <div class="question">
-                <p>ما هو دور الـ Global.asax في ASP.NET؟</p>
-                <input type="radio" name="q4" value="إعدادات تطبيق الويب وإدارة الأحداث العالمية"> إعدادات تطبيق الويب وإدارة الأحداث العالمية<br>
-                <input type="radio" name="q4" value="إدارة قواعد البيانات"> إدارة قواعد البيانات<br>
-                <input type="radio" name="q4" value="تخزين البيانات"> تخزين البيانات<br>
+                <p>ما هي طريقة استخدام `SignalR` في ASP.NET Core؟</p>
+                <input type="radio" name="q4" value="لإنشاء تطبيقات الويب التفاعلية في الوقت الحقيقي"> لإنشاء تطبيقات الويب التفاعلية في الوقت الحقيقي<br>
+                <input type="radio" name="q4" value="لإدارة الجلسات فقط"> لإدارة الجلسات فقط<br>
+                <input type="radio" name="q4" value="لتحليل البيانات فقط"> لتحليل البيانات فقط<br>
             </div>
             <div class="question">
-                <p>كيف يمكن تحسين الأداء عند استخدام ASP.NET Web API؟</p>
-                <input type="radio" name="q5" value="استخدام التخزين المؤقت"> استخدام التخزين المؤقت<br>
-                <input type="radio" name="q5" value="تقليل حجم الاستجابات"> تقليل حجم الاستجابات<br>
-                <input type="radio" name="q5" value="استخدام ضغط البيانات"> استخدام ضغط البيانات<br>
+                <p>ما هو دور `IServiceCollection` في ASP.NET Core؟</p>
+                <input type="radio" name="q5" value="تكوين وإضافة الخدمات إلى حاوية التبعيات"> تكوين وإضافة الخدمات إلى حاوية التبعيات<br>
+                <input type="radio" name="q5" value="تكوين البيانات فقط"> تكوين البيانات فقط<br>
+                <input type="radio" name="q5" value="إدارة التكوينات فقط"> إدارة التكوينات فقط<br>
             </div>
             <div class="question">
-                <p>ما هو مفهوم الـ CQRS في ASP.NET؟</p>
-                <input type="radio" name="q6" value="فصل الاستعلامات عن الأوامر"> فصل الاستعلامات عن الأوامر<br>
-                <input type="radio" name="q6" value="التحكم في الجلسات"> التحكم في الجلسات<br>
-                <input type="radio" name="q6" value="إدارة الأمان"> إدارة الأمان<br>
+                <p>كيف يمكنك تحسين استعلامات Entity Framework في ASP.NET Core؟</p>
+                <input type="radio" name="q6" value="باستخدام `AsNoTracking` و تحسين الفهارس"> باستخدام `AsNoTracking` و تحسين الفهارس<br>
+                <input type="radio" name="q6" value="بزيادة عدد الجداول فقط"> بزيادة عدد الجداول فقط<br>
+                <input type="radio" name="q6" value="بتقليل حجم البيانات فقط"> بتقليل حجم البيانات فقط<br>
             </div>
             <div class="question">
-                <p>ما هي الطريقة المناسبة لإنشاء API متعددة اللغات في ASP.NET؟</p>
-                <input type="radio" name="q7" value="استخدام الموارد العالمية"> استخدام الموارد العالمية<br>
-                <input type="radio" name="q7" value="تخزين النصوص في قاعدة البيانات"> تخزين النصوص في قاعدة البيانات<br>
-                <input type="radio" name="q7" value="تحديد اللغة في التكوين"> تحديد اللغة في التكوين<br>
+                <p>ما هو استخدام `AutoMapper` في ASP.NET Core؟</p>
+                <input type="radio" name="q7" value="لتحويل الكائنات بين الطبقات المختلفة"> لتحويل الكائنات بين الطبقات المختلفة<br>
+                <input type="radio" name="q7" value="لتخزين البيانات في قاعدة البيانات"> لتخزين البيانات في قاعدة البيانات<br>
+                <input type="radio" name="q7" value="لإدارة الجلسات فقط"> لإدارة الجلسات فقط<br>
             </div>
             <div class="question">
-                <p>كيف يمكنك التعامل مع معالجة الأخطاء في تطبيقات ASP.NET Core؟</p>
-                <input type="radio" name="q8" value="استخدام Middleware للأخطاء"> استخدام Middleware للأخطاء<br>
-                <input type="radio" name="q8" value="تسجيل الأخطاء في ملف"> تسجيل الأخطاء في ملف<br>
-                <input type="radio" name="q8" value="استخدام صفحات الخطأ المخصصة"> استخدام صفحات الخطأ المخصصة<br>
+                <p>كيف يمكنك تكوين إعدادات بيئة التطوير والإنتاج في ASP.NET Core؟</p>
+                <input type="radio" name="q8" value="باستخدام ملفات التكوينات المخصصة `appsettings.Development.json` و `appsettings.Production.json`"> باستخدام ملفات التكوينات المخصصة `appsettings.Development.json` و `appsettings.Production.json`<br>
+                <input type="radio" name="q8" value="بإعداد إعدادات يدوية فقط"> بإعداد إعدادات يدوية فقط<br>
+                <input type="radio" name="q8" value="باستخدام قاعدة بيانات فقط"> باستخدام قاعدة بيانات فقط<br>
             </div>
             <div class="question">
-                <p>ما هو دور الـ Action Filter في ASP.NET MVC؟</p>
-                <input type="radio" name="q9" value="تنفيذ منطق معين قبل أو بعد تنفيذ إجراء"> تنفيذ منطق معين قبل أو بعد تنفيذ إجراء<br>
-                <input type="radio" name="q9" value="إدارة التوجيهات"> إدارة التوجيهات<br>
-                <input type="radio" name="q9" value="تخزين البيانات"> تخزين البيانات<br>
+                <p>ما هو دور `IActionFilter` في ASP.NET Core؟</p>
+                <input type="radio" name="q9" value="تنفيذ المنطق قبل أو بعد تنفيذ الإجراءات"> تنفيذ المنطق قبل أو بعد تنفيذ الإجراءات<br>
+                <input type="radio" name="q9" value="تكوين البيانات فقط"> تكوين البيانات فقط<br>
+                <input type="radio" name="q9" value="إدارة الجلسات فقط"> إدارة الجلسات فقط<br>
             </div>
             <div class="question">
-                <p>كيف يمكن تأمين واجهات برمجة التطبيقات في ASP.NET Core؟</p>
-                <input type="radio" name="q10" value="استخدام التوثيق والتفويض"> استخدام التوثيق والتفويض<br>
-                <input type="radio" name="q10" value="تشفير البيانات"> تشفير البيانات<br>
-                <input type="radio" name="q10" value="تخزين الجلسات"> تخزين الجلسات<br>
-            </div>
-            <div class="question">
-                <p>ما هو مفهوم الـ SignalR وكيفية استخدامه في ASP.NET Core؟</p>
-                <input type="radio" name="q11" value="توفير اتصال ثنائي الاتجاه في الوقت الفعلي"> توفير اتصال ثنائي الاتجاه في الوقت الفعلي<br>
-                <input type="radio" name="q11" value="تخزين البيانات في الذاكرة"> تخزين البيانات في الذاكرة<br>
-                <input type="radio" name="q11" value="إدارة الجلسات"> إدارة الجلسات<br>
-            </div>
-            <div class="question">
-                <p>ما هي الطرق المثلى لتحسين أمان التطبيقات في ASP.NET Core؟</p>
-                <input type="radio" name="q12" value="تشفير البيانات واستخدام التصديق"> تشفير البيانات واستخدام التصديق<br>
-                <input type="radio" name="q12" value="استخدام التشفير فقط"> استخدام التشفير فقط<br>
-                <input type="radio" name="q12" value="استخدام التصديق فقط"> استخدام التصديق فقط<br>
-            </div>
-            <div class="question">
-                <p>كيف يمكنك التعامل مع الاستعلامات المعقدة في Entity Framework؟</p>
-                <input type="radio" name="q13" value="استخدام الاستعلامات LINQ"> استخدام الاستعلامات LINQ<br>
-                <input type="radio" name="q13" value="استخدام الاستعلامات النصية"> استخدام الاستعلامات النصية<br>
-                <input type="radio" name="q13" value="استخدام الإجراءات المخزنة"> استخدام الإجراءات المخزنة<br>
-            </div>
-            <div class="question">
-                <p>ما هو مفهوم الـ Asynchronous Programming وكيفية استخدامه في ASP.NET Core؟</p>
-                <input type="radio" name="q14" value="تنفيذ المهام بشكل غير متزامن لتحسين الأداء"> تنفيذ المهام بشكل غير متزامن لتحسين الأداء<br>
-                <input type="radio" name="q14" value="تنفيذ المهام بشكل متزامن"> تنفيذ المهام بشكل متزامن<br>
-                <input type="radio" name="q14" value="استخدام المعاملات"> استخدام المعاملات<br>
-            </div>
-            <div class="question">
-                <p>ما هو دور الـ Dependency Injection في تحسين تصميم التطبيقات في ASP.NET Core؟</p>
-                <input type="radio" name="q15" value="فصل التبعيات وإدارة الاعتماديات بشكل فعال"> فصل التبعيات وإدارة الاعتماديات بشكل فعال<br>
-                <input type="radio" name="q15" value="تخزين البيانات"> تخزين البيانات<br>
-                <input type="radio" name="q15" value="إدارة الجلسات"> إدارة الجلسات<br>
-            </div>
-            <div class="question">
-                <p>ما هي الـ Middleware في ASP.NET Core وكيفية استخدامها؟</p>
-                <input type="radio" name="q16" value="مكونات معالجة الطلبات والاستجابات في التطبيق"> مكونات معالجة الطلبات والاستجابات في التطبيق<br>
-                <input type="radio" name="q16" value="إدارة الجلسات"> إدارة الجلسات<br>
-                <input type="radio" name="q16" value="تخزين البيانات"> تخزين البيانات<br>
-            </div>
-            <div class="question">
-                <p>ما هو مفهوم الـ Multi-tenancy وكيفية تطبيقه في ASP.NET Core؟</p>
-                <input type="radio" name="q17" value="إدارة تطبيقات متعددة ضمن نفس البنية التحتية"> إدارة تطبيقات متعددة ضمن نفس البنية التحتية<br>
-                <input type="radio" name="q17" value="إدارة الجلسات"> إدارة الجلسات<br>
-                <input type="radio" name="q17" value="تخزين البيانات"> تخزين البيانات<br>
-            </div>
-            <div class="question">
-                <p>كيف يمكنك تحسين أمان API في ASP.NET Core؟</p>
-                <input type="radio" name="q18" value="استخدام التوثيق والتفويض"> استخدام التوثيق والتفويض<br>
-                <input type="radio" name="q18" value="تشفير البيانات"> تشفير البيانات<br>
-                <input type="radio" name="q18" value="إدارة الجلسات"> إدارة الجلسات<br>
-            </div>
-            <div class="question">
-                <p>ما هو مفهوم الـ CQRS وكيف يمكن استخدامه في تطبيق ASP.NET Core؟</p>
-                <input type="radio" name="q19" value="فصل الاستعلامات عن الأوامر لتحسين الأداء وصيانة الكود"> فصل الاستعلامات عن الأوامر لتحسين الأداء وصيانة الكود<br>
-                <input type="radio" name="q19" value="إدارة الجلسات"> إدارة الجلسات<br>
-                <input type="radio" name="q19" value="تخزين البيانات"> تخزين البيانات<br>
-            </div>
-            <div class="question">
-                <p>ما هي تقنيات تحسين الأداء عند استخدام ASP.NET Core؟</p>
-                <input type="radio" name="q20" value="استخدام التخزين المؤقت، تحسين الاستعلامات، وتحديد المصادر"> استخدام التخزين المؤقت، تحسين الاستعلامات، وتحديد المصادر<br>
-                <input type="radio" name="q20" value="تخزين البيانات فقط"> تخزين البيانات فقط<br>
-                <input type="radio" name="q20" value="إدارة الجلسات فقط"> إدارة الجلسات فقط<br>
-            </div>
+                <p>ما هي ميزة استخدام `Health Checks` في ASP.NET Core؟</p>
+                <input type="radio" name="q10" value="مراقبة حالة التطبيق والتأكد من صحة الخدمات"> مراقبة حالة التطبيق والتأكد من صحة الخدمات<br>
+                <input type="radio" name="q10" value="تحسين الأداء فقط"> تحسين الأداء فقط<br>
+                <input type="radio" name="q10" value="إدارة قواعد البيانات فقط"> إدارة قواعد البيانات فقط<br>
+          </div>
         </div>
-          <button onclick="submitQuiz()">طمنى بسرعه</button>
+        <button onclick="showResults()">طمنى بسرعه</button>
+
+        <div id="evaluationPopup" class="evaluation-popup">
+            <h2>نتائج الاختبار</h2>
+            <p id="evaluationResult"></p>
+            <button onclick="closePopup()">إغلاق</button>
+      
     </div>
 
-    <!-- نافذة النتيجة -->
-    <div id="resultPopup" class="evaluation-popup">
-        <p id="resultText"></p>
-        <button onclick="closePopup()">إغلاق</button>
-    </div>
+    
 
     <script>
-        const levelSelect = document.getElementById('levelSelect');
-        const levelContents = document.querySelectorAll('.level-content');
-        const resultPopup = document.getElementById('resultPopup');
-        const resultText = document.getElementById('resultText');
+        const correctAnswers = {
+            easy: {
+                q1: "إطار عمل لتطوير تطبيقات الويب",
+                q2: "باستخدام Visual Studio",
+                q3: "التحكمات، النماذج، والواجهات",
+                q4: "تمثل البيانات والنماذج",
+                q5: "التعامل مع طلبات المستخدم وتوجيهها",
+                q6: "محرك عرض لكتابة HTML مع C#",
+                q7: "باستخدام ConfigureServices",
+                q8: "الفئة التي تقوم بتكوين التطبيق والخدمات",
+                q9: "توفير واجهة برمجية للتعامل مع قواعد البيانات بشكل كائنات",
+                q10: "`View` تعرض صفحة كاملة و `Partial View` تعرض أجزاء منها",
+   q11: "ASP.NET Core هو النسخة الحديثة والمفتوحة المصدر",
+                q12: "MVC يتيح فصل المهام بشكل أفضل",
+                q13: "تخزين بيانات المستخدم بشكل مؤقت",
+                q14: "مكونات لمعالجة الطلبات في التطبيق",
+                q15: "إدارة وتوثيق المستخدمين",
+                q16: "توفير معلومات عن بيئة الاستضافة",
+                q17: "تسهيل كتابة شيفرة HTML مع C#",
+                q18: "TempData يحتفظ بالبيانات لجلسة واحدة فقط",
+                q19: "خادم ويب صغير مدمج",
+                q20: "إنشاء مثيل للخدمة لكل طلب جديد"         
+           
+           
+             }, 
+            medium: {
+                q1: "باستخدام كلمة مفتاحية from",
+                q2: "نقل البيانات بين وحدة التحكم والـ View",
+                q3: "باستخدام الكتل try-catch",
+                q4: "الـ GET يستخدم للحصول على البيانات والـ POST يستخدم لإرسال البيانات",
+                q5: "جزء من View يعاد استخدامه في أماكن متعددة",
+                q6: "تكوين الـ Middleware و إعدادات التطبيق",
+                q7: "تحسين إدارة التبعيات وتسهيل اختبار الوحدة",
+                q8: "باستخدام ملف `appsettings.json`",
+                q9: "`IActionResult` هو واجهة و `ActionResult` هو تطبيق لها",
+                q10: "خدمة لقراءة الإعدادات من ملفات التكوين",
+            },
+            hard: {
+                q1: "بإنشاء فئة تحقق واجهة `IMiddleware`",
+                q2: "استخدام Caching و Compression و تحسين الاستعلامات",
+                q3: "لتنفيذ المهام المؤجلة في الخلفية",
+                q4: "لإنشاء تطبيقات الويب التفاعلية في الوقت الحقيقي",
+                q5: "تكوين وإضافة الخدمات إلى حاوية التبعيات",
+                q6: "باستخدام `AsNoTracking` و تحسين الفهارس",
+                q7: "لتحويل الكائنات بين الطبقات المختلفة",
+                q8: "باستخدام ملفات التكوينات المخصصة `appsettings.Development.json` و `appsettings.Production.json`",
+                q9: "تنفيذ المنطق قبل أو بعد تنفيذ الإجراءات",
+                q10: "مراقبة حالة التطبيق والتأكد من صحة الخدمات",
+            }
+        };
 
-        levelSelect.addEventListener('change', (e) => {
-            const selectedLevel = e.target.value;
-
-            levelContents.forEach(content => {
-                if (content.id === selectedLevel) {
-                    content.classList.remove('hidden');
-                } else {
-                    content.classList.add('hidden');
-                }
-            });
+     
+        document.getElementById('levelSelect').addEventListener('change', function() {
+            document.querySelectorAll('.level-content').forEach(div => div.classList.add('hidden'));
+            document.getElementById(this.value).classList.remove('hidden');
         });
 
-        function submitQuiz() {
-            const selectedLevel = levelSelect.value;
-            const questions = document.querySelectorAll(`#${selectedLevel} .question`);
-            let score = 0;
-
-            questions.forEach(question => {
-                const selectedOption = question.querySelector('input[type="radio"]:checked');
-                if (selectedOption && selectedOption.value === getCorrectAnswer(question)) {
+        function showResults() {
+            const selectedLevel = document.getElementById('levelSelect').value;
+            const answers = document.querySelectorAll(`#${selectedLevel} input[type="radio"]:checked`);
+            const result = Array.from(answers).reduce((score, answer) => {
+                const question = answer.name;
+                const selectedAnswer = answer.value;
+                if (correctAnswers[selectedLevel][question] === selectedAnswer) {
                     score++;
                 }
-            });
-
-            resultText.textContent = `لقد أجبت بشكل صحيح على ${score} من ${questions.length} سؤال.`;
-            resultPopup.style.display = 'block';
-        }
-
-        function getCorrectAnswer(question) {
-            // هذا مجرد مثال. يجب استبداله بالمنطق الحقيقي لتحديد الإجابة الصحيحة.
-         const correctAnswers = {
-        easy: {
-            q1: "جافا",
-            q2: "بي إتش بي",
-            q3: "أوبجيكت أورينتد",
-            q4: "إطار عمل متكامل",
-            q5: "عن طريق ملفات الإعداد",
-            q6: "عن طريق واجهات برمجة التطبيقات",
-            q7: "إدخال نوعية بيانات محددة",
-            q8: "وحدة بناء البرمجة",
-            q9: "لغة برمجة",
-            q10: "أداة لتجميع البرامج",
-            q11: "عن طريق التوجيه",
-            q12: "لغة نصية",
-            q13: "تخزين بيانات المكونات",
-            q14: "إطار عمل برمجي",
-            q15: "إضافة إصدارات البرمجة",
-            q16: "مكتبة مفتوحة المصدر",
-            q17: "تفاعل العملاء",
-            q18: "تفاعل مكونات المستخدم",
-            q19: "مكتبة برمجية",
-            q20: "عن طريق البرمجة"
-        },
-        medium: {
-            q1: "إعادة استخدام المكونات",
-            q2: "تخزين البيانات بشكل مؤقت",
-            q3: "تحديث البيانات بشكل دوري",
-            q4: "تحليل البيانات",
-            q5: "استخدام DataAnnotations",
-            q6: "توفير الاعتماديات لمكونات التطبيق بشكل ديناميكي",
-            q7: "استخدام الموارد العالمية",
-            q8: "استخدام Middleware للأخطاء",
-            q9: "تنفيذ منطق معين قبل أو بعد تنفيذ إجراء",
-            q10: "استخدام التوثيق والتفويض",
-            q11: "توفير اتصال ثنائي الاتجاه في الوقت الفعلي",
-            q12: "تشفير البيانات واستخدام التصديق",
-            q13: "استخدام الاستعلامات LINQ",
-            q14: "تنفيذ المهام بشكل غير متزامن لتحسين الأداء",
-            q15: "فصل التبعيات وإدارة الاعتماديات بشكل فعال",
-            q16: "مكونات معالجة الطلبات والاستجابات في التطبيق",
-            q17: "إدارة تطبيقات متعددة ضمن نفس البنية التحتية",
-            q18: "استخدام التوثيق والتفويض",
-            q19: "فصل الاستعلامات عن الأوامر لتحسين الأداء وصيانة الكود",
-            q20: "استخدام التخزين المؤقت، تحسين الاستعلامات، وتحديد المصادر"
-        },
-        hard: {
-            q1: "أداة لتعامل مع قواعد البيانات باستخدام البرمجة الكائنية",
-            q2: "استخدام xUnit",
-            q3: "استخدام الاستعلامات المعدة مسبقاً",
-            q4: "إعدادات تطبيق الويب وإدارة الأحداث العالمية",
-            q5: "استخدام التخزين المؤقت",
-            q6: "فصل الاستعلامات عن الأوامر",
-            q7: "استخدام الموارد العالمية",
-            q8: "استخدام Middleware للأخطاء",
-            q9: "تنفيذ منطق معين قبل أو بعد تنفيذ إجراء",
-            q10: "استخدام التوثيق والتفويض",
-            q11: "توفير اتصال ثنائي الاتجاه في الوقت الفعلي",
-            q12: "تشفير البيانات واستخدام التصديق",
-            q13: "استخدام الاستعلامات LINQ",
-            q14: "تنفيذ المهام بشكل غير متزامن لتحسين الأداء",
-            q15: "فصل التبعيات وإدارة الاعتماديات بشكل فعال",
-            q16: "مكونات معالجة الطلبات والاستجابات في التطبيق",
-            q17: "إدارة تطبيقات متعددة ضمن نفس البنية التحتية",
-            q18: "استخدام التوثيق والتفويض",
-            q19: "فصل الاستعلامات عن الأوامر لتحسين الأداء وصيانة الكود",
-            q20: "استخدام التخزين المؤقت، تحسين الاستعلامات، وتحديد المصادر"
-        }
-    };
-
-    // التحقق من الإجابات وحساب النقاط
-    document.getElementById('submit-btn').addEventListener('click', function() {
-        let score = 0;
-        const levels = ['easy', 'medium', 'hard'];
-
-        levels.forEach(level => {
-            const questions = document.querySelectorAll(`#${level} .question`);
-            questions.forEach(question => {
-                const questionId = question.querySelector('input[type="radio"]').name;
-                const selectedAnswer = document.querySelector(`input[name="${questionId}"]:checked`);
-                if (selectedAnswer && selectedAnswer.value === correctAnswers[level][questionId]) {
-                    score++;
-                }
-            });
-        });
-
-        // عرض النتيجة في نافذة منبثقة
-        alert('نتيجتك: ' + score + ' من ' + (levels.length * 20));
-    });
-            const questionId = question.querySelector('input[type="radio"]').name;
-            return correctAnswers[selectedLevel][questionId];
+                return score;
+            }, 0);
+            document.getElementById('evaluationResult').innerText = `لقد حصلت على ${result} من ${Object.keys(correctAnswers[selectedLevel]).length} إجابة صحيحة.`;
+            document.getElementById('evaluationPopup').style.display = 'block';
         }
 
         function closePopup() {
-            resultPopup.style.display = 'none';
+            document.getElementById('evaluationPopup').style.display = 'none';
         }
     </script>
-
 </body>
 </html>
