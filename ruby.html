@@ -321,96 +321,80 @@
             </div>
         </div>
         
-           <button onclick="submitQuiz()">طمنى بسرعه</button>
-    </div>
+  
+        <button onclick="showResults()">طمنى بسرعه</button>
 
-    <!-- نافذة النتيجة -->
-    <div id="resultPopup" class="evaluation-popup">
-        <p id="resultText"></p>
-        <button onclick="closePopup()">إغلاق</button>
+        <div id="evaluationPopup" class="evaluation-popup">
+            <h2>نتائج الاختبار</h2>
+            <p id="evaluationResult"></p>
+            <button onclick="closePopup()">إغلاق</button>
+      
     </div>
 
     <script>
-        const levelSelect = document.getElementById('levelSelect');
-        const levelContents = document.querySelectorAll('.level-content');
-        const resultPopup = document.getElementById('resultPopup');
-        const resultText = document.getElementById('resultText');
-
-        levelSelect.addEventListener('change', (e) => {
-            const selectedLevel = e.target.value;
-
-            levelContents.forEach(content => {
-                if (content.id === selectedLevel) {
-                    content.classList.remove('hidden');
-                } else {
-                    content.classList.add('hidden');
-                }
-            });
+      
+    
+        const correctAnswers = {
+            easy: {
+            q1: 'def',
+            q2: 'CONSTANT',
+            q3: 'String',
+            q4: 'puts',
+            q5: 'loop',
+            q6: 'begin',
+            q7: 'class MyClass; end',
+            q8: 'MyClass.new',
+            q9: '<<',
+            q10: 'each'
+        },
+        medium: {
+            q11: 'CONSTANT',
+            q12: 'each',
+            q13: 'my',
+            q14: 'Integer',
+            q15: 'times',
+            q16: 'attr_accessor',
+            q17: 'before',
+            q18: 'module',
+            q19: 'first',
+            q20: 'pop'
+        },
+        hard: {
+            q21: 'new',
+            q22: 'CONST',
+            q23: 'Boolean',
+            q24: 'super',
+            q25: 'each_with_index',
+            q26: 'times',
+            q27: 'rescue',
+            q28: 'Array',
+            q29: 'while',
+            q30: 'def'
+            }
+        };
+    
+        document.getElementById('levelSelect').addEventListener('change', function() {
+            document.querySelectorAll('.level-content').forEach(div => div.classList.add('hidden'));
+            document.getElementById(this.value).classList.remove('hidden');
         });
 
-        function submitQuiz() {
-            const selectedLevel = levelSelect.value;
-            const questions = document.querySelectorAll(`#${selectedLevel} .question`);
-            let score = 0;
-
-            questions.forEach(question => {
-                const selectedOption = question.querySelector('input[type="radio"]:checked');
-                if (selectedOption && selectedOption.value === getCorrectAnswer(question)) {
+        function showResults() {
+            const selectedLevel = document.getElementById('levelSelect').value;
+            const answers = document.querySelectorAll(`#${selectedLevel} input[type="radio"]:checked`);
+            const result = Array.from(answers).reduce((score, answer) => {
+                const question = answer.name;
+                const selectedAnswer = answer.value;
+                if (correctAnswers[selectedLevel][question] === selectedAnswer) {
                     score++;
                 }
-            });
-
-            resultText.textContent = `لقد أجبت بشكل صحيح على ${score} من ${questions.length} سؤال.`;
-            resultPopup.style.display = 'block';
-        }
-
-        function getCorrectAnswer(question) {
-            // هذا مجرد مثال. يجب استبداله بالمنطق الحقيقي لتحديد الإجابة الصحيحة.
-         const correctAnswers = {
-                easy: {
-                    q1: 'def',
-                    q2: 'CONSTANT',
-                    q3: 'String',
-                    q4: 'puts',
-                    q5: 'loop',
-                    q6: 'begin',
-                    q7: 'class MyClass; end',
-                    q8: 'MyClass.new',
-                    q9: '<<',
-                    q10: 'each'
-                },
-                medium: {
-                    q11: 'CONSTANT',
-                    q12: 'each',
-                    q13: 'local',
-                    q14: 'Integer',
-                    q15: 'times',
-                    q16: 'attr_accessor',
-                    q17: 'before',
-                    q18: 'module',
-                    q19: 'first',
-                    q20: 'pop'
-                },
-                hard: {
-                    q21: 'new',
-                    q22: 'CONST',
-                    q23: 'Boolean',
-                    q24: 'super',
-                    q25: 'each_with_index',
-                    q26: 'times',
-                    q27: 'rescue',
-                    q28: 'Array',
-                    q29: 'while',
-                    q30: 'def'
-                }
-            };
-
-            const questionId = question.querySelector('input[type="radio"]').name;
-            return correctAnswers[selectedLevel][questionId];
+                return score;
+            }, 0);
+            document.getElementById('evaluationResult').innerText = `لقد حصلت على ${result} من ${Object.keys(correctAnswers[selectedLevel]).length} إجابة صحيحة.`;
+            document.getElementById('evaluationPopup').style.display = 'block';
         }
 
         function closePopup() {
-            resultPopup.style.display = 'none';
+            document.getElementById('evaluationPopup').style.display = 'none';
         }
     </script>
 
