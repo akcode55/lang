@@ -333,29 +333,18 @@
             </div>
         </div>
 
-        <button onclick="submitQuiz()">طمنى بسرعه</button>
-    </div>
+        <button onclick="showResults()">طمنى بسرعه</button>
 
-    <!-- نافذة النتيجة -->
-    <div id="evaluationPopup" class="evaluation-popup">
-        <div id="evaluationResult"></div>
-        <button onclick="closePopup()">إغلاق</button>
+        <div id="evaluationPopup" class="evaluation-popup">
+            <h2>نتائج الاختبار</h2>
+            <p id="evaluationResult"></p>
+            <button onclick="closePopup()">إغلاق</button>
+      
     </div>
 
     <script>
-        // عرض الأسئلة بناءً على المستوى المختار
-        document.getElementById('levelSelect').addEventListener('change', function() {
-            var selectedLevel = this.value;
-            var levels = document.querySelectorAll('.level-content');
-            levels.forEach(level => {
-                level.classList.add('hidden');
-            });
-            document.getElementById(selectedLevel).classList.remove('hidden');
-        });
-
-        // الدالة المخصصة لإرسال نتائج الاختبار وعرض النتيجة
-        function submitQuiz() {
-            var correctAnswers = {
+      
+      const correctAnswers = {
                 easy: {
                     q1: 'int',
                     q2: 'fmt.Println',
@@ -395,34 +384,29 @@
                     q10: 'type ComplexType struct { Field1 type1; Field2 type2 }'
                 }
             };
+            document.getElementById('levelSelect').addEventListener('change', function() {
+            document.querySelectorAll('.level-content').forEach(div => div.classList.add('hidden'));
+            document.getElementById(this.value).classList.remove('hidden');
+        });
 
-            var level = document.getElementById('levelSelect').value;
-            var questions = document.querySelectorAll(`#${level} .question`);
-            var score = 0;
-
-            questions.forEach(question => {
-                var qId = question.querySelector('p').textContent.trim();
-                var selectedOption = question.querySelector('input[type="radio"]:checked');
-                if (selectedOption) {
-                    var selectedAnswer = selectedOption.value;
-                    var correctAnswer = correctAnswers[level][qId];
-                    if (selectedAnswer === correctAnswer) {
-                        score++;
-                    }
+        function showResults() {
+            const selectedLevel = document.getElementById('levelSelect').value;
+            const answers = document.querySelectorAll(`#${selectedLevel} input[type="radio"]:checked`);
+            const result = Array.from(answers).reduce((score, answer) => {
+                const question = answer.name;
+                const selectedAnswer = answer.value;
+                if (correctAnswers[selectedLevel][question] === selectedAnswer) {
+                    score++;
                 }
-            });
-
-            var totalQuestions = questions.length;
-            var result = `لقد أجبت بشكل صحيح على ${score} من أصل ${totalQuestions} سؤالاً.`;
-            document.getElementById('evaluationResult').textContent = result;
+                return score;
+            }, 0);
+            document.getElementById('evaluationResult').innerText = `لقد حصلت على ${result} من ${Object.keys(correctAnswers[selectedLevel]).length} إجابة صحيحة.`;
             document.getElementById('evaluationPopup').style.display = 'block';
         }
 
-        // إغلاق نافذة النتيجة
         function closePopup() {
             document.getElementById('evaluationPopup').style.display = 'none';
         }
-    </script>
+</script>
 </body>
 </html>
-
