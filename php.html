@@ -319,53 +319,28 @@
                 <input type="radio" name="q30" value="لإزالة نمط من سلسلة نصية"> لإزالة نمط من سلسلة نصية<br>
                 <input type="radio" name="q30" value="لإضافة نمط إلى سلسلة نصية"> لإضافة نمط إلى سلسلة نصية<br>
             </div>
-        </div>
-
-       <button onclick="submitQuiz()">طمنى بسرعه</button>
+    </div>
     </div>
 
-    <!-- نافذة النتيجة -->
-    <div id="resultPopup" class="evaluation-popup">
-        <p id="resultText"></p>
-        <button onclick="closePopup()">إغلاق</button>
-    </div>
+    <button onclick="submitQuiz()">طمنى بسرعه</button>
+</div>
 
-    <script>
-        const levelSelect = document.getElementById('levelSelect');
-        const levelContents = document.querySelectorAll('.level-content');
-        const resultPopup = document.getElementById('resultPopup');
-        const resultText = document.getElementById('resultText');
+<!-- نافذة النتيجة -->
+<div id="resultPopup" class="evaluation-popup">
+    <p id="resultText"></p>
+    <button onclick="closePopup()">إغلاق</button>
+</div>
 
-        levelSelect.addEventListener('change', (e) => {
-            const selectedLevel = e.target.value;
+<script>
+    // إظهار الأسئلة بناءً على المستوى المحدد
+    document.getElementById('levelSelect').addEventListener('change', function() {
+        document.querySelectorAll('.level-content').forEach(div => div.classList.add('hidden'));
+        document.getElementById(this.value).classList.remove('hidden');
+    });
 
-            levelContents.forEach(content => {
-                if (content.id === selectedLevel) {
-                    content.classList.remove('hidden');
-                } else {
-                    content.classList.add('hidden');
-                }
-            });
-        });
-
-        function submitQuiz() {
-            const selectedLevel = levelSelect.value;
-            const questions = document.querySelectorAll(`#${selectedLevel} .question`);
-            let score = 0;
-
-            questions.forEach(question => {
-                const selectedOption = question.querySelector('input[type="radio"]:checked');
-                if (selectedOption && selectedOption.value === getCorrectAnswer(question)) {
-                    score++;
-                }
-            });
-
-            resultText.textContent = `لقد أجبت بشكل صحيح على ${score} من ${questions.length} سؤال.`;
-            resultPopup.style.display = 'block';
-        }
-
-        function getCorrectAnswer(question) {
-        const easyQuestions = {
+    // الإجابات الصحيحة لكل مستوى
+        const correctAnswers = {
+            easy: {
             "q1": "$variable",
             "q2": "// تعليق",
             "q3": "int",
@@ -375,10 +350,10 @@
             "q7": "للتحقق من وجود متغير",
             "q8": "$array = array();",
             "q9": "15",
-            "q10": "gettype()"
-        };
+            "q10": "gettype()",
+        },
 
-        const mediumQuestions = {
+       medium: {
             "q11": "require يوقف تنفيذ السكربت عند حدوث خطأ بينما include لا يفعل ذلك.",
             "q12": "session_start()",
             "q13": "لللاتصال بقاعدة البيانات",
@@ -389,9 +364,9 @@
             "q18": "لتحويل الأحرف الخاصة إلى رموز HTML",
             "q19": "!empty()",
             "q20": "لتقسيم سلسلة نصية إلى مصفوفة"
-        };
+        },
 
-        const hardQuestions = {
+        hard:{
             "q21": "الفئة هي قالب للكائنات، بينما الكائن هو مثيل للفئة",
             "q22": "interface InterfaceName {}",
             "q23": "class ChildClass extends ParentClass {}",
@@ -402,16 +377,39 @@
             "q28": "GET ينقل البيانات عبر URL، بينما POST ينقل البيانات عبر جسم الطلب",
             "q29": "لقراءة محتوى ملف إلى سلسلة نصية",
             "q30": "للتحقق من تطابق نمط مع سلسلة نصية"
-        };
+        },
+    };
 
+    // الحصول على الإجابة الصحيحة بناءً على معرف السؤال
+    function getCorrectAnswer(questionId) {
+        const level = document.getElementById('levelSelect').value;
+        return correctAnswers[level][questionId];
+    }
+
+    // تقديم الامتحان وحساب النتيجة
+    function submitQuiz() {
+        const level = document.getElementById('levelSelect').value;
+        const questions = document.querySelectorAll(`#${level} .question`);
+        let score = 0;
+
+        questions.forEach((question) => {
             const questionId = question.querySelector('input[type="radio"]').name;
-            return correctAnswers[selectedLevel][questionId];
-        }
+            const selectedAnswer = question.querySelector('input[type="radio"]:checked');
+            if (selectedAnswer && selectedAnswer.value === getCorrectAnswer(questionId)) {
+                score++;
+            }
+        });
 
-        function closePopup() {
-            resultPopup.style.display = 'none';
-        }
-    </script>
+        const resultText = `نتيجتك هي: ${score} من ${questions.length}`;
+        document.getElementById('resultText').innerText = resultText;
+        document.getElementById('resultPopup').style.display = 'block';
+    }
+
+    // إغلاق نافذة النتيجة
+    function closePopup() {
+        document.getElementById('resultPopup').style.display = 'none';
+    }
+</script>
 </body>
 </html>
 
